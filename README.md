@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 360 Los Ríos
 
-## Getting Started
+Página de portafolio y programas de desarrollo. Next.js + Tailwind CSS.
 
-First, run the development server:
+## Desarrollo local
 
-```bash
+```powershell
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Despliegue en Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Sube el proyecto a GitHub (repositorio nuevo).
+2. En [vercel.com](https://vercel.com) → **Add New Project** → Importa el repo.
+3. Deploy automático en cada push a `main`.
 
-## Learn More
+## Dominio 360losrios.cl
 
-To learn more about Next.js, take a look at the following resources:
+En Vercel → Project Settings → Domains:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Agrega `360losrios.cl` y `www.360losrios.cl`.
+- En Cloudflare, crea los registros DNS que indique Vercel:
+  - Raíz: A → `76.76.21.21`
+  - www: CNAME → `cname.vercel-dns.com`
