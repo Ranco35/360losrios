@@ -2,6 +2,7 @@ interface Project {
   title: string;
   description: string;
   status: "producción" | "desarrollo";
+  href?: string;
 }
 
 const projects: Project[] = [
@@ -181,6 +182,36 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </section>
+
+        {/* Parcelas en Venta */}
+        <section className="mb-20">
+          <h2 className="mb-6 text-sm font-medium text-neutral-400">
+            Propiedades
+          </h2>
+          <a
+            href="/ventas"
+            className="block rounded-lg border border-neutral-800 p-5 transition-colors hover:border-neutral-600 hover:bg-neutral-900/50 group"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h3 className="font-medium text-neutral-100 group-hover:text-white">
+                  Parcelas Dollinco, Futrono 🌿
+                </h3>
+                <p className="mt-1 text-sm text-neutral-400">
+                  Parcelas agrícolas de agrado — ideales para construir tu casa
+                  de veraneo. A solo 10 minutos de Playa Coique, en un entorno
+                  natural tranquilo en la Región de Los Ríos.
+                </p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-blue-400 group-hover:text-blue-300">
+                  Ver parcelas disponibles →
+                </span>
+              </div>
+              <span className="inline-block rounded-full px-3 py-0.5 text-xs font-medium bg-blue-500/15 text-blue-400 shrink-0">
+                En venta
+              </span>
+            </div>
+          </a>
         </section>
 
         {/* Sobre mí */}
