@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="360 Los Rios - Propiedades y equipos agricolas en la region de Los Rios, Chile. Parcelas, tractores y montacargas disponibles.">
-    <meta name="keywords" content="propiedades Los Rios, parcelas Chile, tractor, montacargas, venta equipos agricolas">
+    <meta name="description" content="360 Los Rios - Parcelas en Loteo Dollinco, Futrono y equipos agricolas en la region de Los Rios, Chile. Parcelas desde $39.000.000.">
+    <meta name="keywords" content="parcelas Dollinco, Futrono, propiedades Los Rios, parcelas Chile, tractor, montacargas, venta equipos agricolas">
     <meta name="author" content="360 Los Rios">
-    <meta property="og:title" content="360 Los Rios - Propiedades & Equipos">
-    <meta property="og:description" content="Venta de parcelas, tractores y equipos agricolas en Los Rios, Chile">
+    <meta property="og:title" content="360 Los Rios - Parcelas Dollinco, Futrono & Equipos">
+    <meta property="og:description" content="Parcelas en Loteo Dollinco, Futrono desde $39.000.000. Tractores y equipos agricolas en Los Rios, Chile">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ventas.360losrios.cl">
-    <title>360 Los Rios - Propiedades & Equipos | Venta Parcelas y Maquinaria Agricola</title>
+    <title>360 Los Rios - Parcelas Dollinco Futrono & Equipos Agricolas</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -617,6 +617,112 @@
             }
         }
 
+        /* Price comparison styles */
+        .product-price-original {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 0.3rem;
+        }
+
+        .product-badge-offer {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #ef4444;
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+        }
+
+        .discount-tag {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Market Reference Section */
+        .market-reference {
+            background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+            padding: 3rem 2rem;
+            border-top: 3px solid #f59e0b;
+        }
+
+        .market-reference-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .market-reference-text h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .market-reference-text p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .market-price-highlight {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #b45309;
+        }
+
+        .our-price-highlight {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-green);
+        }
+
+        .market-reference-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .market-reference-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .market-reference-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Scroll animations */
         .fade-in {
             opacity: 0;
@@ -642,8 +748,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Propiedades & Equipos Agricolas en Los Rios</h1>
-            <p>Parcelas, tractores y maquinaria de calidad para tu negocio agricola. Ubicados en la hermosa region de Los Rios, Chile.</p>
+            <h1>Parcelas en Dollinco, Futrono & Equipos Agricolas</h1>
+            <p>Parcelas en Loteo Dollinco desde $39.000.000 (precio de mercado $50.000.000). Tractores y maquinaria de calidad en la Region de Los Rios, Chile.</p>
             <div class="cta-buttons">
                 <a href="#productos" class="btn btn-primary">
                     <i class="fas fa-search"></i>
@@ -663,29 +769,30 @@
         <p class="section-subtitle">Soluciones integrales para tu operacion agricola</p>
 
         <div class="products-grid">
-            <!-- Parcela 1 -->
+            <!-- Parcela 9 -->
             <div class="product-card">
                 <div class="product-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad576?w=500&h=400&fit=crop" alt="Parcela agricola Los Rios" class="product-image">
-                    <span class="product-badge">
-                        <i class="fas fa-check-circle"></i>
-                        DISPONIBLE
+                    <img src="images/parcelas-dollinco.jpg" alt="Parcela 9 - Loteo Dollinco, Futrono" class="product-image">
+                    <span class="product-badge-offer">
+                        <i class="fas fa-fire"></i>
+                        OFERTA
                     </span>
                 </div>
                 <div class="product-content">
-                    <div class="product-category">Propiedad</div>
-                    <h3 class="product-name">Parcela 1</h3>
+                    <div class="product-category">Propiedad - Loteo Dollinco</div>
+                    <h3 class="product-name">Parcela 9 - Futrono</h3>
                     <p class="product-description">
-                        Terreno agricola en la region de Los Rios. Ubicacion estrategica con excelente acceso y servicios basicos.
+                        Parcela #9 en Loteo Dollinco, Futrono. Terreno agricola con excelente ubicacion, acceso a camino publico y tierra fertil. Mismo loteo donde se venden parcelas a $50.000.000.
                     </p>
                     <ul class="product-features">
-                        <li><i class="fas fa-map"></i>Los Rios, Chile</li>
+                        <li><i class="fas fa-map-marker-alt"></i>Dollinco, Futrono, Los Rios</li>
                         <li><i class="fas fa-leaf"></i>Tierra fertil certificada</li>
                         <li><i class="fas fa-road"></i>Acceso a camino publico</li>
                     </ul>
-                    <div class="product-price">$35.000.000</div>
+                    <div class="product-price-original">$50.000.000 <span class="discount-tag">-22%</span></div>
+                    <div class="product-price">$39.000.000</div>
                     <div class="product-buttons">
-                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Parcela 1', 35000000)">
+                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Parcela 9 - Dollinco', 39000000)">
                             <i class="fas fa-comments"></i>
                             Consultar
                         </button>
@@ -693,29 +800,30 @@
                 </div>
             </div>
 
-            <!-- Parcela 2 -->
+            <!-- Parcela 10 -->
             <div class="product-card">
                 <div class="product-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=500&h=400&fit=crop" alt="Parcela agricola Los Rios" class="product-image">
-                    <span class="product-badge">
-                        <i class="fas fa-check-circle"></i>
-                        DISPONIBLE
+                    <img src="images/parcelas-dollinco.jpg" alt="Parcela 10 - Loteo Dollinco, Futrono" class="product-image">
+                    <span class="product-badge-offer">
+                        <i class="fas fa-fire"></i>
+                        OFERTA
                     </span>
                 </div>
                 <div class="product-content">
-                    <div class="product-category">Propiedad</div>
-                    <h3 class="product-name">Parcela 2</h3>
+                    <div class="product-category">Propiedad - Loteo Dollinco</div>
+                    <h3 class="product-name">Parcela 10 - Futrono</h3>
                     <p class="product-description">
-                        Segunda parcela disponible en la region de Los Rios con caracteristicas similares. Ideal para agricultura familiar.
+                        Parcela #10 en Loteo Dollinco, Futrono. Terreno agricola en el mismo loteo donde las parcelas se ofrecen a $50.000.000. Ideal para agricultura familiar o proyecto de vida.
                     </p>
                     <ul class="product-features">
-                        <li><i class="fas fa-map"></i>Los Rios, Chile</li>
+                        <li><i class="fas fa-map-marker-alt"></i>Dollinco, Futrono, Los Rios</li>
                         <li><i class="fas fa-leaf"></i>Tierra fertil certificada</li>
                         <li><i class="fas fa-road"></i>Acceso a camino publico</li>
                     </ul>
-                    <div class="product-price">$35.000.000</div>
+                    <div class="product-price-original">$50.000.000 <span class="discount-tag">-10%</span></div>
+                    <div class="product-price">$45.000.000</div>
                     <div class="product-buttons">
-                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Parcela 2', 35000000)">
+                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Parcela 10 - Dollinco', 45000000)">
                             <i class="fas fa-comments"></i>
                             Consultar
                         </button>
@@ -785,6 +893,30 @@
         </div>
     </section>
 
+    <!-- Market Reference Section -->
+    <section class="market-reference">
+        <div class="market-reference-container">
+            <div class="market-reference-text">
+                <h3><i class="fas fa-chart-line"></i> Precio de referencia en Loteo Dollinco</h3>
+                <p>
+                    En este mismo loteo, la corredora <strong>Moreno Soffia Propiedades</strong> esta vendiendo parcelas a:
+                </p>
+                <p class="market-price-highlight">
+                    <i class="fas fa-tag"></i> Precio de mercado: $50.000.000 por parcela
+                </p>
+                <p>
+                    Nuestras parcelas (Lotes 9 y 10) las ofrecemos desde:
+                </p>
+                <p class="our-price-highlight">
+                    <i class="fas fa-arrow-down"></i> Desde $39.000.000 — Ahorra hasta $11.000.000
+                </p>
+            </div>
+            <div class="market-reference-image">
+                <img src="images/referencia-precio.jpg" alt="Publicacion de parcelas en Loteo Dollinco a $50.000.000 por Moreno Soffia Propiedades">
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact-section" id="contacto">
         <div class="contact-container">
@@ -813,9 +945,9 @@
                             <label for="producto">Producto de Interes *</label>
                             <select id="producto" name="producto" required>
                                 <option value="">Selecciona un producto</option>
-                                <option value="Parcela 1">Parcela 1 - $35.000.000</option>
-                                <option value="Parcela 2">Parcela 2 - $35.000.000</option>
-                                <option value="Tractor">Tractor - $12.000.000</option>
+                                <option value="Parcela 9 - Dollinco">Parcela 9 - Dollinco, Futrono - $39.000.000</option>
+                                <option value="Parcela 10 - Dollinco">Parcela 10 - Dollinco, Futrono - $45.000.000</option>
+                                <option value="Tractor">Tractor Agricola - $12.000.000</option>
                                 <option value="Yale">Yale/Montacargas - $8.000.000</option>
                             </select>
                         </div>
