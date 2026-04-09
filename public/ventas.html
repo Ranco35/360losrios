@@ -855,14 +855,24 @@
         <h2 class="section-title">Parcelas Disponibles</h2>
         <p class="section-subtitle">Venta directa por su dueno, sin comisiones — Solo 2 parcelas en Loteo Dollinco</p>
 
+        <div style="max-width:750px;margin:0 auto 2rem;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #3b82f6;border-radius:12px;padding:1.5rem;text-align:center;">
+            <p style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:700;color:#1e40af;margin-bottom:0.5rem;">
+                <i class="fas fa-info-circle"></i> Como funciona el precio
+            </p>
+            <p style="font-size:0.95rem;color:#1e3a5f;line-height:1.6;">
+                La <strong>primera parcela que se venda</strong> (ya sea la 9 o la 10) se va en <strong style="color:#16a34a;">$39.000.000</strong>.<br>
+                La <strong>segunda parcela</strong> (la que quede) se vende en <strong style="color:#f97316;">$45.000.000</strong>.
+            </p>
+        </div>
+
         <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 750px; margin: 0 auto;">
             <!-- Parcela 9 -->
             <div class="product-card">
                 <div class="product-image-wrapper">
                     <img src="/images/parcelas-dollinco.jpg" alt="Parcela 9 - Loteo Dollinco, Futrono" class="product-image">
                     <span class="product-badge-offer">
-                        <i class="fas fa-bolt"></i>
-                        1ra OFERTA
+                        <i class="fas fa-fire"></i>
+                        OFERTA
                     </span>
                 </div>
                 <div class="product-content">
@@ -872,7 +882,7 @@
                         <i class="fas fa-user-check"></i> Venta directa — Sin comisiones
                     </p>
                     <p class="product-description">
-                        Primera parcela en venderse a precio preferencial. Se vende sin agua ni luz, pero en el mismo loteo ya estan conectando estos servicios y construyendo caminos. Cuando la infraestructura este lista, los precios suben. En el loteo otras se venden a $50M tambien sin servicios.
+                        Parcela de agrado en Loteo Dollinco, Futrono. Se vende sin agua ni luz, pero en el mismo loteo ya estan conectando estos servicios y construyendo caminos. Cuando la infraestructura este lista, los precios suben. En el loteo otras se venden a $50M tambien sin servicios.
                     </p>
                     <ul class="product-features">
                         <li><i class="fas fa-tint" style="color:#3b82f6"></i>Sin agua <span style="color:#16a34a;font-weight:600;">(loteo conectando agua)</span></li>
@@ -883,9 +893,6 @@
                     </ul>
                     <div class="product-price-original">$50.000.000 <span class="discount-tag">-22%</span></div>
                     <div class="product-price">$39.000.000</div>
-                    <p style="font-size:0.8rem;color:#ef4444;font-weight:600;margin-top:-0.5rem;margin-bottom:1rem;">
-                        <i class="fas fa-clock"></i> Precio valido para la primera parcela vendida
-                    </p>
                     <div class="product-buttons">
                         <button class="btn btn-primary btn-consult" onclick="consultarProducto('Parcela 9 - Dollinco', 39000000)">
                             <i class="fas fa-comments"></i>
@@ -899,9 +906,9 @@
             <div class="product-card">
                 <div class="product-image-wrapper">
                     <img src="/images/parcelas-dollinco.jpg" alt="Parcela 10 - Loteo Dollinco, Futrono" class="product-image">
-                    <span class="product-badge-offer" style="background-color:#f97316;">
-                        <i class="fas fa-tag"></i>
-                        2da OFERTA
+                    <span class="product-badge-offer">
+                        <i class="fas fa-fire"></i>
+                        OFERTA
                     </span>
                 </div>
                 <div class="product-content">
@@ -911,7 +918,7 @@
                         <i class="fas fa-user-check"></i> Venta directa — Sin comisiones
                     </p>
                     <p class="product-description">
-                        Si la Parcela 9 se vende, esta sera la unica disponible a precio preferencial. Se vende sin agua ni luz, pero el loteo ya esta conectando estos servicios. Cuando esten listos, el valor sube. Las otras parcelas a $50M tampoco tienen servicios.
+                        Parcela de agrado en Loteo Dollinco, Futrono. Se vende sin agua ni luz, pero en el mismo loteo ya estan conectando estos servicios y construyendo caminos. Cuando la infraestructura este lista, los precios suben. En el loteo otras se venden a $50M tambien sin servicios.
                     </p>
                     <ul class="product-features">
                         <li><i class="fas fa-tint" style="color:#3b82f6"></i>Sin agua <span style="color:#16a34a;font-weight:600;">(loteo conectando agua)</span></li>
@@ -922,9 +929,6 @@
                     </ul>
                     <div class="product-price-original">$50.000.000 <span class="discount-tag">-10%</span></div>
                     <div class="product-price">$45.000.000</div>
-                    <p style="font-size:0.8rem;color:#f97316;font-weight:600;margin-top:-0.5rem;margin-bottom:1rem;">
-                        <i class="fas fa-info-circle"></i> Precio si la Parcela 9 ya se vendio
-                    </p>
                     <div class="product-buttons">
                         <button class="btn btn-primary btn-consult" onclick="consultarProducto('Parcela 10 - Dollinco', 45000000)">
                             <i class="fas fa-comments"></i>
@@ -1100,8 +1104,9 @@
                             <label for="producto">Producto de Interes *</label>
                             <select id="producto" name="producto" required>
                                 <option value="">Selecciona un producto</option>
-                                <option value="Parcela 9 - Dollinco">Parcela 9 - Dollinco, Futrono - $39.000.000</option>
-                                <option value="Parcela 10 - Dollinco">Parcela 10 - Dollinco, Futrono - $45.000.000</option>
+                                <option value="Parcela 9 - Dollinco">Parcela 9 - Dollinco, Futrono</option>
+                                <option value="Parcela 10 - Dollinco">Parcela 10 - Dollinco, Futrono</option>
+                                <option value="Cualquier Parcela">Cualquiera de las 2 parcelas</option>
                                 <option value="Tractor">Tractor Agricola - $12.000.000</option>
                                 <option value="Yale">Yale/Montacargas - $8.000.000</option>
                             </select>
