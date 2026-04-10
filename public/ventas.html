@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="360 Los Rios - Parcelas de agrado en Loteo Dollinco, Futrono. Proyecto con agua, luz y caminos en ejecucion. Desde $39.000.000 mientras el mercado vende a $50.000.000 SIN servicios.">
-    <meta name="keywords" content="parcelas agrado Dollinco, Futrono, casa veraneo Los Rios, parcelas Chile, Playa Coique, propiedad veraneo, inversion parcelas">
-    <meta name="author" content="360 Los Rios">
-    <meta property="og:title" content="Oportunidad de Inversion: Parcelas en Dollinco, Futrono — Solo 2 disponibles">
-    <meta property="og:description" content="Parcelas con agua, luz y caminos en ejecucion desde $39.000.000. El mercado vende a $50.000.000 SIN servicios. Solo 2 parcelas disponibles.">
+    <meta name="description" content="360 Los Ríos - Parcelas de agrado en Loteo Dollinco, Futrono. Ideal para casa de veraneo a 10 minutos de Playa Coique. Desde $39.000.000.">
+    <meta name="keywords" content="parcelas agrado Dollinco, Futrono, casa veraneo Los Ríos, parcelas Chile, Playa Coique, propiedad veraneo">
+    <meta name="author" content="360 Los Ríos">
+    <meta property="og:title" content="Parcelas de Agrado en Dollinco, Futrono — 10 min de Playa Coique">
+    <meta property="og:description" content="Parcelas de agrado en Loteo Dollinco, Futrono. Para tu casa de veraneo a 10 minutos de Playa Coique. Desde $39.000.000.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ventas.360losrios.cl">
     <title>Parcelas de Agrado en Dollinco, Futrono — Casa de Veraneo</title>
@@ -101,7 +101,7 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #0066cc 0%, #004fa3 100%);
+            background: linear-gradient(rgba(0, 66, 163, 0.7), rgba(0, 40, 100, 0.8)), url('/images/portada.JPG') center/cover no-repeat;
             color: var(--white);
             padding: 6rem 2rem;
             text-align: center;
@@ -110,15 +110,7 @@
         }
 
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,133.3C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-            background-size: cover;
-            opacity: 0.3;
+            display: none;
         }
 
         .hero-content {
@@ -126,18 +118,6 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background-color: #ef4444;
-            color: var(--white);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            animation: pulse 2s infinite;
         }
 
         .hero h1 {
@@ -254,11 +234,6 @@
             }
         }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-            50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
-        }
-
         .product-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
@@ -356,217 +331,6 @@
         .btn-consult {
             flex: 1;
             min-width: 150px;
-        }
-
-        /* Price comparison styles */
-        .product-price-original {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #999;
-            text-decoration: line-through;
-            margin-bottom: 0.3rem;
-        }
-
-        .product-badge-offer {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background-color: #ef4444;
-            color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            animation: pulse 2s infinite;
-        }
-
-        .discount-tag {
-            display: inline-block;
-            background: #ef4444;
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 700;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            margin-left: 0.5rem;
-            vertical-align: middle;
-        }
-
-        .product-price-note {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            font-style: italic;
-            margin-top: -1rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Why Invest Section */
-        .why-invest {
-            background: var(--bg-light);
-            padding: 4rem 2rem;
-        }
-
-        .why-invest-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .benefit-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .benefit-icon {
-            font-size: 2.5rem;
-            line-height: 1;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .benefit-card h4 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .benefit-card p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            line-height: 1.5;
-        }
-
-        /* Market Reference Section */
-        .market-reference {
-            background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
-            padding: 3rem 2rem;
-            border-top: 3px solid #f59e0b;
-        }
-
-        .market-reference-container {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .market-reference-text h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
-
-        .market-reference-text p {
-            color: var(--text-light);
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-
-        .market-price-highlight {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #b45309;
-        }
-
-        .our-price-highlight {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--accent-green);
-        }
-
-        .market-reference-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-            border: 1px solid var(--border-color);
-        }
-
-        .reference-card-header {
-            background: #f1f5f9;
-            padding: 0.8rem 1.2rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-light);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .reference-card-header i {
-            margin-right: 0.4rem;
-        }
-
-        .reference-card-body {
-            padding: 0;
-        }
-
-        .reference-card-screenshot {
-            width: 100%;
-            display: block;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .reference-card-vs {
-            text-align: center;
-            padding: 0.5rem;
-            background: #f8f9fa;
-        }
-
-        .reference-card-vs span {
-            display: inline-block;
-            background: var(--primary-blue);
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 0.9rem;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-        }
-
-        .reference-card-our {
-            padding: 1.2rem 1.5rem;
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            text-align: center;
-        }
-
-        .reference-card-our p {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-light);
-            margin-bottom: 0.3rem;
-        }
-
-        .reference-card-our-price {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #16a34a;
         }
 
         /* Contact Form Section */
@@ -760,6 +524,15 @@
                 margin-bottom: 1.5rem;
             }
 
+            .cta-buttons {
+                gap: 0.8rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+
             .section-title {
                 font-size: 2rem;
             }
@@ -770,14 +543,6 @@
 
             .products-grid {
                 gap: 1.5rem;
-            }
-
-            .market-reference-container {
-                grid-template-columns: 1fr;
-            }
-
-            .benefits-grid {
-                grid-template-columns: 1fr 1fr;
             }
 
             .contact-section {
@@ -830,10 +595,6 @@
                 font-size: 1.5rem;
             }
 
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-
             .form-row {
                 grid-template-columns: 1fr;
             }
@@ -845,6 +606,196 @@
 
             .btn {
                 width: 100%;
+            }
+        }
+
+        /* Price comparison styles */
+        .product-price-original {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 0.3rem;
+        }
+
+        .product-badge-offer {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #ef4444;
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+        }
+
+        .discount-tag {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Market Reference Section */
+        .market-reference {
+            background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+            padding: 3rem 2rem;
+            border-top: 3px solid #f59e0b;
+        }
+
+        .market-reference-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .market-reference-text h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .market-reference-text p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .market-price-highlight {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #b45309;
+        }
+
+        .our-price-highlight {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-green);
+        }
+
+        .market-reference-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--border-color);
+        }
+
+        .reference-card-header {
+            background: #f1f5f9;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .reference-card-header i {
+            margin-right: 0.4rem;
+        }
+
+        .reference-card-body {
+            padding: 0;
+        }
+
+        .reference-card-screenshot {
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .reference-card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .reference-card-broker {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+        }
+
+        .reference-card-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .reference-card-note {
+            font-size: 0.8rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .reference-card-vs {
+            text-align: center;
+            padding: 0.5rem;
+            background: #f8f9fa;
+        }
+
+        .reference-card-vs span {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 0.9rem;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+        }
+
+        .reference-card-our {
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            text-align: center;
+        }
+
+        .reference-card-our p {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .reference-card-our-price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #16a34a;
+        }
+
+        @media (max-width: 768px) {
+            .market-reference-container {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -861,7 +812,7 @@
         <div class="navbar">
             <a href="#" class="logo">
                 <i class="fas fa-map-marker-alt"></i>
-                360 Los Rios
+                360 Los Ríos
             </a>
             <nav>
                 <a href="#productos">Productos</a>
@@ -873,17 +824,17 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-badge">
+            <div style="display:inline-block;background:#ef4444;color:white;padding:0.5rem 1.5rem;border-radius:50px;font-family:'Poppins',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:1.5rem;animation:pulse 2s infinite;">
                 <i class="fas fa-exclamation-triangle"></i> Solo 2 parcelas disponibles
             </div>
-            <h1>Oportunidad de Inversion: Parcelas en Dollinco, Futrono</h1>
-            <p>Proyecto en ejecucion con agua, luz y caminos en construccion. Desde <strong>$39.000.000</strong> mientras en el mismo loteo venden a $50.000.000 SIN servicios. Los precios van a subir cuando termine la infraestructura.</p>
+            <h1>Oportunidad de Inversión: Parcelas en Dollinco, Futrono</h1>
+            <p>Venta directa por su dueño, sin comisiones. Estas parcelas se venden <strong>sin agua ni luz</strong>. Las demás parcelas del loteo están en ejecución de agua y luz, lo que va a aumentar el valor de todo el sector. Desde <strong>$39.000.000</strong> mientras otras se venden a $50.000.000 (también sin servicios).</p>
             <div class="cta-buttons">
                 <a href="#productos" class="btn btn-primary">
                     <i class="fas fa-search"></i>
                     Ver Parcelas
                 </a>
-                <a href="https://wa.me/56998871415?text=Hola%2C%20estoy%20interesado%20en%20las%20parcelas%20de%20Dollinco" class="btn btn-secondary" target="_blank">
+                <a href="https://wa.me/56998871415?text=Hola%2C%20me%20interesan%20las%20parcelas%20en%20Dollinco" class="btn btn-secondary" target="_blank">
                     <i class="fab fa-whatsapp"></i>
                     Consultar Ahora
                 </a>
@@ -891,38 +842,54 @@
         </div>
     </section>
 
-    <!-- Parcelas Section -->
+    <!-- Products Section: Parcelas -->
     <section class="products" id="productos">
         <h2 class="section-title">Parcelas Disponibles</h2>
-        <p class="section-subtitle">Solo 2 parcelas a la venta en Loteo Dollinco — Proyecto con agua, luz y caminos en construccion</p>
+        <p class="section-subtitle">Venta directa por su dueño, sin comisiones — Solo 2 parcelas en Loteo Dollinco</p>
 
-        <div class="products-grid">
+        <div style="max-width:750px;margin:0 auto 2rem;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid #3b82f6;border-radius:12px;padding:1.5rem;text-align:center;">
+            <p style="font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:700;color:#1e40af;margin-bottom:0.5rem;">
+                <i class="fas fa-info-circle"></i> Cómo funciona el precio
+            </p>
+            <p style="font-size:0.95rem;color:#1e3a5f;line-height:1.6;">
+                La <strong>primera parcela que se venda</strong> (ya sea la 9 o la 10) se va en <strong style="color:#16a34a;">$39.000.000</strong>.<br>
+                La <strong>segunda parcela</strong> (la que quede) se vende en <strong style="color:#f97316;">$45.000.000</strong>.
+            </p>
+            <p style="font-size:0.85rem;color:#64748b;margin-top:0.5rem;">
+                <i class="fas fa-exclamation-triangle" style="color:#f59e0b;"></i> Estas 2 parcelas se venden <strong>sin agua ni luz</strong>. Las demás parcelas del loteo están en ejecución de agua y luz, lo que va a aumentar el valor de todo el sector.
+            </p>
+        </div>
+
+        <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 750px; margin: 0 auto;">
             <!-- Parcela 9 -->
             <div class="product-card">
                 <div class="product-image-wrapper">
                     <img src="/images/parcelas-dollinco.jpg" alt="Parcela 9 - Loteo Dollinco, Futrono" class="product-image">
                     <span class="product-badge-offer">
-                        <i class="fas fa-bolt"></i>
-                        1ra OFERTA
+                        <i class="fas fa-fire"></i>
+                        OFERTA
                     </span>
                 </div>
                 <div class="product-content">
                     <div class="product-category">Parcela de Agrado - Loteo Dollinco</div>
                     <h3 class="product-name">Parcela 9 - Futrono</h3>
+                    <p style="display:inline-block;background:#dbeafe;color:#1d4ed8;font-size:0.75rem;font-weight:700;padding:0.3rem 0.7rem;border-radius:4px;margin-bottom:0.8rem;">
+                        <i class="fas fa-user-check"></i> Venta directa — Sin comisiones
+                    </p>
                     <p class="product-description">
-                        Primera parcela en venderse a precio preferencial. Loteo con proyecto de agua, luz y caminos en ejecucion. En el mismo loteo venden parcelas a $50M SIN estos servicios. Invierte ahora antes de que suban los precios.
+                        Parcela de agrado en Loteo Dollinco, Futrono. Se vende sin agua ni luz. Las demás parcelas del loteo están en ejecución de agua y luz, lo que va a aumentar el valor de todo el sector. Otras parcelas se venden a $50M también sin servicios.
                     </p>
                     <ul class="product-features">
-                        <li><i class="fas fa-tint"></i><strong>Agua en conexion</strong> (proyecto en ejecucion)</li>
-                        <li><i class="fas fa-lightbulb"></i><strong>Luz en conexion</strong> (proyecto en ejecucion)</li>
-                        <li><i class="fas fa-road"></i><strong>Caminos en construccion</strong></li>
-                        <li><i class="fas fa-umbrella-beach"></i>10 min de Playa Coique</li>
+                        <li><i class="fas fa-times-circle" style="color:#ef4444"></i>Se vende <strong>sin agua ni luz</strong></li>
+                        <li><i class="fas fa-hard-hat" style="color:#f59e0b"></i>Las demás parcelas del loteo <strong>están en ejecución de agua y luz</strong></li>
+                        <li><i class="fas fa-chart-line" style="color:#16a34a"></i>Eso aumenta el valor de todo el sector</li>
+                        <li><i class="fas fa-umbrella-beach" style="color:#06b6d4"></i>10 min de Playa Coique</li>
+                        <li><i class="fas fa-user-check" style="color:#22c55e"></i><strong>Venta directa, sin comisiones</strong></li>
                     </ul>
                     <div class="product-price-original">$50.000.000 <span class="discount-tag">-22%</span></div>
                     <div class="product-price">$39.000.000</div>
-                    <p class="product-price-note"><i class="fas fa-clock"></i> Precio valido para la primera parcela vendida</p>
                     <div class="product-buttons">
-                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Parcela 9 - Dollinco, Futrono - $39.000.000', 39000000)">
+                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Parcela 9 - Dollinco', 39000000)">
                             <i class="fas fa-comments"></i>
                             Consultar
                         </button>
@@ -935,27 +902,30 @@
                 <div class="product-image-wrapper">
                     <img src="/images/parcelas-dollinco.jpg" alt="Parcela 10 - Loteo Dollinco, Futrono" class="product-image">
                     <span class="product-badge-offer">
-                        <i class="fas fa-bolt"></i>
-                        2da OFERTA
+                        <i class="fas fa-fire"></i>
+                        OFERTA
                     </span>
                 </div>
                 <div class="product-content">
                     <div class="product-category">Parcela de Agrado - Loteo Dollinco</div>
                     <h3 class="product-name">Parcela 10 - Futrono</h3>
+                    <p style="display:inline-block;background:#dbeafe;color:#1d4ed8;font-size:0.75rem;font-weight:700;padding:0.3rem 0.7rem;border-radius:4px;margin-bottom:0.8rem;">
+                        <i class="fas fa-user-check"></i> Venta directa — Sin comisiones
+                    </p>
                     <p class="product-description">
-                        Si la Parcela 9 se vende, esta sera la unica disponible a precio preferencial. Mismo loteo con infraestructura en construccion. Las parcelas a $50M de la competencia NO tienen agua ni luz.
+                        Parcela de agrado en Loteo Dollinco, Futrono. Se vende sin agua ni luz. Las demás parcelas del loteo están en ejecución de agua y luz, lo que va a aumentar el valor de todo el sector. Otras parcelas se venden a $50M también sin servicios.
                     </p>
                     <ul class="product-features">
-                        <li><i class="fas fa-tint"></i><strong>Agua en conexion</strong> (proyecto en ejecucion)</li>
-                        <li><i class="fas fa-lightbulb"></i><strong>Luz en conexion</strong> (proyecto en ejecucion)</li>
-                        <li><i class="fas fa-road"></i><strong>Caminos en construccion</strong></li>
-                        <li><i class="fas fa-umbrella-beach"></i>10 min de Playa Coique</li>
+                        <li><i class="fas fa-times-circle" style="color:#ef4444"></i>Se vende <strong>sin agua ni luz</strong></li>
+                        <li><i class="fas fa-hard-hat" style="color:#f59e0b"></i>Las demás parcelas del loteo <strong>están en ejecución de agua y luz</strong></li>
+                        <li><i class="fas fa-chart-line" style="color:#16a34a"></i>Eso aumenta el valor de todo el sector</li>
+                        <li><i class="fas fa-umbrella-beach" style="color:#06b6d4"></i>10 min de Playa Coique</li>
+                        <li><i class="fas fa-user-check" style="color:#22c55e"></i><strong>Venta directa, sin comisiones</strong></li>
                     </ul>
                     <div class="product-price-original">$50.000.000 <span class="discount-tag">-10%</span></div>
                     <div class="product-price">$45.000.000</div>
-                    <p class="product-price-note"><i class="fas fa-clock"></i> Precio si la Parcela 9 ya se vendio</p>
                     <div class="product-buttons">
-                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Parcela 10 - Dollinco, Futrono - $45.000.000', 45000000)">
+                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Parcela 10 - Dollinco', 45000000)">
                             <i class="fas fa-comments"></i>
                             Consultar
                         </button>
@@ -965,31 +935,31 @@
         </div>
     </section>
 
-    <!-- Why Invest Now Section -->
-    <section class="why-invest">
-        <div class="why-invest-container">
-            <h2 class="section-title"><i class="fas fa-chart-line"></i> Por que invertir ahora</h2>
-            <p class="section-subtitle">Este loteo esta en plena ejecucion — los precios van a subir</p>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <span class="benefit-icon">🚧</span>
-                    <h4>Proyecto en ejecucion</h4>
-                    <p>Agua, luz y caminos se estan conectando ahora mismo. Infraestructura real, no promesas.</p>
+    <!-- Por qué invertir ahora -->
+    <section style="padding:4rem 2rem;background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 100%);">
+        <div style="max-width:900px;margin:0 auto;">
+            <h2 class="section-title" style="margin-bottom:0.5rem;"><i class="fas fa-chart-line" style="color:var(--accent-green)"></i> Por qué invertir ahora</h2>
+            <p class="section-subtitle">Las demás parcelas del loteo están en ejecución de agua y luz — el valor del sector va a subir</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;">
+                <div style="background:white;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.08);text-align:center;">
+                    <div style="font-size:2.5rem;margin-bottom:0.8rem;">🚧</div>
+                    <h4 style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;">Loteo en ejecución</h4>
+                    <p style="font-size:0.85rem;color:var(--text-light);line-height:1.5;">Las demás parcelas del loteo están en ejecución de agua y luz. Eso aumenta el valor de todo el sector.</p>
                 </div>
-                <div class="benefit-card">
-                    <span class="benefit-icon">📈</span>
-                    <h4>Plusvalia garantizada</h4>
-                    <p>Cuando la infraestructura este lista, los precios suben. Comprar ahora es invertir.</p>
+                <div style="background:white;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.08);text-align:center;">
+                    <div style="font-size:2.5rem;margin-bottom:0.8rem;">📈</div>
+                    <h4 style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;">Plusvalía garantizada</h4>
+                    <p style="font-size:0.85rem;color:var(--text-light);line-height:1.5;">Cuando las demás parcelas tengan agua y luz, el valor de todo el sector sube. Comprar ahora es invertir.</p>
                 </div>
-                <div class="benefit-card">
-                    <span class="benefit-icon">💡</span>
-                    <h4>Mejor que la competencia</h4>
-                    <p>A $50M venden parcelas SIN agua ni luz. Las nuestras TENDRAN todo y cuestan menos.</p>
+                <div style="background:white;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.08);text-align:center;">
+                    <div style="font-size:2.5rem;margin-bottom:0.8rem;">💡</div>
+                    <h4 style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;">Mejor que la competencia</h4>
+                    <p style="font-size:0.85rem;color:var(--text-light);line-height:1.5;">Otras parcelas del mismo loteo se venden a $50M, también sin agua ni luz. Las nuestras cuestan menos y son venta directa sin comisiones.</p>
                 </div>
-                <div class="benefit-card">
-                    <span class="benefit-icon">⏳</span>
-                    <h4>Solo 2 disponibles</h4>
-                    <p>Una vez vendidas, no hay mas parcelas a este precio. La primera se va en $39M.</p>
+                <div style="background:white;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.08);text-align:center;">
+                    <div style="font-size:2.5rem;margin-bottom:0.8rem;">⏳</div>
+                    <h4 style="font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;">Solo 2 disponibles</h4>
+                    <p style="font-size:0.85rem;color:var(--text-light);line-height:1.5;">Una vez vendidas, no hay mas parcelas a este precio. La primera se va en $39M.</p>
                 </div>
             </div>
         </div>
@@ -1006,11 +976,11 @@
                 <p class="market-price-highlight">
                     <i class="fas fa-tag"></i> Precio de mercado: $50.000.000 por parcela
                 </p>
-                <p>
-                    <strong>Importante:</strong> Esas parcelas a $50M NO incluyen agua ni luz.
+                <p style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:0.8rem;font-size:0.9rem;color:#dc2626;font-weight:600;">
+                    <i class="fas fa-exclamation-circle"></i> Las parcelas a $50M también se venden SIN agua ni luz. Mismas condiciones, mayor precio
                 </p>
                 <p>
-                    Nuestras parcelas (Lotes 9 y 10) TENDRAN agua, luz y caminos, y las ofrecemos desde:
+                    Nuestras parcelas (Lotes 9 y 10) son venta directa sin comisiones, y las ofrecemos desde:
                 </p>
                 <p class="our-price-highlight">
                     <i class="fas fa-arrow-down"></i> Desde $39.000.000 — Ahorra hasta $11.000.000
@@ -1018,10 +988,10 @@
             </div>
             <div class="market-reference-card">
                 <div class="reference-card-header">
-                    <i class="fas fa-building"></i> Publicacion de referencia
+                    <i class="fas fa-building"></i> Publicación de referencia
                 </div>
                 <div class="reference-card-body">
-                    <img src="/images/referencia-precio.jpg" alt="Publicacion Moreno Soffia Propiedades - Parcelas Dollinco a $50.000.000" class="reference-card-screenshot">
+                    <img src="/images/referencia-precio.jpg" alt="Publicación Moreno Soffia Propiedades - Parcelas Dollinco a $50.000.000" class="reference-card-screenshot">
                 </div>
                 <div class="reference-card-vs">
                     <span>VS</span>
@@ -1034,16 +1004,15 @@
         </div>
     </section>
 
-    <!-- Maquinaria Section -->
-    <section class="products">
-        <h2 class="section-title">Tambien disponible: Maquinaria</h2>
-        <p class="section-subtitle">Equipos agricolas de calidad</p>
-
-        <div class="products-grid">
+    <!-- Maquinaria Section (oculta temporalmente) -->
+    <section class="products" style="display:none;background:var(--bg-light);">
+        <h2 class="section-title" style="font-size:1.8rem;">También disponible: Maquinaria</h2>
+        <p class="section-subtitle">Equipos agrícolas de calidad</p>
+        <div class="products-grid" style="max-width:700px;margin:0 auto;">
             <!-- Tractor -->
             <div class="product-card">
                 <div class="product-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad576?w=500&h=400&fit=crop" alt="Tractor agricola profesional" class="product-image">
+                    <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad576?w=500&h=400&fit=crop" alt="Tractor agrícola profesional" class="product-image">
                     <span class="product-badge">
                         <i class="fas fa-check-circle"></i>
                         DISPONIBLE
@@ -1053,16 +1022,16 @@
                     <div class="product-category">Maquinaria</div>
                     <h3 class="product-name">Tractor Agricola</h3>
                     <p class="product-description">
-                        Tractor de ultima generacion, equipado con todas las funcionalidades modernas para agricultura eficiente.
+                        Tractor de última generación, equipado con todas las funcionalidades modernas para agricultura eficiente.
                     </p>
                     <ul class="product-features">
                         <li><i class="fas fa-cog"></i>Motor de alto rendimiento</li>
-                        <li><i class="fas fa-bolt"></i>Tecnologia hibrida</li>
-                        <li><i class="fas fa-handshake"></i>Garantia incluida</li>
+                        <li><i class="fas fa-bolt"></i>Tecnología híbrida</li>
+                        <li><i class="fas fa-handshake"></i>Garantía incluida</li>
                     </ul>
                     <div class="product-price">$12.000.000</div>
                     <div class="product-buttons">
-                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Tractor Agricola - $12.000.000', 12000000)">
+                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Tractor', 12000000)">
                             <i class="fas fa-comments"></i>
                             Consultar
                         </button>
@@ -1083,7 +1052,7 @@
                     <div class="product-category">Maquinaria</div>
                     <h3 class="product-name">Yale (Montacargas)</h3>
                     <p class="product-description">
-                        Montacargas Yale profesional, ideal para labores de carga y movimiento de materiales agricolas.
+                        Montacargas Yale profesional, ideal para labores de carga y movimiento de materiales agrícolas.
                     </p>
                     <ul class="product-features">
                         <li><i class="fas fa-weight"></i>Capacidad de carga premium</li>
@@ -1092,7 +1061,7 @@
                     </ul>
                     <div class="product-price">$8.000.000</div>
                     <div class="product-buttons">
-                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Yale/Montacargas - $8.000.000', 8000000)">
+                        <button class="btn btn-primary btn-consult" onclick="consultarProducto('Yale/Montacargas', 8000000)">
                             <i class="fas fa-comments"></i>
                             Consultar
                         </button>
@@ -1123,24 +1092,25 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="telefono">Telefono *</label>
+                            <label for="telefono">Teléfono *</label>
                             <input type="tel" id="telefono" name="telefono" required>
                         </div>
                         <div class="form-group">
-                            <label for="producto">Producto de Interes *</label>
+                            <label for="producto">Producto de Interés *</label>
                             <select id="producto" name="producto" required>
                                 <option value="">Selecciona un producto</option>
-                                <option value="Parcela 9 - Dollinco, Futrono - $39.000.000">Parcela 9 - Dollinco, Futrono - $39.000.000</option>
-                                <option value="Parcela 10 - Dollinco, Futrono - $45.000.000">Parcela 10 - Dollinco, Futrono - $45.000.000</option>
-                                <option value="Tractor Agricola - $12.000.000">Tractor Agricola - $12.000.000</option>
-                                <option value="Yale/Montacargas - $8.000.000">Yale/Montacargas - $8.000.000</option>
+                                <option value="Parcela 9 - Dollinco">Parcela 9 - Dollinco, Futrono</option>
+                                <option value="Parcela 10 - Dollinco">Parcela 10 - Dollinco, Futrono</option>
+                                <option value="Cualquier Parcela">Cualquiera de las 2 parcelas</option>
+                                <!-- <option value="Tractor">Tractor Agricola - $12.000.000</option>
+                                <option value="Yale">Yale/Montacargas - $8.000.000</option> -->
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="mensaje">Mensaje *</label>
-                        <textarea id="mensaje" name="mensaje" required placeholder="Cuentanos mas sobre tu interes..."></textarea>
+                        <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos más sobre tu interés..."></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-submit">
@@ -1156,8 +1126,8 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3><i class="fas fa-map-marker-alt"></i> Ubicacion</h3>
-                <p>Region de Los Rios<br>Chile</p>
+                <h3><i class="fas fa-map-marker-alt"></i> Ubicación</h3>
+                <p>Región de Los Ríos<br>Chile</p>
             </div>
             <div class="footer-section">
                 <h3><i class="fas fa-envelope"></i> Contacto</h3>
@@ -1168,12 +1138,12 @@
             </div>
             <div class="footer-section">
                 <h3><i class="fas fa-info-circle"></i> Acerca de</h3>
-                <p>360 Los Rios es tu solucion integral para propiedades y equipos agricolas de calidad en la region.</p>
+                <p>360 Los Ríos es tu solución integral para propiedades y equipos agrícolas de calidad en la región.</p>
             </div>
         </div>
         <div class="footer-divider"></div>
         <div class="footer-bottom">
-            <p>&copy; 2026 360 Los Rios - Propiedades & Equipos. Todos los derechos reservados.</p>
+            <p>&copy; 2026 360 Los Ríos - Propiedades & Equipos. Todos los derechos reservados.</p>
         </div>
     </footer>
 
@@ -1225,13 +1195,13 @@
             const mensaje = document.getElementById('mensaje').value;
 
             // Create mailto link
-            const asunto = `Consulta sobre: ${producto} - 360 Los Rios`;
-            const cuerpo = `Hola,\n\nMe interesa consultar sobre: ${producto}\n\nDatos del interesado:\nNombre: ${nombre}\nEmail: ${email}\nTelefono: ${telefono}\n\nMensaje:\n${mensaje}\n\nQuedo atento a su respuesta.\n\nSaludos`;
+            const asunto = `Consulta sobre: ${producto} - 360 Los Ríos`;
+            const cuerpo = `Hola,\n\nMe interesa consultar sobre: ${producto}\n\nDatos del interesado:\nNombre: ${nombre}\nEmail: ${email}\nTeléfono: ${telefono}\n\nMensaje:\n${mensaje}\n\nQuedo atento a su respuesta.\n\nSaludos`;
 
             const mailtoLink = `mailto:eduardo@termasllifen.cl?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
 
             // Show confirmation
-            alert('Gracias por tu interes!\n\nNos comunicaremos pronto contigo.\n\nTelefono: +56 9 9887 1415\nEmail: eduardo@termasllifen.cl');
+            alert('Gracias por tu interés!\n\nNos comunicaremos pronto contigo.\n\nTeléfono: +56 9 9887 1415\nEmail: eduardo@termasllifen.cl');
 
             // Reset form
             document.getElementById('contactForm').reset();
@@ -1263,3 +1233,4 @@
     </script>
 </body>
 </html>
+                                                                                                          
