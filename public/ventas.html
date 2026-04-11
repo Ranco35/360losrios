@@ -1085,6 +1085,11 @@
 
             <div class="contact-info">
                 <form id="contactForm" onsubmit="enviarFormulario(event)">
+                    <input type="hidden" name="access_key" value="3bf25c88-e9c0-4e86-af26-db3d229cef49">
+                    <input type="hidden" name="subject" value="Nueva consulta desde ventas.360losrios.cl">
+                    <input type="hidden" name="from_name" value="360 Los Rios - Ventas">
+                    <input type="checkbox" name="botcheck" style="display:none;">
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nombre">Nombre Completo *</label>
@@ -1119,7 +1124,9 @@
                         <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos más sobre tu interés..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-submit">
+                    <div id="form-result" style="display:none;padding:1rem;border-radius:8px;margin-bottom:1rem;font-weight:600;"></div>
+
+                    <button type="submit" id="submit-btn" class="btn btn-submit">
                         <i class="fas fa-paper-plane"></i>
                         Enviar Consulta
                     </button>
@@ -1190,30 +1197,55 @@
             document.getElementById('nombre').focus();
         }
 
-        // Form submission handler
-        function enviarFormulario(event) {
+        // Form submission handler - envia via Web3Forms
+        async function enviarFormulario(event) {
             event.preventDefault();
 
-            const nombre = document.getElementById('nombre').value;
-            const email = document.getElementById('email').value;
-            const telefono = document.getElementById('telefono').value;
-            const producto = document.getElementById('producto').value;
-            const mensaje = document.getElementById('mensaje').value;
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submit-btn');
+            const result = document.getElementById('form-result');
 
-            // Create mailto link
-            const asunto = `Consulta sobre: ${producto} - 360 Los Ríos`;
-            const cuerpo = `Hola,\n\nMe interesa consultar sobre: ${producto}\n\nDatos del interesado:\nNombre: ${nombre}\nEmail: ${email}\nTeléfono: ${telefono}\n\nMensaje:\n${mensaje}\n\nQuedo atento a su respuesta.\n\nSaludos`;
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            result.style.display = 'none';
 
-            const mailtoLink = `mailto:eduardo@termasllifen.cl?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
 
-            // Show confirmation
-            alert('Gracias por tu interés!\n\nNos comunicaremos pronto contigo.\n\nTeléfono: +56 9 9887 1415\nEmail: eduardo@termasllifen.cl');
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                });
 
-            // Reset form
-            document.getElementById('contactForm').reset();
+                const data = await response.json();
 
-            // Optional: Open email client
-            window.location.href = mailtoLink;
+                if (response.status === 200) {
+                    result.style.display = 'block';
+                    result.style.background = '#dcfce7';
+                    result.style.color = '#166534';
+                    result.style.border = '1px solid #86efac';
+                    result.innerHTML = '<i class="fas fa-check-circle"></i> ¡Gracias por tu interés! Recibimos tu consulta y nos comunicaremos contigo pronto.';
+                    form.reset();
+                } else {
+                    throw new Error(data.message || 'Error al enviar');
+                }
+            } catch (error) {
+                result.style.display = 'block';
+                result.style.background = '#fee2e2';
+                result.style.color = '#991b1b';
+                result.style.border = '1px solid #fca5a5';
+                result.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error al enviar. Por favor contactanos directamente por WhatsApp: +56 9 9887 1415';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Consulta';
+            }
         }
 
         // Smooth scroll behavior
