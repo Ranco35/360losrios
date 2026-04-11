@@ -1086,33 +1086,33 @@
             <div class="contact-info">
                 <form id="contactForm" onsubmit="enviarFormulario(event)">
                     <input type="hidden" name="access_key" value="3bf25c88-e9c0-4e86-af26-db3d229cef49">
-                    <input type="hidden" name="subject" value="Nueva consulta desde ventas.360losrios.cl">
-                    <input type="hidden" name="from_name" value="360 Los Rios - Ventas">
+                    <input type="hidden" name="from_name" value="Ventas Parcelas Dollinco">
+                    <input type="hidden" name="replyto" id="replyto-field">
                     <input type="checkbox" name="botcheck" style="display:none;">
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nombre">Nombre Completo *</label>
-                            <input type="text" id="nombre" name="nombre" required>
+                            <input type="text" id="nombre" name="Nombre Completo" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="Correo Electronico" required>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="telefono">Teléfono *</label>
-                            <input type="tel" id="telefono" name="telefono" required>
+                            <input type="tel" id="telefono" name="Telefono" required>
                         </div>
                         <div class="form-group">
                             <label for="producto">Producto de Interés *</label>
-                            <select id="producto" name="producto" required>
+                            <select id="producto" name="Parcela de Interes" required>
                                 <option value="">Selecciona un producto</option>
-                                <option value="Parcela 9 - Dollinco">Parcela 9 - Dollinco, Futrono</option>
-                                <option value="Parcela 10 - Dollinco">Parcela 10 - Dollinco, Futrono</option>
-                                <option value="Cualquier Parcela">Cualquiera de las 2 parcelas</option>
+                                <option value="Parcela 9 - Dollinco, Futrono">Parcela 9 - Dollinco, Futrono</option>
+                                <option value="Parcela 10 - Dollinco, Futrono">Parcela 10 - Dollinco, Futrono</option>
+                                <option value="Cualquiera de las 2 parcelas">Cualquiera de las 2 parcelas</option>
                                 <!-- <option value="Tractor">Tractor Agricola - $12.000.000</option>
                                 <option value="Yale">Yale/Montacargas - $8.000.000</option> -->
                             </select>
@@ -1121,7 +1121,7 @@
 
                     <div class="form-group">
                         <label for="mensaje">Mensaje *</label>
-                        <textarea id="mensaje" name="mensaje" required placeholder="Cuéntanos más sobre tu interés..."></textarea>
+                        <textarea id="mensaje" name="Mensaje del Cliente" required placeholder="Cuéntanos más sobre tu interés..."></textarea>
                     </div>
 
                     <div id="form-result" style="display:none;padding:1rem;border-radius:8px;margin-bottom:1rem;font-weight:600;"></div>
@@ -1210,7 +1210,39 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             result.style.display = 'none';
 
+            // Build dynamic subject and set reply-to so you can reply directly to the client
+            const nombre = document.getElementById('nombre').value;
+            const emailCliente = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const producto = document.getElementById('producto').value;
+            const mensajeTexto = document.getElementById('mensaje').value;
+
             const formData = new FormData(form);
+            formData.set('subject', `🌲 Nueva consulta: ${producto} - ${nombre}`);
+            formData.set('replyto', emailCliente);
+            formData.set('message', `Nueva consulta recibida desde ventas.360losrios.cl
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DATOS DEL INTERESADO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤 Nombre: ${nombre}
+📧 Email: ${emailCliente}
+📱 Teléfono: ${telefono}
+🏡 Parcela de interés: ${producto}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MENSAJE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+${mensajeTexto}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 Puedes responder directamente a este email para contactar al cliente.
+
+Enviado desde: https://ventas.360losrios.cl`);
+
             const object = Object.fromEntries(formData);
             const json = JSON.stringify(object);
 
