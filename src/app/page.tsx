@@ -153,12 +153,15 @@ export default function Home() {
       <main className="mx-auto max-w-2xl px-6 py-24 sm:py-32">
         {/* Hero */}
         <section className="mb-20">
-          <Image
-            src={logo360}
-            alt="360 Los Ríos"
-            priority
-            className="mx-auto mb-10 h-auto w-full max-w-sm sm:max-w-md"
-          />
+          <div className="shooting-star-logo mx-auto mb-10 w-full max-w-sm sm:max-w-md">
+            <span aria-hidden="true" className="shooting-star" />
+            <Image
+              src={logo360}
+              alt="360 Los Ríos"
+              priority
+              className="relative z-10 h-auto w-full"
+            />
+          </div>
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
             Desarrollo de Software
           </h1>
