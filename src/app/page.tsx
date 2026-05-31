@@ -274,29 +274,58 @@ export default function Home() {
           <h2 className="mb-6 text-sm font-medium text-neutral-400">
             Guías
           </h2>
-          <a
-            href="/asociaciones-gremiales"
-            className="block rounded-lg border border-neutral-800 p-5 transition-colors hover:border-neutral-600 hover:bg-neutral-900/50 group"
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h3 className="font-medium text-neutral-100 group-hover:text-white">
-                  Asociaciones Gremiales (DL 2.757) 📚
-                </h3>
-                <p className="mt-1 text-sm text-neutral-400">
-                  Guía práctica del Decreto Ley N° 2.757: cómo se crean, cómo
-                  funcionan, su directorio, patrimonio, fiscalización y disolución.
-                  Explicado en lenguaje simple para socios.
-                </p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-blue-400 group-hover:text-blue-300">
-                  Leer la guía →
-                </span>
-              </div>
-              <span className="inline-block rounded-full px-3 py-0.5 text-xs font-medium bg-blue-500/15 text-blue-400 shrink-0">
-                Guía legal
-              </span>
-            </div>
-          </a>
+          <ul className="space-y-4">
+            <li>
+              <a
+                href="/asociaciones-gremiales"
+                className="block rounded-lg border border-neutral-800 p-5 transition-colors hover:border-neutral-600 hover:bg-neutral-900/50 group"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-medium text-neutral-100 group-hover:text-white">
+                      Asociaciones Gremiales (DL 2.757) 📚
+                    </h3>
+                    <p className="mt-1 text-sm text-neutral-400">
+                      Guía práctica del Decreto Ley N° 2.757: cómo se crean, cómo
+                      funcionan, su directorio, patrimonio, fiscalización y
+                      disolución. Explicado en lenguaje simple para socios.
+                    </p>
+                    <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-blue-400 group-hover:text-blue-300">
+                      Leer la guía →
+                    </span>
+                  </div>
+                  <span className="inline-block rounded-full px-3 py-0.5 text-xs font-medium bg-blue-500/15 text-blue-400 shrink-0">
+                    Guía legal
+                  </span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/corporaciones-fundaciones"
+                className="block rounded-lg border border-neutral-800 p-5 transition-colors hover:border-neutral-600 hover:bg-neutral-900/50 group"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-medium text-neutral-100 group-hover:text-white">
+                      Corporaciones y Fundaciones 🏛️
+                    </h3>
+                    <p className="mt-1 text-sm text-neutral-400">
+                      Personas jurídicas sin fines de lucro según el Código Civil
+                      y la Ley 20.500: qué son, cómo se constituyen y registran,
+                      cómo se gobiernan y cómo se disuelven.
+                    </p>
+                    <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-blue-400 group-hover:text-blue-300">
+                      Leer la guía →
+                    </span>
+                  </div>
+                  <span className="inline-block rounded-full px-3 py-0.5 text-xs font-medium bg-blue-500/15 text-blue-400 shrink-0">
+                    Guía legal
+                  </span>
+                </div>
+              </a>
+            </li>
+          </ul>
         </section>
 
         {/* Sobre mí */}
