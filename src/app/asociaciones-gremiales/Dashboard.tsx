@@ -59,14 +59,40 @@ const GLOSARIO = [
   { t: "Culpa leve", d: "Estándar de responsabilidad con que responden los directores en su gestión." },
 ];
 
+function Resaltar({ texto, q }: { texto: string; q: string }) {
+  const term = q.trim();
+  if (!term) return <>{texto}</>;
+  // escapa caracteres especiales de regex
+  const esc = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const partes = texto.split(new RegExp(`(${esc})`, "gi"));
+  return (
+    <>
+      {partes.map((parte, i) =>
+        parte.toLowerCase() === term.toLowerCase() ? (
+          <mark
+            key={i}
+            className="rounded bg-yellow-300/90 px-0.5 font-semibold text-neutral-900"
+          >
+            {parte}
+          </mark>
+        ) : (
+          <span key={i}>{parte}</span>
+        )
+      )}
+    </>
+  );
+}
+
 function ArticuloItem({
   a,
   open,
   onToggle,
+  q,
 }: {
   a: Articulo;
   open: boolean;
   onToggle: () => void;
+  q: string;
 }) {
   return (
     <div className="border border-neutral-800 border-b-0 bg-neutral-900/30 first:rounded-t-xl last:rounded-b-xl last:border-b overflow-hidden">
@@ -79,14 +105,14 @@ function ArticuloItem({
         </span>
         <span className="min-w-0 flex-1">
           <span className="block text-sm font-semibold text-neutral-100">
-            {a.h}
+            <Resaltar texto={a.h} q={q} />
           </span>
           <span
             className={`block text-xs text-neutral-400 ${
               open ? "" : "truncate"
             }`}
           >
-            {a.p}
+            <Resaltar texto={a.p} q={q} />
           </span>
         </span>
         <span
@@ -100,10 +126,12 @@ function ArticuloItem({
       {open && (
         <div className="bg-neutral-950/60 px-4 pb-4 text-sm leading-relaxed text-neutral-300">
           <p className="m-0">
-            <b className="text-neutral-100">En simple:</b> {a.p}
+            <b className="text-neutral-100">En simple:</b>{" "}
+            <Resaltar texto={a.p} q={q} />
           </p>
           <p className="mt-3 rounded-lg border border-neutral-800 border-l-2 border-l-blue-400 bg-neutral-900/50 px-4 py-3 text-[13px] text-neutral-400">
-            <b className="text-blue-200">Texto legal:</b> {a.legal}
+            <b className="text-blue-200">Texto legal:</b>{" "}
+            <Resaltar texto={a.legal} q={q} />
           </p>
         </div>
       )}
@@ -269,16 +297,25 @@ export default function Dashboard() {
             por tema o busca una palabra.
           </p>
 
-          <div className="mt-4 flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900/30 px-3 py-2.5">
-            <span>🔎</span>
+          <div className="mt-4 flex items-center gap-3 rounded-xl border-2 border-blue-500/40 bg-blue-500/5 px-4 py-3.5 shadow-lg shadow-blue-500/5 transition-colors focus-within:border-blue-400 focus-within:bg-blue-500/10">
+            <span className="text-lg">🔎</span>
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar: 'directorio', 'disolución', 'cuotas', 'federación'..."
-              className="flex-1 bg-transparent text-sm text-neutral-100 outline-none placeholder:text-neutral-600"
+              placeholder="Buscar por palabra clave: directorio, disolución, cuotas, multa…"
+              className="flex-1 bg-transparent text-base text-neutral-100 outline-none placeholder:text-neutral-500"
             />
-            <span className="whitespace-nowrap text-xs text-neutral-500">
+            {query ? (
+              <button
+                onClick={() => setQuery("")}
+                aria-label="Limpiar búsqueda"
+                className="rounded-full bg-neutral-800 px-2 py-0.5 text-xs text-neutral-300 transition-colors hover:bg-neutral-700"
+              >
+                ✕
+              </button>
+            ) : null}
+            <span className="hidden whitespace-nowrap rounded-full bg-blue-500/15 px-2.5 py-1 text-xs font-semibold text-blue-300 sm:inline">
               {lista.length} de {ARTICULOS.length}
             </span>
           </div>
@@ -322,8 +359,9 @@ export default function Dashboard() {
                         <ArticuloItem
                           key={a.n}
                           a={a}
-                          open={abiertos.has(a.n)}
+                          open={abiertos.has(a.n) || query.trim() !== ""}
                           onToggle={() => toggle(a.n)}
+                          q={query}
                         />
                       ))}
                     </div>
@@ -335,8 +373,9 @@ export default function Dashboard() {
                       <ArticuloItem
                         key={a.n}
                         a={a}
-                        open={abiertos.has(a.n)}
+                        open={abiertos.has(a.n) || query.trim() !== ""}
                         onToggle={() => toggle(a.n)}
+                        q={query}
                       />
                     ))}
                   </div>
