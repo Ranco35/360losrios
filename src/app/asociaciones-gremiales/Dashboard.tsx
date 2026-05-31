@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ARTICULOS,
@@ -186,6 +186,17 @@ export default function Dashboard() {
   const [abiertos, setAbiertos] = useState<Set<string>>(new Set());
 
   const c = palette(theme);
+
+  // Recupera la preferencia guardada al cargar
+  useEffect(() => {
+    const guardado = localStorage.getItem("tema-360");
+    if (guardado === "light" || guardado === "dark") setTheme(guardado);
+  }, []);
+
+  // Guarda la preferencia cada vez que cambia
+  useEffect(() => {
+    localStorage.setItem("tema-360", theme);
+  }, [theme]);
 
   const lista = useMemo(() => {
     const q = query.toLowerCase().trim();
