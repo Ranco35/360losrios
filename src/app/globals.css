@@ -18,38 +18,42 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.shooting-star-logo {
+.hero-logo-section {
   position: relative;
-  overflow: hidden;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: max(1.5rem, calc(50vw - 21rem));
+  padding-right: max(1.5rem, calc(50vw - 21rem));
+  overflow: clip;
   isolation: isolate;
 }
 
-.shooting-star-logo::before {
+.hero-logo-section::before {
   content: "";
   position: absolute;
-  inset: 7% 0 42%;
+  inset: 10% 22% 32%;
   z-index: 0;
   background:
-    radial-gradient(circle at 25% 50%, rgba(250, 204, 21, 0.22), transparent 28%),
-    radial-gradient(circle at 78% 34%, rgba(250, 204, 21, 0.14), transparent 20%);
-  filter: blur(10px);
-  opacity: 0.7;
+    radial-gradient(circle at 32% 38%, rgba(250, 204, 21, 0.16), transparent 26%),
+    radial-gradient(circle at 70% 48%, rgba(250, 204, 21, 0.12), transparent 24%);
+  filter: blur(16px);
+  opacity: 0.8;
 }
 
 .shooting-star {
   position: absolute;
-  top: 21%;
-  left: -34%;
+  top: 27%;
+  left: -22vw;
   z-index: 0;
-  width: 38%;
-  height: 4px;
+  width: min(34vw, 520px);
+  height: 5px;
   border-radius: 999px;
-  background: linear-gradient(90deg, transparent, rgba(253, 230, 138, 0.2), #facc15);
+  background: linear-gradient(90deg, transparent 0%, rgba(253, 230, 138, 0.05) 18%, rgba(250, 204, 21, 0.78) 76%, #fff7ad 100%);
   box-shadow:
-    0 0 14px rgba(250, 204, 21, 0.85),
-    0 0 30px rgba(217, 119, 6, 0.42);
-  transform: rotate(-18deg);
-  animation: shooting-star-pass 4.8s ease-in-out infinite;
+    0 0 18px rgba(250, 204, 21, 0.95),
+    0 0 42px rgba(217, 119, 6, 0.6);
+  transform: translate3d(-120%, -26px, 0) rotate(-14deg);
+  animation: shooting-star-pass 3.8s cubic-bezier(0.35, 0, 0.2, 1) infinite;
 }
 
 .shooting-star::after {
@@ -75,29 +79,28 @@ body {
 }
 
 @keyframes shooting-star-pass {
-  0%,
-  38% {
+  0% {
     opacity: 0;
-    transform: translate3d(0, 0, 0) rotate(-18deg);
+    transform: translate3d(-120%, -26px, 0) rotate(-14deg);
   }
-  46% {
+  8%,
+  16% {
     opacity: 1;
   }
-  72% {
+  58% {
     opacity: 1;
-    transform: translate3d(360%, 92px, 0) rotate(-18deg);
+    transform: translate3d(calc(100vw + 42vw), 138px, 0) rotate(-14deg);
   }
-  76%,
+  66%,
   100% {
     opacity: 0;
-    transform: translate3d(390%, 102px, 0) rotate(-18deg);
+    transform: translate3d(calc(100vw + 50vw), 158px, 0) rotate(-14deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .shooting-star {
     animation: none;
-    opacity: 0.45;
-    transform: translate3d(165%, 44px, 0) rotate(-18deg);
+    opacity: 0;
   }
 }

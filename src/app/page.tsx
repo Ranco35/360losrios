@@ -152,9 +152,9 @@ export default function Home() {
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
       <main className="mx-auto max-w-2xl px-6 py-24 sm:py-32">
         {/* Hero */}
-        <section className="mb-20">
-          <div className="shooting-star-logo mx-auto mb-10 w-full max-w-sm sm:max-w-md">
-            <span aria-hidden="true" className="shooting-star" />
+        <section className="hero-logo-section mb-20">
+          <span aria-hidden="true" className="shooting-star" />
+          <div className="relative z-10 mx-auto mb-10 w-full max-w-sm sm:max-w-md">
             <Image
               src={logo360}
               alt="360 Los Ríos"
