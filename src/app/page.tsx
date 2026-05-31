@@ -1,3 +1,6 @@
+import Image from "next/image";
+import logo360 from "./icon.png";
+
 interface Project {
   title: string;
   description: string;
@@ -150,9 +153,12 @@ export default function Home() {
       <main className="mx-auto max-w-2xl px-6 py-24 sm:py-32">
         {/* Hero */}
         <section className="mb-20">
-          <p className="mb-2 text-sm font-medium text-neutral-400">
-            360 Los Ríos
-          </p>
+          <Image
+            src={logo360}
+            alt="360 Los Ríos"
+            priority
+            className="mb-8 h-auto w-48 sm:w-56"
+          />
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
             Desarrollo de Software
           </h1>
