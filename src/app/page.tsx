@@ -20,8 +20,9 @@ const projects: Project[] = [
   {
     title: "Sistema de Reservas 📅",
     description:
-      "Motor de reservas para hoteles y espacios (day use, hospedaje, grupos).",
+      "Maneja las reservas de tu negocio por WhatsApp. Anota reservas y pide tus reportes de llegadas y ocupación escribiendo un mensaje.",
     status: "desarrollo",
+    href: "/reservas",
   },
   {
     title: "Tarjeta de Fidelización 💳",
@@ -160,27 +161,72 @@ export default function Home() {
           </p>
         </section>
 
+        {/* Banner destacado: Demo Reservas por WhatsApp */}
+        <a
+          href="/reservas"
+          className="group mb-20 block overflow-hidden rounded-xl border border-green-500/30 bg-gradient-to-r from-green-500/10 to-emerald-500/5 p-6 transition-colors hover:border-green-400/60 hover:from-green-500/15"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <span className="inline-block rounded-full bg-green-500/20 px-3 py-0.5 text-xs font-semibold text-green-300">
+                🧪 Nuevo · En prueba
+              </span>
+              <h3 className="mt-3 text-lg font-semibold text-white">
+                Reservas Llifén — maneja tu negocio por WhatsApp 💬
+              </h3>
+              <p className="mt-1 text-sm text-neutral-400">
+                Anota reservas y pide tus reportes de llegadas y ocupación
+                escribiendo un mensaje. Mira la demo interactiva.
+              </p>
+            </div>
+            <span className="hidden shrink-0 items-center gap-1 rounded-lg bg-green-500 px-4 py-2 text-sm font-semibold text-white transition-transform group-hover:scale-105 sm:inline-flex">
+              Ver demo →
+            </span>
+          </div>
+        </a>
+
         {/* Proyectos */}
         <section className="mb-20">
           <h2 className="mb-6 text-sm font-medium text-neutral-400">
             Proyectos
           </h2>
           <ul className="space-y-4">
-            {projects.map((project) => (
-              <li key={project.title}>
-                <div className="rounded-lg border border-neutral-800 p-5 transition-colors hover:border-neutral-700 hover:bg-neutral-900/50">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="font-medium">{project.title}</h3>
-                      <p className="mt-1 text-sm text-neutral-400">
-                        {project.description}
-                      </p>
-                    </div>
-                    <StatusBadge status={project.status} />
+            {projects.map((project) => {
+              const cardContent = (
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-medium group-hover:text-white">
+                      {project.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-neutral-400">
+                      {project.description}
+                    </p>
+                    {project.href && (
+                      <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-green-400 group-hover:text-green-300">
+                        Ver demo →
+                      </span>
+                    )}
                   </div>
+                  <StatusBadge status={project.status} />
                 </div>
-              </li>
-            ))}
+              );
+              return (
+                <li key={project.title}>
+                  {project.href ? (
+                    <a
+                      href={project.href}
+                      className="block rounded-lg border border-neutral-800 p-5 transition-colors hover:border-neutral-600 hover:bg-neutral-900/50 group"
+                    >
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <div className="rounded-lg border border-neutral-800 p-5 transition-colors hover:border-neutral-700 hover:bg-neutral-900/50 group">
+                      {cardContent}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </section>
 

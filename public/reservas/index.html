@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reservas Llifén — Maneja tu negocio por WhatsApp</title>
+<meta name="description" content="Tu asistente del negocio por WhatsApp. Anota reservas y pide tus reportes de llegadas y ocupación escribiendo un mensaje. Sin computador. Producto en testeo.">
+<style>
+  :root{
+    --wa:#25d366;        /* whatsapp */
+    --wa-d:#128c7e;
+    --wa-t:#075e54;
+    --sky:#0ea5e9;
+    --sky-d:#0284c7;
+    --sky-dd:#075985;
+    --ink:#0f172a;
+    --muted:#475569;
+    --line:#e2e8f0;
+    --bg:#f6faf8;
+    --card:#ffffff;
+    --shadow:0 18px 50px rgba(15,23,42,.12);
+    --shadow-sm:0 4px 16px rgba(15,23,42,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--card);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:17px}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:#fff;font-weight:700;font-size:18px;border:none;border-radius:14px;padding:16px 28px;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 22px rgba(37,211,102,.38)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.5)}
+  .btn.ghost{background:#fff;color:var(--wa-t);border:2px solid #d6e0dd;box-shadow:none;font-size:17px}
+  .btn.ghost:hover{box-shadow:var(--shadow-sm)}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:#e7f9ee;color:var(--wa-d);font-size:15px;font-weight:700;padding:8px 16px;border-radius:30px}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px}
+  .brand .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--wa),var(--wa-d));display:grid;place-items:center;color:#fff;font-size:21px}
+  .nav-cta{background:var(--wa);color:#fff;font-weight:700;padding:10px 20px;border-radius:12px;font-size:15px}
+  @media(max-width:560px){.nav-cta{display:none}}
+
+  .ribbon{background:var(--wa-t);color:#fff;text-align:center;font-size:14px;padding:9px;font-weight:600}
+
+  /* HERO */
+  .hero{background:linear-gradient(180deg,#fff,#eafaf1);padding:56px 0 44px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
+  .hero h1{font-size:50px;line-height:1.06;letter-spacing:-1.2px;margin:18px 0 18px;font-weight:800}
+  .hero h1 span{color:var(--wa-d)}
+  .hero p.lead{font-size:22px;color:var(--muted);margin-bottom:28px;max-width:520px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{margin-top:22px;font-size:16px;color:var(--muted);font-weight:600}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:34px}.hero h1{font-size:36px}.hero p.lead{font-size:19px}}
+
+  /* PHONE (whatsapp) */
+  .wphone{width:320px;max-width:100%;margin:0 auto;background:#000;border-radius:42px;padding:11px;box-shadow:var(--shadow)}
+  .wphone-screen{background:#efe7dd;border-radius:32px;overflow:hidden;height:580px;display:flex;flex-direction:column}
+  .wa-top{background:var(--wa-t);color:#fff;padding:13px 15px;display:flex;align-items:center;gap:11px}
+  .wa-top .av{width:40px;height:40px;border-radius:50%;background:#cfd8dc;display:grid;place-items:center;color:var(--wa-t);font-weight:700;font-size:16px}
+  .wa-top .who{font-weight:600;font-size:15px;line-height:1.2}
+  .wa-top .who small{display:block;font-weight:400;font-size:12px;color:#bfe0da}
+  .wa-chat{flex:1;padding:15px 12px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+  .wa-chat::-webkit-scrollbar{width:5px}.wa-chat::-webkit-scrollbar-thumb{background:#cdbfb0;border-radius:4px}
+  .msg{max-width:84%;padding:9px 12px;border-radius:10px;font-size:15px;box-shadow:0 1px 1px rgba(0,0,0,.08);animation:pop .28s ease;white-space:pre-line}
+  .msg .t{display:block;font-size:10.5px;color:#8a9aa0;text-align:right;margin-top:3px}
+  .msg.in{background:#fff;align-self:flex-start;border-top-left-radius:2px}
+  .msg.out{background:#d9fdd3;align-self:flex-end;border-top-right-radius:2px}
+  @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+  .typing{align-self:flex-start;background:#fff;border-radius:14px;padding:10px 14px;display:flex;gap:4px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+  .typing span{width:7px;height:7px;background:#9aa6ab;border-radius:50%;animation:blink 1.2s infinite}
+  .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+  .wa-input{background:#f0f2f5;padding:9px 12px;display:flex;align-items:center;gap:9px}
+  .wa-input .box{flex:1;background:#fff;border-radius:22px;padding:10px 14px;color:#98a3a8;font-size:14px}
+  .wa-input .send{width:40px;height:40px;border-radius:50%;background:var(--wa);display:grid;place-items:center;color:#fff;font-size:17px}
+
+  /* SECTIONS */
+  section{padding:64px 0}
+  .sec-head{text-align:center;max-width:720px;margin:0 auto 40px}
+  .sec-head h2{font-size:36px;letter-spacing:-.6px;margin:10px 0 12px;font-weight:800}
+  .sec-head p{color:var(--muted);font-size:20px}
+
+  /* ASK CARDS */
+  .ask{background:var(--bg)}
+  .ask-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:820px){.ask-grid{grid-template-columns:1fr}}
+  .ask-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 26px;text-align:center;box-shadow:var(--shadow-sm)}
+  .ask-card .ico{width:64px;height:64px;border-radius:50%;background:#e7f9ee;display:grid;place-items:center;font-size:30px;margin:0 auto 16px}
+  .ask-card h3{font-size:21px;margin-bottom:8px}
+  .ask-card .say{display:inline-block;background:#d9fdd3;color:#0f5132;border-radius:12px;padding:8px 14px;font-size:15px;font-weight:600;margin-bottom:10px}
+  .ask-card p{color:var(--muted);font-size:16px}
+
+  /* DEMO */
+  .demo-controls{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+  .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  @media(max-width:900px){.demo-grid{grid-template-columns:1fr;gap:28px}}
+  .blist{list-style:none;display:flex;flex-direction:column;gap:18px}
+  .blist li{display:flex;gap:14px;align-items:flex-start}
+  .blist .ck{flex:none;width:30px;height:30px;border-radius:50%;background:#e7f9ee;color:var(--wa-d);display:grid;place-items:center;font-weight:700;font-size:16px;margin-top:2px}
+  .blist h4{font-size:18px;margin-bottom:2px}.blist p{color:var(--muted);font-size:16px}
+
+  /* SCREENS (secondary) */
+  .scr{background:#fff}
+  .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+  .tab{font-size:15px;font-weight:700;padding:10px 18px;border-radius:30px;background:var(--bg);border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:all .15s}
+  .tab.on{background:var(--sky);color:#fff;border-color:var(--sky);box-shadow:0 6px 16px rgba(14,165,233,.3)}
+  .showcase{display:grid;grid-template-columns:1.6fr 1fr;gap:34px;align-items:center}
+  @media(max-width:900px){.showcase{grid-template-columns:1fr;gap:30px}.phone{margin:0 auto}}
+  .browser{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+  .browser-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#f1f5f9;border-bottom:1px solid var(--line)}
+  .browser-bar .dot{width:11px;height:11px;border-radius:50%}
+  .browser-bar .r{background:#fb7185}.browser-bar .y{background:#fbbf24}.browser-bar .g{background:#34d399}
+  .browser-bar .url{flex:1;margin-left:10px;background:#fff;border:1px solid var(--line);border-radius:7px;font-size:12px;color:var(--muted);padding:5px 11px}
+  .device-browser .screen{height:430px;overflow:hidden;background:var(--bg)}
+  .phone{width:280px;max-width:100%;background:#0f172a;border-radius:36px;padding:10px;box-shadow:var(--shadow)}
+  .phone .notch{height:20px;display:flex;justify-content:center}
+  .phone .notch::after{content:"";width:110px;height:18px;background:#0f172a;border-radius:0 0 13px 13px}
+  .phone-screen{background:var(--bg);border-radius:27px;overflow:hidden;height:540px;display:flex;flex-direction:column}
+  .web-caption{text-align:center;font-size:15px;color:var(--muted);margin-top:12px;font-weight:600}
+
+  .app-top{background:#fff;border-bottom:1px solid var(--line);padding:13px 16px;display:flex;align-items:center;justify-content:space-between}
+  .app-top .t-title{font-weight:700;font-size:15px}.app-top .t-sub{font-size:11.5px;color:var(--muted)}
+  .app-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sky-dd));color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+  .app-body{padding:14px;overflow-y:auto;flex:1;height:100%}
+  .app-body::-webkit-scrollbar{width:6px}.app-body::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+  .kpi .lab{font-size:11px;color:var(--muted)}.kpi .val{font-size:19px;font-weight:700;margin-top:3px}
+  .kpi .val.green{color:var(--wa-d)}.kpi .val.sky{color:var(--sky-d)}.kpi .val.amber{color:#d97706}
+  .sec-lbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin:6px 0 9px}
+  .res-row{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .res-row .nm{font-weight:600;font-size:14px}.res-row .meta{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .badge{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .b-pend{background:#fef3c7;color:#b45309}.b-conf{background:#dbeafe;color:#1d4ed8}.b-in{background:#e0e7ff;color:#4338ca}.b-paid{background:#dcfce7;color:#15803d}
+  .amt{font-size:13px;font-weight:700;text-align:right}.amt small{display:block;font-weight:500;color:var(--muted);font-size:10.5px}
+  .filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+  .chip{font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--muted)}
+  .chip.on{background:var(--sky);color:#fff;border-color:var(--sky)}
+  .searchbar{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;color:var(--muted);font-size:13px;margin-bottom:12px}
+  .cal-head{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:5px}
+  .cal-head div{font-size:10px;font-weight:700;color:var(--muted);text-align:center}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .cal-cell{aspect-ratio:1;background:#fff;border:1px solid var(--line);border-radius:7px;font-size:10.5px;color:var(--muted);padding:3px 4px;position:relative}
+  .cal-cell .d{font-weight:600;color:var(--ink)}.cal-cell.muted{background:#f8fafc;color:#cbd5e1}
+  .cal-bar{position:absolute;left:2px;right:2px;bottom:3px;height:5px;border-radius:3px}
+  .cal-bar.sky{background:var(--sky)}.cal-bar.green{background:var(--wa)}.cal-bar.amber{background:#fbbf24}
+
+  /* FUNCIONES simples */
+  .funcs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:840px;margin:0 auto}
+  @media(max-width:700px){.funcs{grid-template-columns:1fr}}
+  .func{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .func .e{font-size:26px;flex:none}
+  .func h4{font-size:17px;margin-bottom:2px}
+  .func p{color:var(--muted);font-size:15px}
+  .func .soon{font-size:10.5px;font-weight:700;background:#fef3c7;color:#b45309;padding:3px 9px;border-radius:20px;margin-left:6px;vertical-align:middle}
+
+  /* CTA */
+  .cta{background:linear-gradient(180deg,#eafaf1,#fff)}
+  .price-box{max-width:600px;margin:0 auto;background:#fff;border:2px solid var(--wa);border-radius:24px;padding:42px;text-align:center;box-shadow:var(--shadow)}
+  .price-box h3{font-size:28px;margin:6px 0 8px}.price-box .p{font-size:18px;color:var(--muted);margin-bottom:24px}
+  .price-box .big-btn{font-size:20px;padding:18px 34px}
+
+  footer{background:var(--wa-t);color:#cfe6e1;padding:40px 0 64px;text-align:center;font-size:15px}
+  footer .brand{justify-content:center;color:#fff;margin-bottom:12px}
+  footer a{color:#fff;font-weight:600}
+
+  .ver{position:fixed;bottom:8px;right:12px;font-size:11px;color:#999;font-family:monospace;opacity:.7;user-select:none;z-index:99}
+</style>
+</head>
+<body>
+
+<div class="ribbon">🧪 Producto en prueba — versión de muestra publicada en 360 Los Ríos</div>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand"><div class="logo">💬</div> Reservas Llifén</div>
+    <a href="#probar" class="nav-cta">Quiero probarlo</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill">💬 Funciona por WhatsApp</span>
+      <h1>Maneja tu negocio <span>escribiendo un WhatsApp</span></h1>
+      <p class="lead">No necesitas computador ni saber de sistemas. Le escribes como a una persona y él te anota las reservas y te cuenta cómo va tu negocio.</p>
+      <div class="hero-cta">
+        <a href="#probar" class="btn">💬 Probarlo gratis</a>
+        <a href="#demo" class="btn ghost">Ver cómo funciona</a>
+      </div>
+      <p class="hero-note">Es como tener un asistente para tu negocio, siempre disponible. 🌟</p>
+    </div>
+    <div>
+      <div class="wphone">
+        <div class="wphone-screen">
+          <div class="wa-top"><div class="av">RL</div><div class="who">Mi Asistente Reservas<small>en línea</small></div></div>
+          <div class="wa-chat">
+            <div class="msg out">Anota: Juan, 15 al 17 dic, 2 personas <span class="t">09:10 ✓✓</span></div>
+            <div class="msg in">✅ Listo. Reserva guardada para Juan, 15 al 17 dic. 🌲</div>
+            <div class="msg out">¿Quién llega hoy? <span class="t">09:12 ✓✓</span></div>
+            <div class="msg in">Hoy llegan 2:\n• María — Cabaña El Bosque\n• Pedro — Habitación Termal</div>
+            <div class="msg out">¿Cómo va la ocupación? <span class="t">09:13 ✓✓</span></div>
+            <div class="msg in">📊 Este mes vas 78% ocupado. ¡Buen mes! 👏</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUE LE PUEDES PEDIR -->
+<section class="ask">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Tú solo le escribes. Él hace el resto.</h2>
+      <p>Estas son las 3 cosas que más vas a usar:</p>
+    </div>
+    <div class="ask-grid">
+      <div class="ask-card">
+        <div class="ico">📝</div>
+        <h3>Anotar una reserva</h3>
+        <div class="say">"Anota: Ana, 20 al 22, 3 personas"</div>
+        <p>Le dices el nombre y las fechas, y queda guardada al instante.</p>
+      </div>
+      <div class="ask-card">
+        <div class="ico">🛎️</div>
+        <h3>Saber quién llega hoy</h3>
+        <div class="say">"¿Quién llega hoy?"</div>
+        <p>Te manda la lista de llegadas y salidas del día, listita.</p>
+      </div>
+      <div class="ask-card">
+        <div class="ico">📊</div>
+        <h3>Ver cómo va el negocio</h3>
+        <div class="say">"¿Cómo va la ocupación?"</div>
+        <p>Te cuenta cuánto llevas ocupado y los ingresos del mes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill">🎬 Míralo en acción</span>
+      <h2>Así de fácil se ve</h2>
+      <p>Presiona el botón y mira una conversación de verdad.</p>
+    </div>
+    <div class="demo-grid">
+      <div>
+        <div class="wphone">
+          <div class="wphone-screen">
+            <div class="wa-top"><div class="av">RL</div><div class="who">Mi Asistente Reservas<small id="waStatus">en línea</small></div></div>
+            <div class="wa-chat" id="chat"></div>
+            <div class="wa-input"><div class="box">Escribe un mensaje…</div><div class="send">➤</div></div>
+          </div>
+        </div>
+        <div class="demo-controls">
+          <button class="btn" id="playBtn">▶ Reproducir</button>
+          <button class="btn ghost" id="resetBtn">↺ Reiniciar</button>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:28px;letter-spacing:-.5px;margin-bottom:10px">Tu asistente, siempre listo</h3>
+        <ul class="blist">
+          <li><span class="ck">✓</span><div><h4>Escribes como hablas</h4><p>Sin botones raros ni menús. Le escribes normal.</p></div></li>
+          <li><span class="ck">✓</span><div><h4>Te responde al toque</h4><p>Anota, te avisa quién llega y te da los números.</p></div></li>
+          <li><span class="ck">✓</span><div><h4>Solo tú lo usas</h4><p>Te reconoce por tu número. Tus huéspedes no entran aquí.</p></div></li>
+          <li><span class="ck">✓</span><div><h4>Todo queda guardado</h4><p>Nada se pierde. Lo puedes revisar cuando quieras.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PANTALLAS (secundario) -->
+<section id="pantallas" class="scr">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill" style="background:#e0f2fe;color:#075985">🖥️ Si prefieres pantalla</span>
+      <h2>¿Te gusta ver todo en pantalla? También se puede.</h2>
+      <p>No es obligación, pero si quieres, lo mismo se ve en el computador y en tu teléfono.</p>
+    </div>
+    <div class="tabs">
+      <div class="tab on" data-scr="dash">Resumen</div>
+      <div class="tab" data-scr="list">Mis reservas</div>
+      <div class="tab" data-scr="cal">Calendario</div>
+    </div>
+    <div class="showcase">
+      <div>
+        <div class="browser device-browser">
+          <div class="browser-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url" id="urlBar">app.reservasllifen.cl</span></div>
+          <div class="screen" id="webScreen"></div>
+        </div>
+        <div class="web-caption">🌐 En el computador</div>
+      </div>
+      <div>
+        <div class="phone"><div class="notch"></div><div class="phone-screen" id="phoneScreen"></div></div>
+        <div class="web-caption">📱 En tu teléfono</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCIONES SIMPLES -->
+<section class="ask">
+  <div class="wrap">
+    <div class="sec-head"><h2>Todo lo que hace por ti</h2></div>
+    <div class="funcs">
+      <div class="func"><div class="e">📝</div><div><h4>Anota tus reservas</h4><p>Por WhatsApp o desde la pantalla.</p></div></div>
+      <div class="func"><div class="e">🛎️</div><div><h4>Te avisa quién llega</h4><p>Llegadas y salidas de cada día.</p></div></div>
+      <div class="func"><div class="e">📊</div><div><h4>Te da los números</h4><p>Ocupación e ingresos del mes.</p></div></div>
+      <div class="func"><div class="e">💵</div><div><h4>Lleva los pagos</h4><p>Quién pagó y quién te debe.</p></div></div>
+      <div class="func"><div class="e">⚡</div><div><h4>Respuestas rápidas</h4><p>Mensajes listos para tus huéspedes con un toque.</p></div></div>
+      <div class="func"><div class="e">⭐</div><div><h4>Encuesta a tus huéspedes <span class="soon">PRONTO</span></h4><p>Sabrás qué les pareció su estadía.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="probar" class="cta">
+  <div class="wrap">
+    <div class="price-box">
+      <span class="pill">🚀 Pruébalo gratis</span>
+      <h3>Empieza por WhatsApp hoy</h3>
+      <p class="p">Te ayudamos a dejarlo listo con tus cabañas y habitaciones. Tú solo escribe.</p>
+      <a class="btn big-btn" href="https://wa.me/56998871415?text=Hola,%20quiero%20probar%20Reservas%20Llif%C3%A9n%20para%20mi%20negocio" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
+      <p style="margin-top:18px;font-size:15px;color:var(--muted)">o al correo <a href="mailto:eduardo@termasllifen.cl" style="color:var(--wa-d);font-weight:600">eduardo@termasllifen.cl</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><div class="logo">💬</div> Reservas Llifén</div>
+    <p>Tu asistente del negocio, por WhatsApp · Producto en prueba</p>
+    <p style="margin-top:8px">Contacto: <a href="mailto:eduardo@termasllifen.cl">eduardo@termasllifen.cl</a> · Publicado en <a href="https://www.360losrios.cl" target="_blank" rel="noopener">360 Los Ríos</a></p>
+    <p style="margin-top:14px;opacity:.7;font-size:13px">© 2026 Reservas Llifén. Muestra con datos de ejemplo. Las conversaciones son simuladas.</p>
+  </div>
+</footer>
+
+<div class="ver">v1.03</div>
+
+<script>
+(function(){
+  /* ----- PANTALLAS ----- */
+  var screens = {
+    dash:{ url:'app.reservasllifen.cl',
+      html:'<div class="app-top"><div><div class="t-title">Termas Llifén</div><div class="t-sub">Resumen · Mayo 2026</div></div><div class="app-av">TL</div></div>'+
+        '<div class="app-body">'+
+        '<div class="kpis">'+
+        '<div class="kpi"><div class="lab">💰 Ingresos del mes</div><div class="val green">$4.280.000</div></div>'+
+        '<div class="kpi"><div class="lab">📋 Reservas</div><div class="val sky">37</div></div>'+
+        '<div class="kpi"><div class="lab">🛏️ Ocupación</div><div class="val">78%</div></div>'+
+        '<div class="kpi"><div class="lab">⏳ Por cobrar</div><div class="val amber">$640.000</div></div>'+
+        '</div>'+
+        '<div class="sec-lbl">Llegan hoy</div>'+
+        '<div class="res-row"><div><div class="nm">María González</div><div class="meta">Cabaña El Bosque · 2 noches</div></div><span class="badge b-conf">Confirmada</span></div>'+
+        '<div class="res-row"><div><div class="nm">Pedro Soto</div><div class="meta">Habitación Termal · 3 noches</div></div><span class="badge b-paid">Pagada</span></div>'+
+        '</div>' },
+    list:{ url:'app.reservasllifen.cl/reservas',
+      html:'<div class="app-top"><div><div class="t-title">Mis reservas</div><div class="t-sub">37 reservas</div></div><div class="app-av">TL</div></div>'+
+        '<div class="app-body">'+
+        '<div class="searchbar">🔍 Buscar huésped…</div>'+
+        '<div class="filters"><span class="chip on">Todas</span><span class="chip">Pendientes</span><span class="chip">Pagadas</span></div>'+
+        '<div class="res-row"><div><div class="nm">María González</div><div class="meta">Cabaña El Bosque · 15–17 dic</div></div><div style="text-align:right"><span class="badge b-conf">Confirmada</span><div class="amt" style="margin-top:5px">$170.000<small>pagó $85.000</small></div></div></div>'+
+        '<div class="res-row"><div><div class="nm">Pedro Soto</div><div class="meta">Habitación Termal · 12–15 dic</div></div><div style="text-align:right"><span class="badge b-paid">Pagada</span><div class="amt" style="margin-top:5px">$180.000<small>al día</small></div></div></div>'+
+        '<div class="res-row"><div><div class="nm">Javiera Muñoz</div><div class="meta">Cabaña Río Llifén · 20–22 dic</div></div><div style="text-align:right"><span class="badge b-pend">Pendiente</span><div class="amt" style="margin-top:5px">$190.000<small>sin pago</small></div></div></div>'+
+        '</div>' },
+    cal:{ url:'app.reservasllifen.cl/calendario',
+      html:'<div class="app-top"><div><div class="t-title">Calendario</div><div class="t-sub">Diciembre 2026</div></div><div class="app-av">TL</div></div>'+
+        '<div class="app-body">'+
+        '<div class="cal-head"><div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div><div>D</div></div>'+
+        '<div class="cal-grid">'+
+        cell('',1)+cell('1')+cell('2')+cell('3')+cell('4','green')+cell('5','green')+cell('6')+
+        cell('7')+cell('8','sky')+cell('9','sky')+cell('10')+cell('11')+cell('12','amber')+cell('13','amber')+
+        cell('14','amber')+cell('15','sky')+cell('16','sky')+cell('17','sky')+cell('18')+cell('19')+cell('20','green')+
+        cell('21','green')+cell('22','green')+cell('23','sky')+cell('24','sky')+cell('25','sky')+cell('26','sky')+cell('27')+
+        '</div>'+
+        '<div class="sec-lbl" style="margin-top:14px">Colores = cada cabaña</div>'+
+        '<div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)">'+
+        '<span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--sky)"></span> El Bosque</span>'+
+        '<span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--wa)"></span> Río Llifén</span>'+
+        '<span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#fbbf24"></span> Habitación Termal</span>'+
+        '</div></div>' }
+  };
+  function cell(d,color){ if(d==='')return '<div class="cal-cell muted"></div>'; return '<div class="cal-cell"><span class="d">'+d+'</span>'+(color?'<span class="cal-bar '+color+'"></span>':'')+'</div>'; }
+
+  var webScreen=document.getElementById('webScreen'),phoneScreen=document.getElementById('phoneScreen'),urlBar=document.getElementById('urlBar'),tabs=document.querySelectorAll('.tab');
+  function render(key){var s=screens[key];webScreen.innerHTML='<div class="app-body" style="padding:0">'+s.html+'</div>';phoneScreen.innerHTML=s.html;urlBar.textContent=s.url;tabs.forEach(function(t){t.classList.toggle('on',t.dataset.scr===key);});}
+  tabs.forEach(function(t){t.addEventListener('click',function(){render(t.dataset.scr);});});
+  render('dash');
+
+  /* ----- WHATSAPP DEMO ----- */
+  var chat=document.getElementById('chat'),status=document.getElementById('waStatus'),playBtn=document.getElementById('playBtn'),resetBtn=document.getElementById('resetBtn');
+  var running=false,timers=[];
+  var conv=[
+    {who:'in',text:'¡Hola! 👋 Soy tu asistente de *Termas Llifén*. Escríbeme lo que necesites.',t:'09:10'},
+    {who:'out',text:'Anota: Juan, 15 al 17 de diciembre, 2 personas, Cabaña El Bosque',t:'09:10'},
+    {who:'in',text:'✅ *Reserva guardada*\n👤 Juan\n📅 15 al 17 dic (2 noches)\n👥 2 personas\n🏡 Cabaña El Bosque\n💰 $170.000',t:'09:11'},
+    {who:'out',text:'¿Quién llega hoy?',t:'09:12'},
+    {who:'in',text:'🛎️ Hoy llegan 2:\n• María González — Cabaña El Bosque\n• Pedro Soto — Habitación Termal (pagada)',t:'09:12'},
+    {who:'out',text:'¿Cómo va la ocupación este mes?',t:'09:13'},
+    {who:'in',text:'📊 Vas *78% ocupado* este mes.\n💰 Ingresos: $4.280.000\n⏳ Te quedan por cobrar: $640.000\n\n¡Buen mes! 👏',t:'09:13'}
+  ];
+  function clearTimers(){timers.forEach(clearTimeout);timers=[];}
+  function bubble(item){var d=document.createElement('div');d.className='msg '+item.who;var h=item.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\*(.+?)\*/g,'<strong>$1</strong>');d.innerHTML=h+(item.t?'<span class="t">'+item.t+(item.who==='out'?' ✓✓':'')+'</span>':'');chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+  function showTyping(){var t=document.createElement('div');t.className='typing';t.id='typing';t.innerHTML='<span></span><span></span><span></span>';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;status.textContent='escribiendo…';}
+  function hideTyping(){var t=document.getElementById('typing');if(t)t.remove();status.textContent='en línea';}
+  function play(){if(running)return;running=true;chat.innerHTML='';playBtn.textContent='⏳ Reproduciendo…';playBtn.disabled=true;var delay=400;
+    conv.forEach(function(item){if(item.who==='in'){timers.push(setTimeout(showTyping,delay));delay+=950;timers.push(setTimeout(function(){hideTyping();bubble(item);},delay));delay+=700;}else{timers.push(setTimeout(function(){bubble(item);},delay));delay+=900;}});
+    timers.push(setTimeout(function(){running=false;playBtn.textContent='▶ Reproducir de nuevo';playBtn.disabled=false;},delay+200));}
+  function reset(){clearTimers();running=false;hideTyping();chat.innerHTML='';playBtn.textContent='▶ Reproducir';playBtn.disabled=false;bubble({who:'in',text:'¡Hola! 👋 Presiona *Reproducir* para ver cómo le escribes a tu asistente.',t:''});}
+  playBtn.addEventListener('click',play);resetBtn.addEventListener('click',reset);
+  var auto=false;
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!auto){auto=true;play();}});},{threshold:.4}).observe(document.getElementById('demo'));}
+  reset();
+})();
+</script>
+</body>
+</html>
