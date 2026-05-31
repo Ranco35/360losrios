@@ -157,7 +157,7 @@ export default function Home() {
             src={logo360}
             alt="360 Los Ríos"
             priority
-            className="mb-8 h-auto w-48 sm:w-56"
+            className="mx-auto mb-10 h-auto w-full max-w-sm sm:max-w-md"
           />
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
             Desarrollo de Software
