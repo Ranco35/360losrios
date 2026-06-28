@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reservas Llifén — Maneja tu negocio por WhatsApp</title>
-<meta name="description" content="Tu asistente del negocio por WhatsApp. Anota reservas y pide tus reportes de llegadas y ocupación escribiendo un mensaje. Sin computador. Producto en testeo.">
+<title>Reservas Llifén — Maneja tu negocio por WhatsApp (ahora con audios)</title>
+<meta name="description" content="Tu asistente del negocio por WhatsApp. Anota reservas y pide tus reportes hablando: ahora puedes mandar un audio si te cuesta escribir y te responde con voz. Producto en testeo.">
 <style>
   :root{
-    --wa:#25d366;        /* whatsapp */
+    --wa:#25d366;
     --wa-d:#128c7e;
     --wa-t:#075e54;
     --sky:#0ea5e9;
@@ -28,6 +28,7 @@
   .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
   .btn{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:#fff;font-weight:700;font-size:18px;border:none;border-radius:14px;padding:16px 28px;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 22px rgba(37,211,102,.38)}
   .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.5)}
+  .btn:disabled{opacity:.7;cursor:default;transform:none}
   .btn.ghost{background:#fff;color:var(--wa-t);border:2px solid #d6e0dd;box-shadow:none;font-size:17px}
   .btn.ghost:hover{box-shadow:var(--shadow-sm)}
   .pill{display:inline-flex;align-items:center;gap:8px;background:#e7f9ee;color:var(--wa-d);font-size:15px;font-weight:700;padding:8px 16px;border-radius:30px}
@@ -69,9 +70,26 @@
   .typing span{width:7px;height:7px;background:#9aa6ab;border-radius:50%;animation:blink 1.2s infinite}
   .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
   @keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
-  .wa-input{background:#f0f2f5;padding:9px 12px;display:flex;align-items:center;gap:9px}
+
+  /* VOICE NOTE bubble */
+  .msg.voice{display:flex;align-items:center;gap:10px;min-width:200px}
+  .v-play{flex:none;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:grid;place-items:center;font-size:14px;color:#fff;background:var(--wa-d)}
+  .msg.out .v-play{background:var(--wa-d)}
+  .msg.in .v-play{background:var(--wa-t)}
+  .v-mid{flex:1;min-width:0}
+  .v-wave{display:flex;align-items:center;gap:2px;height:22px}
+  .v-wave span{display:block;width:2.5px;border-radius:2px;background:#9fb0b5}
+  .msg.out .v-wave span{background:#74b88a}
+  .v-wave.playing span{animation:wv .85s ease-in-out infinite}
+  @keyframes wv{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+  .v-meta{display:flex;align-items:center;gap:7px;margin-top:3px}
+  .v-dur{font-size:11px;color:#6b7b80}
+  .v-tag{font-size:10.5px;color:var(--wa-d);font-weight:700}
+  .v-av{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:13px;background:#cfe8df}
+
+  .wa-input{background:#f0f2f5;padding:8px 11px;display:flex;align-items:center;gap:9px}
   .wa-input .box{flex:1;background:#fff;border-radius:22px;padding:10px 14px;color:#98a3a8;font-size:14px}
-  .wa-input .send{width:40px;height:40px;border-radius:50%;background:var(--wa);display:grid;place-items:center;color:#fff;font-size:17px}
+  .wa-input .mic{width:40px;height:40px;border-radius:50%;background:var(--wa);display:grid;place-items:center;color:#fff;font-size:17px}
 
   /* SECTIONS */
   section{padding:64px 0}
@@ -89,6 +107,16 @@
   .ask-card .say{display:inline-block;background:#d9fdd3;color:#0f5132;border-radius:12px;padding:8px 14px;font-size:15px;font-weight:600;margin-bottom:10px}
   .ask-card p{color:var(--muted);font-size:16px}
 
+  /* VOICE BAND */
+  .voiceband{background:linear-gradient(135deg,var(--wa-t),var(--wa-d));color:#fff}
+  .vb-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  @media(max-width:820px){.vb-grid{grid-template-columns:1fr;gap:26px;text-align:center}}
+  .vb-grid h2{font-size:34px;font-weight:800;letter-spacing:-.6px;margin-bottom:14px}
+  .vb-grid p{font-size:19px;color:#d7f0e9;margin-bottom:10px}
+  .vb-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);color:#fff;font-weight:700;font-size:15px;padding:8px 16px;border-radius:30px;margin-bottom:8px}
+  .vb-demo{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:22px;padding:22px}
+  .vb-demo .lblrow{display:flex;align-items:center;gap:8px;font-size:13px;color:#cdeae2;margin-bottom:8px;font-weight:600}
+
   /* DEMO */
   .demo-controls{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap}
   .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
@@ -97,8 +125,9 @@
   .blist li{display:flex;gap:14px;align-items:flex-start}
   .blist .ck{flex:none;width:30px;height:30px;border-radius:50%;background:#e7f9ee;color:var(--wa-d);display:grid;place-items:center;font-weight:700;font-size:16px;margin-top:2px}
   .blist h4{font-size:18px;margin-bottom:2px}.blist p{color:var(--muted);font-size:16px}
+  .demo-hint{text-align:center;font-size:14px;color:var(--muted);margin-top:12px}
 
-  /* SCREENS (secondary) */
+  /* SCREENS */
   .scr{background:#fff}
   .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
   .tab{font-size:15px;font-weight:700;padding:10px 18px;border-radius:30px;background:var(--bg);border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:all .15s}
@@ -152,6 +181,7 @@
   .func h4{font-size:17px;margin-bottom:2px}
   .func p{color:var(--muted);font-size:15px}
   .func .soon{font-size:10.5px;font-weight:700;background:#fef3c7;color:#b45309;padding:3px 9px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  .func .nuevo{font-size:10.5px;font-weight:700;background:#dcfce7;color:#15803d;padding:3px 9px;border-radius:20px;margin-left:6px;vertical-align:middle}
 
   /* CTA */
   .cta{background:linear-gradient(180deg,#eafaf1,#fff)}
@@ -181,9 +211,9 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="pill">💬 Funciona por WhatsApp</span>
-      <h1>Maneja tu negocio <span>escribiendo un WhatsApp</span></h1>
-      <p class="lead">No necesitas computador ni saber de sistemas. Le escribes como a una persona y él te anota las reservas y te cuenta cómo va tu negocio.</p>
+      <span class="pill">🎤 Ahora con mensajes de voz</span>
+      <h1>Maneja tu negocio <span>hablando o escribiendo</span> por WhatsApp</h1>
+      <p class="lead">No necesitas computador ni saber de sistemas. Le escribes —o le mandas un audio si te cuesta escribir— y él te anota las reservas y te responde, también con voz.</p>
       <div class="hero-cta">
         <a href="#probar" class="btn">💬 Probarlo gratis</a>
         <a href="#demo" class="btn ghost">Ver cómo funciona</a>
@@ -195,12 +225,21 @@
         <div class="wphone-screen">
           <div class="wa-top"><div class="av">RL</div><div class="who">Mi Asistente Reservas<small>en línea</small></div></div>
           <div class="wa-chat">
-            <div class="msg out">Anota: Juan, 15 al 17 dic, 2 personas <span class="t">09:10 ✓✓</span></div>
-            <div class="msg in">✅ Listo. Reserva guardada para Juan, 15 al 17 dic. 🌲</div>
-            <div class="msg out">¿Quién llega hoy? <span class="t">09:12 ✓✓</span></div>
-            <div class="msg in">Hoy llegan 2:\n• María — Cabaña El Bosque\n• Pedro — Habitación Termal</div>
-            <div class="msg out">¿Cómo va la ocupación? <span class="t">09:13 ✓✓</span></div>
-            <div class="msg in">📊 Este mes vas 78% ocupado. ¡Buen mes! 👏</div>
+            <div class="msg out voice" style="min-width:210px">
+              <button class="v-play" aria-label="audio">▶</button>
+              <div class="v-mid">
+                <div class="v-wave"><span style="height:30%"></span><span style="height:70%"></span><span style="height:45%"></span><span style="height:90%"></span><span style="height:55%"></span><span style="height:75%"></span><span style="height:35%"></span><span style="height:60%"></span><span style="height:85%"></span><span style="height:40%"></span><span style="height:65%"></span><span style="height:50%"></span></div>
+                <div class="v-meta"><span class="v-dur">0:06</span><span class="v-tag">🎤 tu audio</span></div>
+              </div>
+            </div>
+            <div class="msg in">🎤 Escuché tu audio. Anoté: Juan, 15 al 17 dic, 2 personas. ✅</div>
+            <div class="msg in voice" style="min-width:210px">
+              <button class="v-play" aria-label="audio">▶</button>
+              <div class="v-mid">
+                <div class="v-wave"><span style="height:50%"></span><span style="height:80%"></span><span style="height:40%"></span><span style="height:70%"></span><span style="height:90%"></span><span style="height:45%"></span><span style="height:65%"></span><span style="height:35%"></span><span style="height:75%"></span><span style="height:55%"></span></div>
+                <div class="v-meta"><span class="v-dur">0:05</span><span class="v-tag">🔊 te responde</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -212,7 +251,7 @@
 <section class="ask">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Tú solo le escribes. Él hace el resto.</h2>
+      <h2>Tú solo le hablas o le escribes. Él hace el resto.</h2>
       <p>Estas son las 3 cosas que más vas a usar:</p>
     </div>
     <div class="ask-grid">
@@ -238,13 +277,44 @@
   </div>
 </section>
 
+<!-- VOICE BAND -->
+<section class="voiceband">
+  <div class="wrap vb-grid">
+    <div>
+      <span class="vb-tag">🆕 Nuevo · Mensajes de voz</span>
+      <h2>¿Te cuesta escribir? Mándale un audio 🎤</h2>
+      <p>Aprieta el micrófono, habla como si llamaras por teléfono, y suéltalo. El asistente entiende tu audio y te <b>responde hablando</b>.</p>
+      <p>Pensado para quienes prefieren la voz al teclado. Más rápido, más fácil.</p>
+    </div>
+    <div class="vb-demo">
+      <div class="lblrow">🎧 Pruébalo: aprieta ▶ para escuchar la respuesta</div>
+      <div class="wa-chat" style="background:#efe7dd;border-radius:14px;padding:12px;min-height:auto">
+        <div class="msg out voice" style="min-width:200px">
+          <button class="v-play" data-speak="Hola, anótame una reserva para Pedro, llega el viernes, dos personas.">▶</button>
+          <div class="v-mid">
+            <div class="v-wave"><span style="height:35%"></span><span style="height:75%"></span><span style="height:50%"></span><span style="height:90%"></span><span style="height:45%"></span><span style="height:65%"></span><span style="height:40%"></span><span style="height:80%"></span><span style="height:55%"></span><span style="height:60%"></span></div>
+            <div class="v-meta"><span class="v-dur">0:06</span><span class="v-tag">🎤 tu audio</span></div>
+          </div>
+        </div>
+        <div class="msg in voice" style="min-width:200px">
+          <button class="v-play" data-speak="Listo. Anoté la reserva de Pedro para el viernes, dos personas. La puedes ver en tu panel cuando quieras.">▶</button>
+          <div class="v-mid">
+            <div class="v-wave"><span style="height:55%"></span><span style="height:80%"></span><span style="height:40%"></span><span style="height:70%"></span><span style="height:90%"></span><span style="height:50%"></span><span style="height:65%"></span><span style="height:45%"></span></div>
+            <div class="v-meta"><span class="v-dur">0:05</span><span class="v-tag">🔊 respuesta hablada</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- DEMO -->
 <section id="demo">
   <div class="wrap">
     <div class="sec-head">
       <span class="pill">🎬 Míralo en acción</span>
       <h2>Así de fácil se ve</h2>
-      <p>Presiona el botón y mira una conversación de verdad.</p>
+      <p>Presiona reproducir, o aprieta "Mandar un audio" para probar tú mismo.</p>
     </div>
     <div class="demo-grid">
       <div>
@@ -252,28 +322,30 @@
           <div class="wphone-screen">
             <div class="wa-top"><div class="av">RL</div><div class="who">Mi Asistente Reservas<small id="waStatus">en línea</small></div></div>
             <div class="wa-chat" id="chat"></div>
-            <div class="wa-input"><div class="box">Escribe un mensaje…</div><div class="send">➤</div></div>
+            <div class="wa-input"><div class="box">Escribe un mensaje…</div><div class="mic">🎤</div></div>
           </div>
         </div>
         <div class="demo-controls">
           <button class="btn" id="playBtn">▶ Reproducir</button>
+          <button class="btn ghost" id="recBtn">🎤 Mandar un audio</button>
           <button class="btn ghost" id="resetBtn">↺ Reiniciar</button>
         </div>
+        <div class="demo-hint" id="demoHint">Consejo: aprieta 🎤 para enviar un audio de prueba y escuchar la respuesta.</div>
       </div>
       <div>
         <h3 style="font-size:28px;letter-spacing:-.5px;margin-bottom:10px">Tu asistente, siempre listo</h3>
         <ul class="blist">
-          <li><span class="ck">✓</span><div><h4>Escribes como hablas</h4><p>Sin botones raros ni menús. Le escribes normal.</p></div></li>
-          <li><span class="ck">✓</span><div><h4>Te responde al toque</h4><p>Anota, te avisa quién llega y te da los números.</p></div></li>
+          <li><span class="ck">✓</span><div><h4>Hablas o escribes</h4><p>Mándale un audio si te cuesta escribir. Él entiende los dos.</p></div></li>
+          <li><span class="ck">✓</span><div><h4>Te responde con voz</h4><p>Si quieres, te contesta hablando. Sin forzar la vista.</p></div></li>
           <li><span class="ck">✓</span><div><h4>Solo tú lo usas</h4><p>Te reconoce por tu número. Tus huéspedes no entran aquí.</p></div></li>
-          <li><span class="ck">✓</span><div><h4>Todo queda guardado</h4><p>Nada se pierde. Lo puedes revisar cuando quieras.</p></div></li>
+          <li><span class="ck">✓</span><div><h4>Todo queda guardado</h4><p>Nada se pierde. Lo revisas cuando quieras.</p></div></li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PANTALLAS (secundario) -->
+<!-- PANTALLAS -->
 <section id="pantallas" class="scr">
   <div class="wrap">
     <div class="sec-head">
@@ -307,12 +379,14 @@
   <div class="wrap">
     <div class="sec-head"><h2>Todo lo que hace por ti</h2></div>
     <div class="funcs">
+      <div class="func"><div class="e">🎤</div><div><h4>Mensajes de voz <span class="nuevo">NUEVO</span></h4><p>Mándale un audio si te cuesta escribir; te responde hablando.</p></div></div>
       <div class="func"><div class="e">📝</div><div><h4>Anota tus reservas</h4><p>Por WhatsApp o desde la pantalla.</p></div></div>
       <div class="func"><div class="e">🛎️</div><div><h4>Te avisa quién llega</h4><p>Llegadas y salidas de cada día.</p></div></div>
       <div class="func"><div class="e">📊</div><div><h4>Te da los números</h4><p>Ocupación e ingresos del mes.</p></div></div>
       <div class="func"><div class="e">💵</div><div><h4>Lleva los pagos</h4><p>Quién pagó y quién te debe.</p></div></div>
       <div class="func"><div class="e">⚡</div><div><h4>Respuestas rápidas</h4><p>Mensajes listos para tus huéspedes con un toque.</p></div></div>
       <div class="func"><div class="e">⭐</div><div><h4>Encuesta a tus huéspedes <span class="soon">PRONTO</span></h4><p>Sabrás qué les pareció su estadía.</p></div></div>
+      <div class="func"><div class="e">📱</div><div><h4>Web y Android</h4><p>El mismo sistema en el computador y en tu teléfono.</p></div></div>
     </div>
   </div>
 </section>
@@ -323,7 +397,7 @@
     <div class="price-box">
       <span class="pill">🚀 Pruébalo gratis</span>
       <h3>Empieza por WhatsApp hoy</h3>
-      <p class="p">Te ayudamos a dejarlo listo con tus cabañas y habitaciones. Tú solo escribe.</p>
+      <p class="p">Te ayudamos a dejarlo listo con tus cabañas y habitaciones. Tú solo habla o escribe.</p>
       <a class="btn big-btn" href="https://wa.me/56998871415?text=Hola,%20quiero%20probar%20Reservas%20Llif%C3%A9n%20para%20mi%20negocio" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
       <p style="margin-top:18px;font-size:15px;color:var(--muted)">o al correo <a href="mailto:eduardo@termasllifen.cl" style="color:var(--wa-d);font-weight:600">eduardo@termasllifen.cl</a></p>
     </div>
@@ -335,15 +409,62 @@
     <div class="brand"><div class="logo">💬</div> Reservas Llifén</div>
     <p>Tu asistente del negocio, por WhatsApp · Producto en prueba</p>
     <p style="margin-top:8px">Contacto: <a href="mailto:eduardo@termasllifen.cl">eduardo@termasllifen.cl</a> · Publicado en <a href="https://www.360losrios.cl" target="_blank" rel="noopener">360 Los Ríos</a></p>
-    <p style="margin-top:14px;opacity:.7;font-size:13px">© 2026 Reservas Llifén. Muestra con datos de ejemplo. Las conversaciones son simuladas.</p>
+    <p style="margin-top:14px;opacity:.7;font-size:13px">© 2026 Reservas Llifén. Muestra con datos de ejemplo. Las conversaciones y voces son simuladas con tu navegador.</p>
   </div>
 </footer>
 
-<div class="ver">v1.03</div>
+<div class="ver">v1.04</div>
 
 <script>
 (function(){
-  /* ----- PANTALLAS ----- */
+  /* ===== Texto a voz (responde hablando) ===== */
+  var synth = window.speechSynthesis || null;
+  var esVoice = null;
+  function loadVoice(){
+    if(!synth) return;
+    var vs = synth.getVoices() || [];
+    esVoice = vs.find(function(v){return /es[-_](CL|419|MX|US|ES)/i.test(v.lang);})
+           || vs.find(function(v){return /^es/i.test(v.lang);}) || null;
+  }
+  if(synth){ loadVoice(); if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = loadVoice; } }
+
+  var playingWrap = null, fallbackTimer = null;
+  function setWaving(wrap, on){
+    var w = wrap.querySelector('.v-wave'); var b = wrap.querySelector('.v-play');
+    if(w) w.classList.toggle('playing', on);
+    if(b) b.textContent = on ? '⏸' : '▶';
+  }
+  function stopAudio(){
+    if(synth) try{ synth.cancel(); }catch(e){}
+    if(fallbackTimer){ clearTimeout(fallbackTimer); fallbackTimer=null; }
+    if(playingWrap){ setWaving(playingWrap,false); playingWrap=null; }
+  }
+  function playVoice(wrap, text){
+    if(playingWrap === wrap){ stopAudio(); return; }
+    stopAudio();
+    playingWrap = wrap; setWaving(wrap, true);
+    if(synth && text){
+      try{
+        var u = new SpeechSynthesisUtterance(text);
+        u.lang = 'es-CL'; if(esVoice) u.voice = esVoice; u.rate = 0.98; u.pitch = 1;
+        u.onend = function(){ if(playingWrap===wrap){ setWaving(wrap,false); playingWrap=null; } };
+        u.onerror = u.onend;
+        synth.speak(u);
+        return;
+      }catch(e){}
+    }
+    // sin voz disponible: anima unos segundos
+    fallbackTimer = setTimeout(function(){ if(playingWrap===wrap){ setWaving(wrap,false); playingWrap=null; } }, 3500);
+  }
+  // Botones de audio estáticos (hero + banda de voz)
+  document.querySelectorAll('.v-play[data-speak], .hero .v-play').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var wrap = btn.closest('.voice');
+      playVoice(wrap, btn.getAttribute('data-speak') || '');
+    });
+  });
+
+  /* ===== PANTALLAS ===== */
   var screens = {
     dash:{ url:'app.reservasllifen.cl',
       html:'<div class="app-top"><div><div class="t-title">Termas Llifén</div><div class="t-sub">Resumen · Mayo 2026</div></div><div class="app-av">TL</div></div>'+
@@ -385,33 +506,105 @@
         '</div></div>' }
   };
   function cell(d,color){ if(d==='')return '<div class="cal-cell muted"></div>'; return '<div class="cal-cell"><span class="d">'+d+'</span>'+(color?'<span class="cal-bar '+color+'"></span>':'')+'</div>'; }
-
   var webScreen=document.getElementById('webScreen'),phoneScreen=document.getElementById('phoneScreen'),urlBar=document.getElementById('urlBar'),tabs=document.querySelectorAll('.tab');
   function render(key){var s=screens[key];webScreen.innerHTML='<div class="app-body" style="padding:0">'+s.html+'</div>';phoneScreen.innerHTML=s.html;urlBar.textContent=s.url;tabs.forEach(function(t){t.classList.toggle('on',t.dataset.scr===key);});}
   tabs.forEach(function(t){t.addEventListener('click',function(){render(t.dataset.scr);});});
   render('dash');
 
-  /* ----- WHATSAPP DEMO ----- */
-  var chat=document.getElementById('chat'),status=document.getElementById('waStatus'),playBtn=document.getElementById('playBtn'),resetBtn=document.getElementById('resetBtn');
+  /* ===== WHATSAPP DEMO ===== */
+  var chat=document.getElementById('chat'),status=document.getElementById('waStatus');
+  var playBtn=document.getElementById('playBtn'),recBtn=document.getElementById('recBtn'),resetBtn=document.getElementById('resetBtn');
   var running=false,timers=[];
+
+  // who: in/out ; text o {audio:true,dur,speak}
   var conv=[
-    {who:'in',text:'¡Hola! 👋 Soy tu asistente de *Termas Llifén*. Escríbeme lo que necesites.',t:'09:10'},
-    {who:'out',text:'Anota: Juan, 15 al 17 de diciembre, 2 personas, Cabaña El Bosque',t:'09:10'},
-    {who:'in',text:'✅ *Reserva guardada*\n👤 Juan\n📅 15 al 17 dic (2 noches)\n👥 2 personas\n🏡 Cabaña El Bosque\n💰 $170.000',t:'09:11'},
-    {who:'out',text:'¿Quién llega hoy?',t:'09:12'},
-    {who:'in',text:'🛎️ Hoy llegan 2:\n• María González — Cabaña El Bosque\n• Pedro Soto — Habitación Termal (pagada)',t:'09:12'},
-    {who:'out',text:'¿Cómo va la ocupación este mes?',t:'09:13'},
-    {who:'in',text:'📊 Vas *78% ocupado* este mes.\n💰 Ingresos: $4.280.000\n⏳ Te quedan por cobrar: $640.000\n\n¡Buen mes! 👏',t:'09:13'}
+    {who:'in',text:'¡Hola! 👋 Soy tu asistente de *Termas Llifén*. Escríbeme o mándame un audio. 🎤'},
+    {who:'out',audio:true,dur:'0:06',speak:'Hola, anótame una reserva para Juan, del 15 al 17 de diciembre, dos personas, en la Cabaña El Bosque.'},
+    {who:'in',text:'🎤 Escuché tu audio. Anoté:\n👤 Juan\n📅 15 al 17 dic (2 noches)\n👥 2 personas\n🏡 Cabaña El Bosque\n💰 $170.000'},
+    {who:'in',audio:true,dur:'0:05',speak:'Reserva guardada para Juan, del quince al diecisiete de diciembre, dos personas. La puedes ver en tu panel cuando quieras.'},
+    {who:'out',text:'¿Quién llega hoy?'},
+    {who:'in',text:'🛎️ Hoy llegan 2:\n• María González — Cabaña El Bosque\n• Pedro Soto — Habitación Termal (pagada)'},
+    {who:'out',text:'¿Cómo va la ocupación este mes?'},
+    {who:'in',text:'📊 Vas *78% ocupado* este mes.\n💰 Ingresos: $4.280.000\n⏳ Por cobrar: $640.000\n\n¡Buen mes! 👏'}
   ];
+
   function clearTimers(){timers.forEach(clearTimeout);timers=[];}
-  function bubble(item){var d=document.createElement('div');d.className='msg '+item.who;var h=item.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\*(.+?)\*/g,'<strong>$1</strong>');d.innerHTML=h+(item.t?'<span class="t">'+item.t+(item.who==='out'?' ✓✓':'')+'</span>':'');chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+
+  function makeWave(out){
+    var n=10, h=[40,75,50,90,45,65,35,80,55,60];
+    var s='';
+    for(var i=0;i<n;i++){ s+='<span style="height:'+h[i]+'%"></span>'; }
+    return s;
+  }
+  function bubble(item){
+    var d=document.createElement('div');
+    if(item.audio){
+      d.className='msg '+item.who+' voice';
+      d.style.minWidth='200px';
+      var tag = item.who==='out' ? '🎤 tu audio' : '🔊 respuesta hablada';
+      d.innerHTML='<button class="v-play">▶</button>'+
+        '<div class="v-mid"><div class="v-wave">'+makeWave(item.who==='out')+'</div>'+
+        '<div class="v-meta"><span class="v-dur">'+(item.dur||'0:05')+'</span><span class="v-tag">'+tag+'</span></div></div>';
+      var btn=d.querySelector('.v-play');
+      btn.addEventListener('click',function(){ playVoice(d, item.speak||''); });
+      d._speak=item.speak||'';
+    } else {
+      d.className='msg '+item.who;
+      var h=item.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\*(.+?)\*/g,'<strong>$1</strong>');
+      d.innerHTML=h+(item.t?'<span class="t">'+item.t+(item.who==='out'?' ✓✓':'')+'</span>':'');
+    }
+    chat.appendChild(d); chat.scrollTop=chat.scrollHeight;
+    return d;
+  }
   function showTyping(){var t=document.createElement('div');t.className='typing';t.id='typing';t.innerHTML='<span></span><span></span><span></span>';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;status.textContent='escribiendo…';}
   function hideTyping(){var t=document.getElementById('typing');if(t)t.remove();status.textContent='en línea';}
-  function play(){if(running)return;running=true;chat.innerHTML='';playBtn.textContent='⏳ Reproduciendo…';playBtn.disabled=true;var delay=400;
-    conv.forEach(function(item){if(item.who==='in'){timers.push(setTimeout(showTyping,delay));delay+=950;timers.push(setTimeout(function(){hideTyping();bubble(item);},delay));delay+=700;}else{timers.push(setTimeout(function(){bubble(item);},delay));delay+=900;}});
-    timers.push(setTimeout(function(){running=false;playBtn.textContent='▶ Reproducir de nuevo';playBtn.disabled=false;},delay+200));}
-  function reset(){clearTimers();running=false;hideTyping();chat.innerHTML='';playBtn.textContent='▶ Reproducir';playBtn.disabled=false;bubble({who:'in',text:'¡Hola! 👋 Presiona *Reproducir* para ver cómo le escribes a tu asistente.',t:''});}
-  playBtn.addEventListener('click',play);resetBtn.addEventListener('click',reset);
+
+  function play(){
+    if(running)return; stopAudio(); running=true; chat.innerHTML=''; clearTimers();
+    playBtn.textContent='⏳ Reproduciendo…'; playBtn.disabled=true; recBtn.disabled=true;
+    var delay=400;
+    conv.forEach(function(item){
+      if(item.who==='in'){
+        timers.push(setTimeout(showTyping,delay)); delay+=item.audio?700:950;
+        timers.push(setTimeout(function(){hideTyping();bubble(item);},delay)); delay+=700;
+      } else {
+        timers.push(setTimeout(function(){bubble(item);},delay)); delay+=item.audio?1000:850;
+      }
+    });
+    timers.push(setTimeout(function(){running=false;playBtn.textContent='▶ Reproducir de nuevo';playBtn.disabled=false;recBtn.disabled=false;},delay+200));
+  }
+
+  function record(){
+    if(running)return; stopAudio(); running=true; clearTimers();
+    recBtn.disabled=true; playBtn.disabled=true;
+    var sec=0;
+    recBtn.textContent='● Grabando 0:0'+sec;
+    var iv=setInterval(function(){ sec++; recBtn.textContent='● Grabando 0:0'+sec; },1000);
+    timers.push(setTimeout(function(){
+      clearInterval(iv);
+      recBtn.textContent='🎤 Mandar un audio';
+      bubble({who:'out',audio:true,dur:'0:04',speak:'Anótame una reserva para Ana González, llega mañana, dos personas, una noche.'});
+      showTyping();
+      timers.push(setTimeout(function(){
+        hideTyping();
+        bubble({who:'in',text:'🎤 Escuché tu audio. Anoté:\n👤 Ana González\n📅 mañana (1 noche)\n👥 2 personas\n\nTe respondo con un audio 👇'});
+        var b=bubble({who:'in',audio:true,dur:'0:05',speak:'Listo. Reserva creada para Ana González, llega mañana, dos personas, una noche. Quedó guardada en tu panel.'});
+        timers.push(setTimeout(function(){ playVoice(b, b._speak); },500));
+        running=false; recBtn.disabled=false; playBtn.disabled=false;
+      },1500));
+    },3000));
+  }
+
+  function reset(){
+    clearTimers(); stopAudio(); running=false; hideTyping(); chat.innerHTML='';
+    playBtn.textContent='▶ Reproducir'; playBtn.disabled=false;
+    recBtn.textContent='🎤 Mandar un audio'; recBtn.disabled=false;
+    bubble({who:'in',text:'¡Hola! 👋 Aprieta *Reproducir* para ver la conversación, o *Mandar un audio* para probar tú mismo. 🎤'});
+  }
+
+  playBtn.addEventListener('click',play);
+  recBtn.addEventListener('click',record);
+  resetBtn.addEventListener('click',reset);
   var auto=false;
   if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!auto){auto=true;play();}});},{threshold:.4}).observe(document.getElementById('demo'));}
   reset();
