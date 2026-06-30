@@ -30,8 +30,9 @@ const projects: Project[] = [
   {
     title: "Tarjeta de Fidelización 💳",
     description:
-      "Programa de puntos digital para negocios, sin papel ni plástico.",
-    status: "producción",
+      "Tarjeta digital con QR para tu empresa o tu comunidad de comercios, sin papel ni plástico. Mira la demo interactiva.",
+    status: "desarrollo",
+    href: "/tarjetas",
   },
   {
     title: "Sistema Gym 🏋️",
@@ -189,6 +190,31 @@ export default function Home() {
               </p>
             </div>
             <span className="hidden shrink-0 items-center gap-1 rounded-lg bg-green-500 px-4 py-2 text-sm font-semibold text-white transition-transform group-hover:scale-105 sm:inline-flex">
+              Ver demo →
+            </span>
+          </div>
+        </a>
+
+        {/* Banner destacado: Demo Tarjeta de Fidelización */}
+        <a
+          href="/tarjetas"
+          className="group mb-20 block overflow-hidden rounded-xl border border-violet-500/30 bg-gradient-to-r from-violet-500/10 to-purple-500/5 p-6 transition-colors hover:border-violet-400/60 hover:from-violet-500/15"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <span className="inline-block rounded-full bg-violet-500/20 px-3 py-0.5 text-xs font-semibold text-violet-300">
+                🧪 Nuevo · En prueba
+              </span>
+              <h3 className="mt-3 text-lg font-semibold text-white">
+                Tarjeta de Fidelización — para tu empresa o tu comunidad 🎫
+              </h3>
+              <p className="mt-1 text-sm text-neutral-400">
+                Tarjeta digital con QR: suma sellos y puntos. Úsala sola en tu
+                empresa o únete a una comunidad de comercios. Mira la demo
+                interactiva.
+              </p>
+            </div>
+            <span className="hidden shrink-0 items-center gap-1 rounded-lg bg-violet-500 px-4 py-2 text-sm font-semibold text-white transition-transform group-hover:scale-105 sm:inline-flex">
               Ver demo →
             </span>
           </div>
