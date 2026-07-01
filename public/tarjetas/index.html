@@ -105,6 +105,16 @@
   .stamp-tile .st-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}
   .stamp-tile .st-head b{font-size:15px}
   .stamp-tile .st-foot{font-size:13px;color:var(--muted);margin-top:12px}
+  .future-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:820px;margin:18px auto 0}
+  @media(max-width:760px){.future-grid{grid-template-columns:1fr}}
+  .fcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+  .fcard .fc-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .fcard .fc-head .fe{font-size:24px}
+  .fcard h4{font-size:17px}
+  .fcard p{color:var(--muted);font-size:15px;margin-top:2px}
+  .stars{margin-top:10px;font-size:18px;letter-spacing:2px;color:var(--gold)}
+  .thumbs{margin-top:10px;display:flex;gap:8px}
+  .thumbs span{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:14px;font-weight:600}
 
   /* member chips (comunidad) */
   .members{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
@@ -405,6 +415,19 @@
         <p style="margin-top:14px;font-size:14px;color:var(--muted)">🛠️ Funcionalidad en desarrollo — disponible en una próxima actualización.</p>
       </div>
     </div>
+
+    <div class="future-grid">
+      <div class="fcard">
+        <div class="fc-head"><span class="fe">📝</span><h4>Encuesta rápida post-descuento <span class="soon-badge">PRONTO</span></h4></div>
+        <p>Justo después de usar un beneficio, el cliente responde en un toque cómo lo atendió la empresa. Sabrás al instante cómo estás trabajando.</p>
+        <div class="stars">★ ★ ★ ★ ☆</div>
+      </div>
+      <div class="fcard">
+        <div class="fc-head"><span class="fe">⭐</span><h4>La empresa califica al cliente <span class="soon-badge">PRONTO</span></h4></div>
+        <p>También tú evalúas al cliente (puntual, buen trato, recurrente). Conoces mejor a quién atiendes y premias a los mejores.</p>
+        <div class="thumbs"><span>👍 Buen cliente</span><span>🔁 Recurrente</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -503,7 +526,8 @@
       <div class="func"><div class="e">🤝</div><div><h4>Modo comunidad</h4><p>Varias empresas, una sola tarjeta para el cliente.</p></div></div>
       <div class="func"><div class="e">📊</div><div><h4>Reportes y estadísticas</h4><p>Quién vuelve, cuánto gasta, qué oferta funciona.</p></div></div>
       <div class="func"><div class="e">🎟️</div><div><h4>Sellos de comunidad <span class="soon">PRONTO</span></h4><p>Junta sellos visitando los comercios de la red y canjea un premio común.</p></div></div>
-      <div class="func"><div class="e">⭐</div><div><h4>Encuestas a clientes <span class="soon">PRONTO</span></h4><p>Sabrás qué les pareció su experiencia.</p></div></div>
+      <div class="func"><div class="e">📝</div><div><h4>Encuesta post-descuento <span class="soon">PRONTO</span></h4><p>El cliente evalúa a la empresa justo tras usar un beneficio.</p></div></div>
+      <div class="func"><div class="e">⭐</div><div><h4>Calificación mutua <span class="soon">PRONTO</span></h4><p>La empresa también califica al cliente.</p></div></div>
     </div>
   </div>
 </section>
@@ -530,7 +554,7 @@
   </div>
 </footer>
 
-<div class="ver">v1.02</div>
+<div class="ver">v1.03</div>
 
 <script>
 (function(){
