@@ -366,9 +366,10 @@
     <div class="txt">
       <span class="num">2</span>
       <h3>Reservas — buscar y anotar</h3>
-      <p>En <b>Reservas</b> ves la lista completa, buscas por huésped y filtras por estado (pendiente, confirmada, pagada). Con <b>"Nueva"</b> anotas una a mano (pre-reserva).</p>
+      <p>Arriba ves tus números del día (<b>Entradas hoy</b>, <b>En casa</b>, <b>Por confirmar</b>, <b>Saldo</b>). Abajo, la lista: buscas por huésped y filtras por estado (<b>Pre-reserva</b>, <b>Confirmada</b>, <b>En curso</b>, <b>Pagada</b>). Con <b>"+ Nueva Reserva"</b> anotas una a mano.</p>
       <ul>
         <li><span class="ck">✓</span><div>Cada reserva muestra su <b>trío de plata</b>: total, recibido y lo que falta.</div></li>
+        <li><span class="ck">✓</span><div>Filtra por <b>Próximas</b>, <b>Pasadas</b> o <b>Todas las fechas</b>.</div></li>
       </ul>
     </div>
     <figure class="shot" data-real="img/panel-reservas.png">
@@ -381,11 +382,16 @@
           <div class="mi"><span class="d"></span>Huéspedes</div>
         </div>
         <div class="main">
-          <div class="mtop"><div><h4>Reservas</h4><div class="sub">37 reservas</div></div></div>
-          <div class="search">🔍 Buscar huésped…</div>
+          <div class="mtop"><div><h4>Reservas</h4><div class="sub">Próximas · 3</div></div></div>
+          <div class="kpis">
+            <div class="kpi"><div class="l">Entradas hoy</div><div class="v s">2</div></div>
+            <div class="kpi"><div class="l">En casa</div><div class="v">4</div></div>
+            <div class="kpi"><div class="l">Por confirmar</div><div class="v a">1</div></div>
+            <div class="kpi"><div class="l">Saldo</div><div class="v g">$640k</div></div>
+          </div>
           <div class="row"><div><div class="nm">María González</div><div class="me">El Bosque · 15–17 nov</div></div><div style="text-align:right"><span class="badge b-conf">Confirmada</span><div class="amt">$170.000<small>falta $85.000</small></div></div></div>
           <div class="row"><div><div class="nm">Pedro Soto</div><div class="me">Termal · 12–15 nov</div></div><div style="text-align:right"><span class="badge b-paid">Pagada</span><div class="amt">$180.000<small>al día</small></div></div></div>
-          <div class="row"><div><div class="nm">Javiera Muñoz</div><div class="me">Río Llifén · 20–22 nov</div></div><div style="text-align:right"><span class="badge b-pend">Pendiente</span><div class="amt">$190.000<small>sin pago</small></div></div></div>
+          <div class="row"><div><div class="nm">Javiera Muñoz</div><div class="me">Río Llifén · 20–22 nov</div></div><div style="text-align:right"><span class="badge b-pend">Pre-reserva</span><div class="amt">$190.000<small>sin pago</small></div></div></div>
         </div>
       </div>
       <div class="shotcap">Listado de reservas</div>
@@ -428,7 +434,7 @@
     <div class="txt">
       <span class="num">4</span>
       <h3>Huéspedes y Configuración</h3>
-      <p>En <b>Huéspedes</b> tienes la ficha de cada persona (contacto e historial). En <b>Configuración</b> defines tus <b>unidades</b> (cabañas/habitaciones), precios y el <b>% de abono</b> que pides por adelantado.</p>
+      <p>En <b>Huéspedes</b> tienes la ficha de cada persona (contacto e historial). En <b>Configuración</b> gestionas <b>Unidades</b> (cabañas, habitaciones, camping), <b>Servicios</b> adicionales, <b>Respuestas rápidas</b> (plantillas de WhatsApp) y los <b>Datos de la propiedad</b> (nombre, ciudad, contacto).</p>
       <ul>
         <li><span class="ck">✓</span><div>Lo que configuras aquí, el Bot lo usa para cobrar y proponer disponibilidad.</div></li>
       </ul>
@@ -442,11 +448,11 @@
           <div class="mi on"><span class="d"></span>Configuración</div>
         </div>
         <div class="main">
-          <div class="mtop"><div><h4>Configuración</h4><div class="sub">Unidades y precios</div></div></div>
-          <div class="row"><div><div class="nm">Cabaña El Bosque</div><div class="me">2 personas · $85.000 / noche</div></div><span class="badge b-paid">Activa</span></div>
-          <div class="row"><div><div class="nm">Cabaña Río Llifén</div><div class="me">4 personas · $95.000 / noche</div></div><span class="badge b-paid">Activa</span></div>
-          <div class="row"><div><div class="nm">Habitación Termal</div><div class="me">2 personas · $60.000 / noche</div></div><span class="badge b-paid">Activa</span></div>
-          <div class="row" style="background:#f0fdf4"><div><div class="nm">Abono por defecto</div><div class="me">Se pide al tomar la reserva</div></div><span class="badge b-conf">50%</span></div>
+          <div class="mtop"><div><h4>Configuración</h4><div class="sub">Cabañas Llifén · Llifen - Futrono</div></div></div>
+          <div class="row"><div><div class="nm">🛏️ Unidades</div><div class="me">Cabañas, habitaciones, camping</div></div><span class="badge b-conf">3</span></div>
+          <div class="row"><div><div class="nm">✨ Servicios</div><div class="me">Servicios adicionales</div></div><span class="badge b-paid">Activo</span></div>
+          <div class="row"><div><div class="nm">💬 Respuestas rápidas</div><div class="me">Plantillas de WhatsApp</div></div><span class="badge b-paid">Activo</span></div>
+          <div class="row" style="background:#f0fdf4"><div><div class="nm">🏠 Datos de la propiedad</div><div class="me">Nombre · ciudad · contacto</div></div><span class="badge b-conf">Editar</span></div>
         </div>
       </div>
       <div class="shotcap">Unidades, precios y % de abono</div>
@@ -551,7 +557,7 @@
   </div>
 </footer>
 
-<div class="ver">manual v1.00</div>
+<div class="ver">manual v1.01</div>
 
 <script>
 (function(){
