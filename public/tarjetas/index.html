@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tarjeta de Fidelización — Una tarjeta digital para tu empresa o tu comunidad</title>
 <meta name="description" content="Crea tu tarjeta de fidelización digital con QR. Tus clientes acceden a tus descuentos y beneficios. Úsala sola en tu empresa, o únete a una comunidad de comercios donde el cliente tiene una sola tarjeta que sirve en todos. Producto en testeo, publicado en 360 Los Ríos.">
+<link rel="icon" type="image/png" sizes="32x32" href="/tarjetas/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/tarjetas/logo-icon-192.png">
+<link rel="apple-touch-icon" href="/tarjetas/logo-icon-192.png">
 <style>
   :root{
     --brand:#7c3aed;     /* violeta */
@@ -42,7 +45,8 @@
   header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
   .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px}
-  .brand .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-ddd));display:grid;place-items:center;color:#fff;font-size:21px}
+  .brand .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;overflow:hidden;background:#fff}
+  .brand .logo img{width:100%;height:100%;object-fit:contain}
   .nav-cta{background:var(--brand);color:#fff;font-weight:700;padding:10px 20px;border-radius:12px;font-size:15px}
   @media(max-width:560px){.nav-cta{display:none}}
 
@@ -262,7 +266,7 @@
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <div class="brand"><div class="logo">🎫</div> Tarjeta de Fidelización</div>
+    <div class="brand"><div class="logo"><img src="/tarjetas/logo-icon-192.png" alt="Tarjeta 360 Los Ríos" loading="lazy"></div> Tarjeta de Fidelización</div>
     <a href="#probar" class="nav-cta">Quiero probarlo</a>
   </div>
 </header>
@@ -547,14 +551,14 @@
 
 <footer>
   <div class="wrap">
-    <div class="brand"><div class="logo">🎫</div> Tarjeta de Fidelización</div>
+    <div class="brand"><div class="logo"><img src="/tarjetas/logo-icon-192.png" alt="Tarjeta 360 Los Ríos" loading="lazy"></div> Tarjeta de Fidelización</div>
     <p>Una tarjeta digital para tu empresa o tu comunidad · Producto en prueba</p>
     <p style="margin-top:8px">Contacto: <a href="mailto:eduardo@termasllifen.cl">eduardo@termasllifen.cl</a> · Publicado en <a href="https://www.360losrios.cl" target="_blank" rel="noopener">360 Los Ríos</a></p>
     <p style="margin-top:14px;opacity:.7;font-size:13px">© 2026 Tarjeta de Fidelización. Muestra con datos de ejemplo. Los comercios y clientes son ficticios.</p>
   </div>
 </footer>
 
-<div class="ver">v1.03</div>
+<div class="ver">v1.04</div>
 
 <script>
 (function(){
