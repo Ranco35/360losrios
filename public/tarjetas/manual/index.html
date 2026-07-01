@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de uso — Tarjeta de Fidelización 360 Los Ríos</title>
+<meta name="description" content="Manual de uso de la Tarjeta de Fidelización 360 Los Ríos: guía paso a paso para el Cliente/Socio de comunidad, para la Empresa y para el Administrador de comunidad.">
+<link rel="icon" type="image/png" sizes="32x32" href="/tarjetas/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/tarjetas/logo-icon-192.png">
+<link rel="apple-touch-icon" href="/tarjetas/logo-icon-192.png">
+<style>
+  :root{
+    --brand:#7c3aed; --brand-d:#6d28d9; --brand-dd:#5b21b6; --brand-ddd:#4c1d95;
+    --gold:#f59e0b; --gold-d:#d97706;
+    --sky:#0ea5e9; --sky-d:#0284c7; --sky-dd:#075985;
+    --blue:#2563eb; --blue-d:#1d4ed8;
+    --green:#16a34a; --green-d:#15803d;
+    --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --bg:#f7f5fb; --card:#fff;
+    --shadow:0 18px 50px rgba(76,29,149,.16); --shadow-sm:0 4px 16px rgba(15,23,42,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--card);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:17px}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:#f1e9ff;color:var(--brand-d);font-size:15px;font-weight:700;padding:8px 16px;border-radius:30px}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--brand);color:#fff;font-weight:700;font-size:16px;border:none;border-radius:13px;padding:13px 22px;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 22px rgba(124,58,237,.35)}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.ghost{background:#fff;color:var(--brand-dd);border:2px solid #e3d9f7;box-shadow:none}
+
+  .ribbon{background:var(--brand-ddd);color:#fff;text-align:center;font-size:14px;padding:9px;font-weight:600}
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px}
+  .brand .logo{width:38px;height:38px;border-radius:11px;overflow:hidden;display:grid;place-items:center;background:#fff}
+  .brand .logo img{width:100%;height:100%;object-fit:contain}
+  .nav-links{display:flex;gap:18px;align-items:center;font-size:15px;font-weight:600;color:var(--muted)}
+  .nav-links a:hover{color:var(--brand-d)}
+  @media(max-width:640px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{background:linear-gradient(180deg,#fff,#f3edfd);padding:48px 0 36px}
+  .hero h1{font-size:44px;line-height:1.08;letter-spacing:-1px;margin:14px 0 14px;font-weight:800}
+  .hero h1 span{color:var(--brand-d)}
+  .hero p.lead{font-size:20px;color:var(--muted);max-width:640px}
+
+  /* ROLE TABS */
+  .roletabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .rt{display:flex;flex-direction:column;gap:2px;background:#fff;border:2px solid var(--line);border-radius:15px;padding:13px 20px;cursor:pointer;transition:all .15s;min-width:190px}
+  .rt .e{font-size:22px}
+  .rt b{font-size:16px}
+  .rt small{font-size:12.5px;color:var(--muted);font-weight:500}
+  .rt.on{border-color:var(--brand);box-shadow:0 8px 22px rgba(124,58,237,.16);transform:translateY(-2px)}
+  .rt.on b{color:var(--brand-d)}
+
+  /* SECTION */
+  .role{display:none;padding:20px 0 60px}
+  .role.on{display:block}
+  .role-head{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:24px 26px;margin:26px 0 30px;display:flex;gap:16px;align-items:flex-start}
+  .role-head .ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:26px;color:#fff;flex:none}
+  .role-head h2{font-size:26px;letter-spacing:-.4px}
+  .role-head p{color:var(--muted);font-size:16px;margin-top:4px}
+  .ic-cli{background:linear-gradient(135deg,var(--brand),var(--brand-ddd))}
+  .ic-emp{background:linear-gradient(135deg,var(--blue),var(--blue-d))}
+  .ic-com{background:linear-gradient(135deg,var(--sky-d),var(--sky-dd))}
+
+  .step{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;padding:26px 0;border-top:1px solid var(--line)}
+  .step:first-of-type{border-top:none}
+  .step.rev .txt{order:2}
+  @media(max-width:820px){.step{grid-template-columns:1fr;gap:18px}.step.rev .txt{order:0}}
+  .step .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;font-size:15px;margin-bottom:10px}
+  .step h3{font-size:21px;letter-spacing:-.3px;margin-bottom:8px}
+  .step p{color:var(--muted);font-size:16px;margin-bottom:8px}
+  .step ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px}
+  .step li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--muted)}
+  .step li b{color:var(--ink)}
+  .step .ck{flex:none;width:22px;height:22px;border-radius:50%;background:#f1e9ff;color:var(--brand-d);display:grid;place-items:center;font-weight:700;font-size:12px;margin-top:2px}
+  .tip{margin-top:12px;background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:10px 13px;font-size:14.5px;color:#92400e}
+  .tip b{color:#78350f}
+
+  /* SHOT / recreations */
+  .shot{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-sm);overflow:hidden}
+  .shot img.real{display:block;width:100%;height:auto}
+  .appbar{display:flex;align-items:center;gap:7px;padding:9px 12px;background:#f1f5f9;border-bottom:1px solid var(--line)}
+  .appbar .dot{width:10px;height:10px;border-radius:50%}
+  .appbar .r{background:#fb7185}.appbar .y{background:#fbbf24}.appbar .g{background:#34d399}
+  .appbar .url{flex:1;margin-left:8px;background:#fff;border:1px solid var(--line);border-radius:6px;font-size:11px;color:var(--muted);padding:4px 9px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .app{display:flex;min-height:270px}
+  .side{width:132px;flex:none;background:#fff;border-right:1px solid var(--line);padding:12px 10px;font-size:11.5px}
+  .side .u{display:flex;gap:7px;align-items:center;margin-bottom:12px}
+  .side .u .av{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-ddd));color:#fff;display:grid;place-items:center;font-size:9px;font-weight:700}
+  .side .u b{font-size:11px;line-height:1.1}
+  .side .mi{display:flex;gap:7px;align-items:center;padding:6px 7px;border-radius:7px;color:var(--muted);margin-bottom:2px}
+  .side .mi.on{background:#f1e9ff;color:var(--brand-d);font-weight:700}
+  .side .mi .d{width:13px;height:13px;border-radius:3px;background:#cbd5e1;flex:none}
+  .side .mi.on .d{background:var(--brand)}
+  .main{flex:1;padding:14px 15px;background:var(--bg);overflow:hidden}
+  .mtop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+  .mtop h4{font-size:16px}
+  .mtop .sub{font-size:11px;color:var(--muted)}
+  .chipf{font-size:10px;background:#ede9fe;color:var(--brand-d);padding:3px 8px;border-radius:20px;font-weight:700}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:8px 0}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px}
+  .kpi .l{font-size:9px;color:var(--muted)}
+  .kpi .v{font-size:16px;font-weight:800;margin-top:1px}
+  .kpi .v.g{color:var(--green-d)}.kpi .v.s{color:var(--sky-d)}.kpi .v.a{color:var(--gold-d)}.kpi .v.b{color:var(--brand-d)}
+  .bigbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:9px}
+  .bb{border-radius:9px;padding:11px;text-align:center;color:#fff;font-weight:700;font-size:12px}
+  .bb.blue{background:linear-gradient(135deg,var(--blue),var(--blue-d))}
+  .bb.purp{background:linear-gradient(135deg,#a21caf,#7c3aed)}
+  .ccard{border-radius:11px;padding:12px 13px;color:#fff;background:linear-gradient(120deg,#1e3a8a,#3b82f6);margin-bottom:8px;position:relative}
+  .ccard .lbl{font-size:9px;letter-spacing:.5px;opacity:.85;font-weight:700}
+  .ccard .nm{font-size:15px;font-weight:800}
+  .ccard .seg{display:inline-block;background:rgba(255,255,255,.2);border-radius:20px;padding:2px 9px;font-size:10px;font-weight:600;margin-top:5px}
+  .ccard .act{position:absolute;top:11px;right:12px;font-size:9px;background:rgba(255,255,255,.22);padding:2px 8px;border-radius:20px}
+  .qbtn{background:linear-gradient(120deg,#2563eb,#38bdf8);color:#fff;text-align:center;border-radius:9px;padding:10px;font-weight:700;font-size:12px;margin-bottom:8px}
+  .promo{display:flex;gap:9px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px}
+  .promo .im{width:34px;height:34px;border-radius:7px;background:linear-gradient(135deg,#a7f3d0,#6ee7b7);flex:none}
+  .promo .t{font-weight:700;font-size:12px}
+  .promo .s{font-size:10px;color:var(--muted)}
+  .segrow{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .segc{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px}
+  .segc .h{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:11.5px}
+  .segc .on{font-size:8.5px;color:var(--green-d);background:#dcfce7;padding:2px 6px;border-radius:20px}
+  .segc .tk{font-size:9px;color:var(--muted);margin-top:4px}
+  .segc .gp{margin-top:7px;background:var(--blue);color:#fff;text-align:center;border-radius:6px;padding:5px;font-size:10px;font-weight:700}
+  .qr{width:120px;height:120px;margin:6px auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}
+  .qr svg{width:100%;height:100%}
+  .field{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--muted);margin-top:5px}
+  .logobox{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px}
+  .logobox .lg{width:46px;height:46px;border-radius:8px;background:#e0edff;display:grid;place-items:center;font-size:20px}
+  .shotcap{font-size:12.5px;color:var(--muted);text-align:center;padding:9px 12px;border-top:1px solid var(--line);background:#fff}
+
+  .note{background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;padding:16px 18px;margin:28px 0;font-size:15.5px;color:#1e40af}
+  .note b{color:#1e3a8a}
+
+  footer{background:var(--brand-ddd);color:#dcd3f4;padding:36px 0 60px;text-align:center;font-size:15px}
+  footer .brand{justify-content:center;color:#fff;margin-bottom:10px}
+  footer a{color:#fff;font-weight:600}
+  .ver{position:fixed;bottom:8px;right:12px;font-size:11px;color:#999;font-family:monospace;opacity:.7;z-index:99}
+</style>
+</head>
+<body>
+
+<div class="ribbon">📖 Manual de uso — Tarjeta de Fidelización · 360 Los Ríos</div>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand"><div class="logo"><img src="/tarjetas/logo-icon-192.png" alt="Tarjeta 360 Los Ríos"></div> Tarjeta de Fidelización</div>
+    <div class="nav-links">
+      <a href="#cliente">Cliente / Socio</a>
+      <a href="#empresa">Empresa</a>
+      <a href="#comunidad">Admin comunidad</a>
+      <a href="/tarjetas">← Volver a la demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="pill">📖 Guía paso a paso</span>
+    <h1>Manual de uso de la <span>Tarjeta de Fidelización</span></h1>
+    <p class="lead">Cómo usar la plataforma según tu rol: si eres <b>cliente/socio</b> de una comunidad, si tienes una <b>empresa</b>, o si <b>administras una comunidad</b> de comercios. Elige tu rol para empezar.</p>
+    <div class="roletabs">
+      <div class="rt on" data-role="cliente"><span class="e">👤</span><b>Cliente / Socio</b><small>Uso tu tarjeta y mis beneficios</small></div>
+      <div class="rt" data-role="empresa"><span class="e">🏢</span><b>Empresa</b><small>Valido tarjetas y publico ofertas</small></div>
+      <div class="rt" data-role="comunidad"><span class="e">🤝</span><b>Admin de comunidad</b><small>Gestiono la comunidad</small></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+<!-- ===================== CLIENTE ===================== -->
+<section class="role on" id="cliente">
+  <div class="role-head">
+    <div class="ico ic-cli">👤</div>
+    <div>
+      <h2>Cliente / Socio de comunidad</h2>
+      <p>Eres una persona que tiene una o varias tarjetas digitales. Con ellas accedes a los descuentos y beneficios de tu comunidad, mostrando tu código QR en los comercios.</p>
+    </div>
+  </div>
+
+  <!-- step 1 -->
+  <div class="step">
+    <div class="txt">
+      <span class="num">1</span>
+      <h3>Ingresa a tu cuenta</h3>
+      <p>Entra a <b>tarjeta.360losrios.cl</b> y presiona <b>Iniciar Sesión</b>. Escribe tu correo y contraseña.</p>
+      <ul>
+        <li><span class="ck">✓</span><div>Usa el mismo correo con el que te registraron en la comunidad.</div></li>
+        <li><span class="ck">✓</span><div>¿Olvidaste la clave? Usa <b>"¿Olvidaste tu contraseña?"</b>.</div></li>
+      </ul>
+    </div>
+    <figure class="shot" data-real="img/cliente-login.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/auth/login</span></div>
+      <div class="main" style="padding:22px 16px;text-align:center">
+        <div style="font-size:26px">🎫</div>
+        <div style="font-weight:800;font-size:16px;margin:6px 0 2px">Iniciar Sesión</div>
+        <div class="field" style="text-align:left">tu@email.com</div>
+        <div class="field" style="text-align:left">••••••••</div>
+        <div class="qbtn" style="margin-top:8px">Iniciar Sesión</div>
+      </div>
+      <div class="shotcap">Pantalla de acceso</div>
+    </figure>
+  </div>
+
+  <!-- step 2 -->
+  <div class="step rev">
+    <div class="txt">
+      <span class="num">2</span>
+      <h3>Revisa "Mis Tarjetas"</h3>
+      <p>Al entrar verás tu resumen: cuántas tarjetas tienes, cuáles están <b>activas</b>, vencidas o usadas.</p>
+      <ul>
+        <li><span class="ck">✓</span><div>Cada <b>comunidad</b> a la que perteneces aparece como una tarjeta de color (ej. <b>Windsor School Valdivia</b>, <b>Barrio Comercial Llifén</b>).</div></li>
+        <li><span class="ck">✓</span><div>Cada tarjeta muestra sus <b>beneficios disponibles</b> y hasta cuándo está <b>vigente</b>.</div></li>
+      </ul>
+    </div>
+    <figure class="shot" data-real="img/cliente-mis-tarjetas.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/mis-tarjetas</span></div>
+      <div class="main">
+        <div class="mtop"><div><h4>Mis Tarjetas</h4><div class="sub">Hola, Eduardo · Tus tarjetas de descuento</div></div></div>
+        <div class="kpis">
+          <div class="kpi"><div class="l">Total</div><div class="v b">2</div></div>
+          <div class="kpi"><div class="l">Activas</div><div class="v g">2</div></div>
+          <div class="kpi"><div class="l">Vencidas</div><div class="v a">0</div></div>
+          <div class="kpi"><div class="l">Usadas</div><div class="v">0</div></div>
+        </div>
+        <div class="ccard"><span class="act">● Activa</span><div class="lbl">TARJETA DE COMUNIDAD</div><div class="nm">Comunidad Windsor School Valdivia</div><span class="seg">Emprendedores Windsor</span></div>
+        <div class="ccard" style="background:linear-gradient(120deg,#1d4ed8,#60a5fa)"><span class="act">● Activa</span><div class="lbl">TARJETA DE COMUNIDAD</div><div class="nm">Barrio Comercial Llifén</div></div>
+      </div>
+      <div class="shotcap">Resumen del socio con sus tarjetas de comunidad</div>
+    </figure>
+  </div>
+
+  <!-- step 3 -->
+  <div class="step">
+    <div class="txt">
+      <span class="num">3</span>
+      <h3>Muestra tu QR para usar un beneficio</h3>
+      <p>En la tarjeta de la comunidad presiona <b>"Mostrar mi QR"</b>. El comercio escanea ese código para validar tu tarjeta y aplicarte el descuento.</p>
+      <ul>
+        <li><span class="ck">✓</span><div>El QR es <b>único y personal</b>: identifica tu membresía.</div></li>
+        <li><span class="ck">✓</span><div>También puedes <b>Descargar</b> la tarjeta para tenerla a mano.</div></li>
+      </ul>
+      <div class="tip">💡 <b>Tip:</b> no necesitas instalar ninguna app. La tarjeta vive en el navegador de tu teléfono.</div>
+    </div>
+    <figure class="shot" data-real="img/cliente-qr.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/mis-tarjetas</span></div>
+      <div class="main" style="text-align:center">
+        <div class="mtop" style="justify-content:center"><h4>Mi código QR</h4></div>
+        <div class="qr" id="qrHolder"></div>
+        <div style="font-size:11px;color:var(--muted)">Muéstralo en el comercio para validar tu beneficio</div>
+      </div>
+      <div class="shotcap">"Mostrar mi QR" · validación en el local</div>
+    </figure>
+  </div>
+
+  <!-- step 4 -->
+  <div class="step rev">
+    <div class="txt">
+      <span class="num">4</span>
+      <h3>Explora tus promociones y ofertas</h3>
+      <p>En <b>"Promociones disponibles"</b> ves cada oferta con su descuento, la fecha de <b>vencimiento</b> y cuántas veces la has <b>usado</b>.</p>
+      <ul>
+        <li><span class="ck">✓</span><div>Usa <b>"Más info"</b> para ir al sitio del comercio y ver el detalle.</div></li>
+        <li><span class="ck">✓</span><div>En <b>"Estadísticas"</b> revisas tu historial de descuentos usados.</div></li>
+      </ul>
+    </div>
+    <figure class="shot" data-real="img/cliente-promos.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/mis-tarjetas</span></div>
+      <div class="main">
+        <div class="mtop"><h4>Promociones disponibles (1)</h4></div>
+        <div class="promo"><div class="im"></div><div><div class="t">15% OFF</div><div class="s">15% descuento en arriendo cabaña</div><div class="s">Vence 11-07-2026 · Usada 1 vez</div></div></div>
+        <div class="field" style="margin-top:9px">🔗 Más info</div>
+      </div>
+      <div class="shotcap">Ofertas de tu comunidad</div>
+    </figure>
+  </div>
+
+  <!-- step 5 -->
+  <div class="step">
+    <div class="txt">
+      <span class="num">5</span>
+      <h3>¿Tu cuenta también es empresa?</h3>
+      <p>Si además administras un comercio, verás el botón <b>"Ver como admin"</b>. Al tocarlo eliges cómo entrar:</p>
+      <ul>
+        <li><span class="ck">✓</span><div><b>Administrador de empresa</b> — gestionar tu empresa, tarjetas y promociones.</div></li>
+        <li><span class="ck">✓</span><div><b>Socio de comunidad</b> — ver y usar tus tarjetas y beneficios.</div></li>
+      </ul>
+      <div class="tip">💡 Puedes cambiar entre un modo y otro cuando quieras, sin cerrar sesión.</div>
+    </div>
+    <figure class="shot" data-real="img/cliente-cambio-rol.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl</span></div>
+      <div class="main" style="text-align:center">
+        <div class="mtop" style="justify-content:center"><div><h4>¿Cómo quieres entrar?</h4><div class="sub">Tu cuenta es administrador y también socio</div></div></div>
+        <div class="promo" style="text-align:left"><div class="im" style="background:#dbeafe;display:grid;place-items:center">🏢</div><div><div class="t">Administrador de empresa</div><div class="s">Gestiona tu empresa, tarjetas y promociones</div></div></div>
+        <div class="promo" style="margin-top:7px"><div class="im" style="background:#dcfce7;display:grid;place-items:center">🎫</div><div><div class="t">Socio de comunidad</div><div class="s">Ver y usar tus tarjetas y beneficios</div></div></div>
+      </div>
+      <div class="shotcap">Selector de rol (cuentas mixtas)</div>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== EMPRESA ===================== -->
+<section class="role" id="empresa">
+  <div class="role-head">
+    <div class="ico ic-emp">🏢</div>
+    <div>
+      <h2>Empresa (socia de una comunidad)</h2>
+      <p>Eres un comercio que participa en una o más comunidades. Desde tu panel validas tarjetas de clientes, publicas tus ofertas en las tarjetas de la comunidad y revisas tus números.</p>
+    </div>
+  </div>
+
+  <!-- step 1 -->
+  <div class="step">
+    <div class="txt">
+      <span class="num">1</span>
+      <h3>Entra como "Administrador de empresa"</h3>
+      <p>Inicia sesión y, si te pregunta, elige <b>Administrador de empresa</b>. Arriba verás tu empresa activa (ej. <b>Cabañas Llifén</b>).</p>
+      <ul>
+        <li><span class="ck">✓</span><div>El menú de una empresa básica es simple: <b>Mis Ofertas</b> y <b>Mi Empresa</b>.</div></li>
+        <li><span class="ck">✓</span><div>El botón <b>"Ver como socio"</b> te devuelve a tus tarjetas personales.</div></li>
+      </ul>
+    </div>
+    <figure class="shot" data-real="img/empresa-dashboard.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/dashboard</span></div>
+      <div class="app">
+        <div class="side">
+          <div class="u"><div class="av">AV</div><b>Angela V.<br><span style="font-weight:400;color:var(--muted)">Cabañas Llifén</span></b></div>
+          <div class="mi on"><span class="d"></span>Dashboard</div>
+          <div class="mi"><span class="d"></span>Mis Ofertas</div>
+          <div class="mi"><span class="d"></span>Mi Empresa</div>
+        </div>
+        <div class="main">
+          <div class="mtop"><div><h4>Dashboard</h4><div class="sub">Bienvenido, Angela</div></div><span class="chipf">Datos: Cabañas Llifén</span></div>
+          <div class="bigbtns"><div class="bb blue">⟟ Validar Tarjeta</div><div class="bb purp">▦ QR Solicitud</div></div>
+          <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+            <div class="kpi"><div class="l">Tarjetas</div><div class="v b">0</div></div>
+            <div class="kpi"><div class="l">Clientes</div><div class="v s">0</div></div>
+            <div class="kpi"><div class="l">Descuentos</div><div class="v a">$0</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="shotcap">Panel de la empresa con datos filtrados</div>
+    </figure>
+  </div>
+
+  <!-- step 2 -->
+  <div class="step rev">
+    <div class="txt">
+      <span class="num">2</span>
+      <h3>Valida la tarjeta de un cliente</h3>
+      <p>Cuando un cliente llega, presiona <b>"Validar Tarjeta"</b> y escanea su QR. El sistema confirma que la tarjeta es válida y registra el uso del beneficio.</p>
+      <ul>
+        <li><span class="ck">✓</span><div>Con <b>"QR Solicitud"</b> generas un código para que nuevos clientes se sumen a tu tarjeta.</div></li>
+        <li><span class="ck">✓</span><div>Cada validación queda registrada en tus estadísticas (usos, valor de descuentos).</div></li>
+      </ul>
+      <div class="tip">💡 <b>Validar</b> = el cliente muestra su QR y tú lo escaneas. <b>QR Solicitud</b> = tú muestras un QR para que el cliente se registre.</div>
+    </div>
+    <figure class="shot" data-real="img/empresa-validar.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/validar-tarjeta</span></div>
+      <div class="main" style="text-align:center">
+        <div class="mtop" style="justify-content:center"><h4>Validar Tarjeta</h4></div>
+        <div class="qr" id="qrHolder2"></div>
+        <div class="qbtn" style="max-width:180px;margin:6px auto 0">Escanear QR del cliente</div>
+      </div>
+      <div class="shotcap">Escaneo y validación en el local</div>
+    </figure>
+  </div>
+
+  <!-- step 3 -->
+  <div class="step">
+    <div class="txt">
+      <span class="num">3</span>
+      <h3>Publica tus ofertas en la comunidad ("Mis Ofertas")</h3>
+      <p>En <b>Mis Ofertas</b> ves las comunidades en las que participas y las <b>tarjetas / segmentos</b> donde puedes publicar (ej. <b>Socios Windsor</b>, <b>Emprendedores</b>, <b>Administrativo</b>, <b>Tarjeta general</b>).</p>
+      <ul>
+        <li><span class="ck">✓</span><div>Presiona <b>"Gestionar Promociones"</b> en la tarjeta donde quieres que aparezca tu oferta.</div></li>
+        <li><span class="ck">✓</span><div>Así tus descuentos llegan a los <b>socios de esa comunidad</b> — son los "avisos" que ve el cliente.</div></li>
+      </ul>
+    </div>
+    <figure class="shot" data-real="img/empresa-mis-ofertas.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/promociones-comunidad</span></div>
+      <div class="main">
+        <div class="mtop"><div><h4>Mis Ofertas</h4><div class="sub">Tu empresa participa en 2 comunidades</div></div></div>
+        <div style="font-weight:700;font-size:12px;margin:2px 0 7px">Comunidad Windsor School Valdivia · 4 tarjetas</div>
+        <div class="segrow">
+          <div class="segc"><div class="h">Socios Windsor <span class="on">Activa</span></div><div class="tk">Segmento · Token 4e4cfb…</div><div class="gp">Gestionar Promociones</div></div>
+          <div class="segc"><div class="h">Emprendedores <span class="on">Activa</span></div><div class="tk">Segmento · Token 056103…</div><div class="gp">Gestionar Promociones</div></div>
+        </div>
+      </div>
+      <div class="shotcap">Publicación de ofertas por comunidad y segmento</div>
+    </figure>
+  </div>
+
+  <!-- step 4 -->
+  <div class="step rev">
+    <div class="txt">
+      <span class="num">4</span>
+      <h3>Configura tu empresa</h3>
+      <p>En <b>Mi Empresa</b> mantienes actualizados los datos de tu comercio: nombre, logo y datos de contacto que ven tus clientes.</p>
+      <ul>
+        <li><span class="ck">✓</span><div>Un buen <b>logo</b> y nombre ayudan a que tus clientes te reconozcan en la comunidad.</div></li>
+      </ul>
+    </div>
+    <figure class="shot" data-real="img/empresa-mi-empresa.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/mi-empresa</span></div>
+      <div class="main">
+        <div class="mtop"><h4>Mi Empresa</h4></div>
+        <div class="logobox"><div class="lg">🏨</div><div><div class="t" style="font-weight:700;font-size:13px">Cabañas Llifén</div><div class="s" style="font-size:11px;color:var(--muted)">Cambiar logo · datos de contacto</div></div></div>
+        <div class="field">Nombre del comercio</div>
+        <div class="field">Descripción / rubro</div>
+      </div>
+      <div class="shotcap">Perfil del comercio</div>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== COMUNIDAD ===================== -->
+<section class="role" id="comunidad">
+  <div class="role-head">
+    <div class="ico ic-com">🤝</div>
+    <div>
+      <h2>Administrador de comunidad</h2>
+      <p>Gestionas una comunidad de comercios (ej. <b>Comunidad Windsor School Valdivia</b>). Defines la identidad de la comunidad, sus tarjetas por segmento y las empresas que participan.</p>
+    </div>
+  </div>
+
+  <!-- step 1 -->
+  <div class="step">
+    <div class="txt">
+      <span class="num">1</span>
+      <h3>Configura tu comunidad ("Mi Comunidad")</h3>
+      <p>En <b>Mi Comunidad</b> defines el <b>nombre</b>, la <b>descripción</b> y el <b>logo</b> de la comunidad — los datos principales que ven las empresas y los clientes.</p>
+      <ul>
+        <li><span class="ck">✓</span><div>El logo se muestra en la tarjeta de comunidad de cada socio.</div></li>
+        <li><span class="ck">✓</span><div>Formatos: PNG, JPG o WEBP (máx. 2 MB).</div></li>
+      </ul>
+    </div>
+    <figure class="shot" data-real="img/comunidad-mi-comunidad.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/mi-comunidad</span></div>
+      <div class="main">
+        <div class="mtop"><div><h4>Mi Comunidad</h4><div class="sub">Nombre, descripción y logo</div></div></div>
+        <div class="logobox"><div class="lg">🦁</div><div><div class="t" style="font-weight:700;font-size:13px">Comunidad Windsor School Valdivia</div><div class="s" style="font-size:11px;color:var(--muted)">Cambiar logo</div></div></div>
+        <div class="field">Nombre de la comunidad</div>
+        <div class="field">Descripción</div>
+      </div>
+      <div class="shotcap">Identidad de la comunidad</div>
+    </figure>
+  </div>
+
+  <!-- step 2 -->
+  <div class="step rev">
+    <div class="txt">
+      <span class="num">2</span>
+      <h3>Tarjetas por segmento</h3>
+      <p>Una comunidad puede tener varias <b>tarjetas de segmento</b> (ej. <b>Socios Windsor</b>, <b>Emprendedores</b>, <b>Administrativo</b>) más una <b>Tarjeta general</b> para todos.</p>
+      <ul>
+        <li><span class="ck">✓</span><div>Cada segmento agrupa a un tipo de socio y tiene su propia vigencia y token.</div></li>
+        <li><span class="ck">✓</span><div>Las empresas eligen en qué segmento publican sus ofertas.</div></li>
+      </ul>
+      <div class="tip">💡 La <b>Tarjeta general</b> (grupal) llega a todos los socios; los segmentos permiten ofertas más dirigidas.</div>
+    </div>
+    <figure class="shot" data-real="img/comunidad-segmentos.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/promociones-comunidad</span></div>
+      <div class="main">
+        <div class="mtop"><div><h4>Tarjetas de comunidad</h4><div class="sub">4 tarjetas · Windsor School Valdivia</div></div></div>
+        <div class="segrow">
+          <div class="segc"><div class="h">Socios Windsor <span class="on">Activa</span></div><div class="tk">Vence 28-06-2027 · Usos 0</div></div>
+          <div class="segc"><div class="h">Emprendedores <span class="on">Activa</span></div><div class="tk">Vence 28-06-2027 · Usos 0</div></div>
+          <div class="segc"><div class="h">Administrativo <span class="on">Activa</span></div><div class="tk">Vence 28-06-2027 · Usos 0</div></div>
+          <div class="segc"><div class="h">Tarjeta general <span class="on">Activa</span></div><div class="tk">Grupal · todos los socios</div></div>
+        </div>
+      </div>
+      <div class="shotcap">Segmentos de la comunidad</div>
+    </figure>
+  </div>
+
+  <!-- step 3 -->
+  <div class="step">
+    <div class="txt">
+      <span class="num">3</span>
+      <h3>Empresas y clientes de la comunidad</h3>
+      <p>Como admin ves las <b>empresas participantes</b> y las <b>estadísticas de clientes</b> de toda la red: cuántos socios, cuántos usos de beneficios, qué empresas aportan más.</p>
+      <ul>
+        <li><span class="ck">✓</span><div>Cada empresa mantiene su propio panel; la comunidad ve el <b>consolidado</b>.</div></li>
+        <li><span class="ck">✓</span><div>El admin de comunidad <b>no gestiona los usuarios internos</b> de cada empresa, solo la membresía compartida.</div></li>
+      </ul>
+    </div>
+    <figure class="shot" data-real="img/comunidad-empresas.png">
+      <div class="appbar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">tarjeta.360losrios.cl/estadisticas-comunidad</span></div>
+      <div class="main">
+        <div class="mtop"><div><h4>Clientes de comunidad</h4><div class="sub">Consolidado de la red</div></div></div>
+        <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+          <div class="kpi"><div class="l">Empresas</div><div class="v b">6</div></div>
+          <div class="kpi"><div class="l">Socios</div><div class="v s">105</div></div>
+          <div class="kpi"><div class="l">Usos</div><div class="v a">5</div></div>
+        </div>
+        <div class="promo" style="margin-top:8px"><div class="im" style="background:#e0edff;display:grid;place-items:center">🏨</div><div><div class="t">Hotel Spa Termas Llifén</div><div class="s">Empresa activa</div></div></div>
+        <div class="promo" style="margin-top:7px"><div class="im" style="background:#e0edff;display:grid;place-items:center">🏕️</div><div><div class="t">Cabañas Llifén</div><div class="s">Empresa activa</div></div></div>
+      </div>
+      <div class="shotcap">Empresas y clientes de la comunidad</div>
+    </figure>
+  </div>
+
+  <div class="note">
+    ℹ️ <b>¿Cómo se conecta todo?</b> Una <b>empresa</b> puede operar sola o unirse a una o varias <b>comunidades</b>. El <b>cliente</b> tiene una tarjeta por comunidad y, en "Mis Tarjetas", ve juntas las ofertas de cada comunidad. La <b>comunidad</b> define los segmentos; las <b>empresas</b> publican ofertas en ellos; los <b>socios</b> las usan mostrando su QR.
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><div class="logo"><img src="/tarjetas/logo-icon-192.png" alt=""></div> Tarjeta de Fidelización</div>
+    <p>Manual de uso · <a href="/tarjetas">Ver la demo interactiva</a></p>
+    <p style="margin-top:8px">Soporte: <a href="mailto:eduardo@termasllifen.cl">eduardo@termasllifen.cl</a> · Publicado en <a href="https://www.360losrios.cl" target="_blank" rel="noopener">360 Los Ríos</a></p>
+  </div>
+</footer>
+
+<div class="ver">manual v1.00</div>
+
+<script>
+(function(){
+  // Role tabs
+  var tabs=document.querySelectorAll('.rt'), roles=document.querySelectorAll('.role');
+  function show(r){
+    tabs.forEach(function(t){t.classList.toggle('on',t.dataset.role===r);});
+    roles.forEach(function(s){s.classList.toggle('on',s.id===r);});
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){ show(t.dataset.role); history.replaceState(null,'','#'+t.dataset.role); window.scrollTo({top:document.querySelector('.roletabs').offsetTop-20,behavior:'smooth'}); });});
+  // Deep-link
+  var h=(location.hash||'').replace('#',''); if(h && document.getElementById(h) && document.getElementById(h).classList.contains('role')) show(h);
+  // nav links switch role
+  document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(a){a.addEventListener('click',function(){var r=a.getAttribute('href').slice(1); if(document.getElementById(r)) show(r);});});
+
+  // QR decorativo
+  var QR='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#fff"/><g fill="#0f172a"><rect x="6" y="6" width="26" height="26"/><rect x="12" y="12" width="14" height="14" fill="#fff"/><rect x="16" y="16" width="6" height="6"/><rect x="68" y="6" width="26" height="26"/><rect x="74" y="12" width="14" height="14" fill="#fff"/><rect x="78" y="16" width="6" height="6"/><rect x="6" y="68" width="26" height="26"/><rect x="12" y="74" width="14" height="14" fill="#fff"/><rect x="16" y="78" width="6" height="6"/><rect x="40" y="8" width="6" height="6"/><rect x="52" y="8" width="6" height="6"/><rect x="44" y="20" width="6" height="6"/><rect x="8" y="40" width="6" height="6"/><rect x="20" y="44" width="6" height="6"/><rect x="40" y="40" width="6" height="6"/><rect x="52" y="44" width="6" height="6"/><rect x="64" y="40" width="6" height="6"/><rect x="76" y="44" width="6" height="6"/><rect x="88" y="40" width="6" height="6"/><rect x="44" y="56" width="6" height="6"/><rect x="56" y="56" width="6" height="6"/><rect x="68" y="60" width="6" height="6"/><rect x="80" y="56" width="6" height="6"/><rect x="40" y="70" width="6" height="6"/><rect x="52" y="74" width="6" height="6"/><rect x="64" y="78" width="6" height="6"/><rect x="76" y="72" width="6" height="6"/><rect x="88" y="78" width="6" height="6"/><rect x="44" y="86" width="6" height="6"/><rect x="60" y="88" width="6" height="6"/><rect x="76" y="88" width="6" height="6"/></g></svg>';
+  ['qrHolder','qrHolder2'].forEach(function(id){var e=document.getElementById(id); if(e) e.innerHTML=QR;});
+
+  // Reemplazo automático por screenshots reales si existen en /img
+  document.querySelectorAll('.shot[data-real]').forEach(function(fig){
+    var src=fig.getAttribute('data-real'); if(!src) return;
+    var img=new Image();
+    img.onload=function(){
+      if(img.naturalWidth<40) return;
+      fig.innerHTML='<img class="real" src="'+src+'" alt="">';
+    };
+    img.src=src;
+  });
+})();
+</script>
+</body>
+</html>
