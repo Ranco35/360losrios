@@ -6,6 +6,7 @@ interface Project {
   description: string;
   status: "producción" | "desarrollo";
   href?: string;
+  manual?: string;
 }
 
 const projects: Project[] = [
@@ -26,6 +27,7 @@ const projects: Project[] = [
       "Maneja las reservas de tu negocio por WhatsApp. Anota reservas y pide tus reportes de llegadas y ocupación escribiendo un mensaje.",
     status: "desarrollo",
     href: "/reservas",
+    manual: "/reservas/manual",
   },
   {
     title: "Tarjeta de Fidelización 💳",
@@ -33,6 +35,7 @@ const projects: Project[] = [
       "Tarjeta digital con QR para tu empresa o tu comunidad de comercios, sin papel ni plástico. Mira la demo interactiva.",
     status: "desarrollo",
     href: "/tarjetas",
+    manual: "/tarjetas/manual",
   },
   {
     title: "Sistema Gym 🏋️",
@@ -230,16 +233,31 @@ export default function Home() {
               const cardContent = (
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="font-medium group-hover:text-white">
+                    <h3 className="font-medium text-neutral-100">
                       {project.title}
                     </h3>
                     <p className="mt-1 text-sm text-neutral-400">
                       {project.description}
                     </p>
-                    {project.href && (
-                      <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-green-400 group-hover:text-green-300">
-                        Ver demo →
-                      </span>
+                    {(project.href || project.manual) && (
+                      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+                        {project.href && (
+                          <a
+                            href={project.href}
+                            className="inline-flex items-center gap-1 text-xs font-medium text-green-400 hover:text-green-300"
+                          >
+                            ▶ Ver demo
+                          </a>
+                        )}
+                        {project.manual && (
+                          <a
+                            href={project.manual}
+                            className="inline-flex items-center gap-1 text-xs font-medium text-violet-400 hover:text-violet-300"
+                          >
+                            📖 Manual de uso
+                          </a>
+                        )}
+                      </div>
                     )}
                   </div>
                   <StatusBadge status={project.status} />
@@ -247,18 +265,9 @@ export default function Home() {
               );
               return (
                 <li key={project.title}>
-                  {project.href ? (
-                    <a
-                      href={project.href}
-                      className="block rounded-lg border border-neutral-800 p-5 transition-colors hover:border-neutral-600 hover:bg-neutral-900/50 group"
-                    >
-                      {cardContent}
-                    </a>
-                  ) : (
-                    <div className="rounded-lg border border-neutral-800 p-5 transition-colors hover:border-neutral-700 hover:bg-neutral-900/50 group">
-                      {cardContent}
-                    </div>
-                  )}
+                  <div className="rounded-lg border border-neutral-800 p-5 transition-colors hover:border-neutral-700 hover:bg-neutral-900/50">
+                    {cardContent}
+                  </div>
                 </li>
               );
             })}
