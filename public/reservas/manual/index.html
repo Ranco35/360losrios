@@ -133,6 +133,17 @@
   .m3 .v{font-size:15px;font-weight:800;margin-top:2px}
   .m3.tot .v{color:var(--ink)}.m3.rec .v{color:var(--wa-d)}.m3.fal .v{color:var(--amber-d)}
 
+  /* Mobile gallery */
+  .appbox{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:22px;margin:6px 0 24px}
+  .appbox h3{font-size:20px;letter-spacing:-.3px;margin-bottom:4px}
+  .appbox p.s{color:var(--muted);font-size:15px;margin-bottom:16px}
+  .mgal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:760px){.mgal{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:460px){.mgal{grid-template-columns:1fr}}
+  .mphone{background:#0f172a;border-radius:24px;padding:6px;box-shadow:var(--shadow-sm)}
+  .mphone img{display:block;width:100%;border-radius:19px}
+  .mcap{text-align:center;font-size:13px;color:var(--muted);margin-top:8px;font-weight:600}
+
   .note{background:#ecfdf5;border:1px solid #a7f3d0;border-radius:14px;padding:16px 18px;margin:28px 0;font-size:15.5px;color:#065f46}
   .note b{color:#064e3b}
 
@@ -321,6 +332,19 @@
     <div>
       <h2>El panel (web y app)</h2>
       <p>Si prefieres ver todo en pantalla, entra a <b>reservas.360losrios.cl</b> (o la app Android). Lo mismo que hace el Bot, aquí lo ves y lo editas con el dedo.</p>
+    </div>
+  </div>
+
+  <div class="appbox">
+    <h3>📱 La app en tu teléfono</h3>
+    <p class="s">Capturas reales de la app Android de Reservas Llifén (Google Play).</p>
+    <div class="mgal">
+      <div><div class="mphone"><img src="img/mobile/mobile-login.png" alt="Ingreso" loading="lazy"></div><div class="mcap">Ingreso</div></div>
+      <div><div class="mphone"><img src="img/mobile/mobile-home.png" alt="Inicio" loading="lazy"></div><div class="mcap">Inicio · hoy</div></div>
+      <div><div class="mphone"><img src="img/mobile/mobile-reservas.png" alt="Reservas" loading="lazy"></div><div class="mcap">Reservas</div></div>
+      <div><div class="mphone"><img src="img/mobile/mobile-calendario.png" alt="Calendario" loading="lazy"></div><div class="mcap">Calendario</div></div>
+      <div><div class="mphone"><img src="img/mobile/mobile-huespedes.png" alt="Huéspedes" loading="lazy"></div><div class="mcap">Huéspedes</div></div>
+      <div><div class="mphone"><img src="img/mobile/mobile-ajustes.png" alt="Ajustes" loading="lazy"></div><div class="mcap">Ajustes</div></div>
     </div>
   </div>
 
@@ -557,7 +581,7 @@
   </div>
 </footer>
 
-<div class="ver">manual v1.01</div>
+<div class="ver">manual v1.02</div>
 
 <script>
 (function(){
