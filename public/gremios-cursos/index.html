@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Gremio · Mi Curso — La tesorería de tu organización, ordenada y a la vista de todos</title>
+<meta name="description" content="Cobra las cuotas de tu gremio o del curso de tu hijo mes a mes, registra los pagos y muestra un balance claro. Reporte de deudores con recordatorio por WhatsApp, importación de socios desde Excel, directorio con actas y acuerdos, y todo a la vista de la directiva. Producto en testeo, publicado en 360 Los Ríos.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%F0%9F%92%B0%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --gremio:#7c3aed;   --gremio-d:#6d28d9;  --gremio-dd:#5b21b6;
+    --curso:#2563eb;    --curso-d:#1d4ed8;   --curso-dd:#1e40af;
+    --brand:#4f46e5;    --brand-d:#4338ca;   --brand-dd:#3730a3;  --brand-ddd:#312e81;
+    --gold:#f59e0b;     --gold-d:#d97706;
+    --wa:#25d366;       --wa-d:#128c7e;
+    --green:#16a34a;    --green-d:#15803d;
+    --amber:#d97706;    --red:#dc2626;
+    --ink:#0f172a;      --muted:#475569;     --line:#e2e8f0;
+    --bg:#f5f6fb;       --card:#ffffff;
+    --shadow:0 18px 50px rgba(49,46,129,.16);
+    --shadow-sm:0 4px 16px rgba(15,23,42,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--card);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:17px}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--brand);color:#fff;font-weight:700;font-size:18px;border:none;border-radius:14px;padding:16px 28px;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 22px rgba(79,70,229,.38)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(79,70,229,.5)}
+  .btn:disabled{opacity:.7;cursor:default;transform:none}
+  .btn.ghost{background:#fff;color:var(--brand-dd);border:2px solid #dcd9f7;box-shadow:none;font-size:17px}
+  .btn.ghost:hover{box-shadow:var(--shadow-sm)}
+  .btn.wa{background:var(--wa);box-shadow:0 8px 22px rgba(37,211,102,.38)}
+  .pill{display:inline-flex;align-items:center;gap:8px;background:#eceafe;color:var(--brand-d);font-size:15px;font-weight:700;padding:8px 16px;border-radius:30px}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:19px}
+  .brand .logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,var(--gremio),var(--curso));color:#fff}
+  .nav-links{display:flex;gap:14px;align-items:center}
+  .nav-links a.txt{font-weight:700;font-size:15px}
+  .nav-links a.g{color:var(--gremio-d)}
+  .nav-links a.c{color:var(--curso-d)}
+  .nav-cta{background:var(--brand);color:#fff;font-weight:700;padding:10px 20px;border-radius:12px;font-size:15px}
+  @media(max-width:680px){.nav-links a.txt{display:none}}
+
+  .ribbon{background:var(--brand-ddd);color:#fff;text-align:center;font-size:14px;padding:9px;font-weight:600}
+
+  /* HERO */
+  .hero{background:linear-gradient(180deg,#fff,#eef0fb);padding:56px 0 44px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
+  .hero h1{font-size:49px;line-height:1.07;letter-spacing:-1.2px;margin:18px 0 18px;font-weight:800}
+  .hero h1 .g{color:var(--gremio-d)}
+  .hero h1 .c{color:var(--curso-d)}
+  .hero p.lead{font-size:22px;color:var(--muted);margin-bottom:28px;max-width:520px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{margin-top:22px;font-size:16px;color:var(--muted);font-weight:600}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:34px}.hero h1{font-size:35px}.hero p.lead{font-size:19px}}
+
+  /* PHONE */
+  .phone{width:308px;max-width:100%;margin:0 auto;background:#0f172a;border-radius:40px;padding:11px;box-shadow:var(--shadow)}
+  .phone .notch{height:22px;display:flex;justify-content:center}
+  .phone .notch::after{content:"";width:120px;height:20px;background:#0f172a;border-radius:0 0 14px 14px}
+  .phone-screen{background:var(--bg);border-radius:30px;overflow:hidden;height:566px;display:flex;flex-direction:column}
+  .ph-top{background:#fff;border-bottom:1px solid var(--line);padding:13px 16px;display:flex;align-items:center;justify-content:space-between}
+  .ph-top .t-title{font-weight:700;font-size:15px}.ph-top .t-sub{font-size:11.5px;color:var(--muted)}
+  .ph-av{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--gremio),var(--gremio-dd));color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+  .ph-av.c{background:linear-gradient(135deg,var(--curso),var(--curso-dd))}
+  .ph-body{padding:15px;overflow-y:auto;flex:1}
+  .ph-body::-webkit-scrollbar{width:6px}.ph-body::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
+
+  /* BALANCE CARD */
+  .bcard{border-radius:20px;padding:18px;color:#fff;position:relative;overflow:hidden;box-shadow:0 14px 34px rgba(49,46,129,.28);animation:pop .35s ease}
+  .bcard.g{background:linear-gradient(135deg,var(--gremio),var(--gremio-dd))}
+  .bcard.c{background:linear-gradient(135deg,var(--curso),var(--curso-dd))}
+  .bcard::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;background:rgba(255,255,255,.12);border-radius:50%}
+  .bc-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;position:relative;z-index:1}
+  .bc-logo{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:20px}
+  .bc-name{font-weight:800;font-size:15.5px;line-height:1.15}
+  .bc-name small{display:block;font-weight:500;font-size:11px;opacity:.85}
+  .bc-lab{font-size:12px;opacity:.85;position:relative;z-index:1}
+  .bc-big{font-size:30px;font-weight:800;letter-spacing:-.5px;position:relative;z-index:1}
+  .bc-break{margin-top:12px;display:flex;flex-direction:column;gap:6px;position:relative;z-index:1}
+  .bc-row{background:rgba(255,255,255,.15);border-radius:10px;padding:8px 11px;font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .bc-row .l{display:flex;align-items:center;gap:8px;opacity:.95}
+  .bc-row .v{font-weight:800}
+  .bc-foot{margin-top:12px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:10px 12px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+
+  .ph-note{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px 13px;font-size:13px;color:var(--muted)}
+  .ph-note b{color:var(--ink)}
+
+  /* dots strip (cuota mes a mes) */
+  .strip{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+  .dot{width:19px;height:19px;border-radius:6px;display:grid;place-items:center;font-size:10px;font-weight:800;background:#fff;color:#94a3b8;border:1px solid #e2e8f0}
+  .dot.p{background:#dcfce7;color:var(--green-d);border-color:#bbf7d0}
+  .dot.x{background:#fef3c7;color:#b45309;border-color:#fde68a}
+  .dot.e{background:#e0e7ff;color:var(--brand-d);border-color:#c7d2fe}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .lg{width:13px;height:13px;border-radius:4px;display:inline-block}
+
+  /* SECTIONS */
+  section{padding:64px 0}
+  .sec-head{text-align:center;max-width:760px;margin:0 auto 40px}
+  .sec-head h2{font-size:36px;letter-spacing:-.6px;margin:10px 0 12px;font-weight:800}
+  .sec-head p{color:var(--muted);font-size:20px}
+
+  /* MODE SELECTOR */
+  .modes{background:var(--bg)}
+  .mode-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:34px}
+  .mode-tab{display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:700;padding:14px 24px;border-radius:16px;background:#fff;border:2px solid var(--line);color:var(--muted);cursor:pointer;transition:all .15s;min-width:158px}
+  .mode-tab .mt-emo{font-size:24px}
+  .mode-tab small{font-weight:500;font-size:12.5px;color:var(--muted)}
+  .mode-tab.on[data-mode="gremio"]{border-color:var(--gremio);color:var(--gremio-d);box-shadow:0 8px 22px rgba(124,58,237,.18);transform:translateY(-2px)}
+  .mode-tab.on[data-mode="curso"]{border-color:var(--curso);color:var(--curso-d);box-shadow:0 8px 22px rgba(37,99,235,.18);transform:translateY(-2px)}
+  .mode-tab.on[data-mode="comun"]{border-color:var(--brand);color:var(--brand-d);box-shadow:0 8px 22px rgba(79,70,229,.18);transform:translateY(-2px)}
+  .mode-tab.on small{color:inherit}
+  .mode-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:44px;align-items:center}
+  @media(max-width:900px){.mode-grid{grid-template-columns:1fr;gap:32px}}
+  .mode-info h3{font-size:30px;letter-spacing:-.5px;margin-bottom:6px}
+  .mode-info .sub{color:var(--muted);font-size:18px;margin-bottom:20px}
+  .blist{list-style:none;display:flex;flex-direction:column;gap:15px}
+  .blist li{display:flex;gap:13px;align-items:flex-start}
+  .blist .ck{flex:none;width:28px;height:28px;border-radius:50%;background:#eceafe;color:var(--brand-d);display:grid;place-items:center;font-weight:700;font-size:15px;margin-top:2px}
+  .blist p{color:var(--muted);font-size:16px}.blist p b{color:var(--ink)}
+  .diagram{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;min-height:96px}
+  .dnode{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--muted);text-align:center}
+  .dnode .db{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:22px;color:#fff}
+  .db.g{background:linear-gradient(135deg,var(--gremio),var(--gremio-dd))}
+  .db.c{background:linear-gradient(135deg,var(--curso),var(--curso-dd))}
+  .db.k{background:linear-gradient(135deg,var(--gold),var(--gold-d))}
+  .db.n{background:#475569}
+  .db.b{background:linear-gradient(135deg,var(--brand),var(--brand-dd))}
+  .darrow{font-size:22px;color:#cbd5e1}
+  .dstack{display:flex;flex-direction:column;gap:6px}
+
+  /* ASK CARDS */
+  .ask{background:#fff}
+  .ask-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:820px){.ask-grid{grid-template-columns:1fr}}
+  .ask-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 26px;text-align:center;box-shadow:var(--shadow-sm)}
+  .ask-card .ico{width:64px;height:64px;border-radius:50%;background:#eceafe;display:grid;place-items:center;font-size:30px;margin:0 auto 16px}
+  .ask-card h3{font-size:21px;margin-bottom:8px}
+  .ask-card .say{display:inline-block;background:#e0e7ff;color:var(--brand-dd);border-radius:12px;padding:8px 14px;font-size:14.5px;font-weight:600;margin-bottom:10px}
+  .ask-card p{color:var(--muted);font-size:16px}
+
+  /* BALANCE BAND */
+  .balband{background:linear-gradient(135deg,var(--brand-dd),var(--brand-ddd));color:#fff}
+  .bb-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  @media(max-width:820px){.bb-grid{grid-template-columns:1fr;gap:26px;text-align:center}}
+  .bb-grid h2{font-size:34px;font-weight:800;letter-spacing:-.6px;margin-bottom:14px}
+  .bb-grid p{font-size:19px;color:#d8d6f4;margin-bottom:10px}
+  .bb-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);color:#fff;font-weight:700;font-size:15px;padding:8px 16px;border-radius:30px;margin-bottom:8px}
+  .bb-demo{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:22px;padding:22px}
+  .bb-demo .lblrow{display:flex;align-items:center;gap:8px;font-size:13px;color:#d8d6f4;margin-bottom:12px;font-weight:600}
+  .bb-tile{background:rgba(255,255,255,.95);color:var(--ink);border-radius:13px;padding:11px 13px;margin-bottom:9px;display:flex;align-items:center;gap:11px}
+  .bb-tile .e{font-size:22px}.bb-tile b{font-size:14.5px}.bb-tile small{display:block;color:var(--muted);font-size:12px}
+  .bb-tile .amt{margin-left:auto;font-size:14.5px;font-weight:800;white-space:nowrap}
+  .bb-tile .amt.pos{color:var(--green-d)}.bb-tile .amt.neg{color:var(--red)}
+  .bb-total{background:#fff;color:var(--ink);border-radius:13px;padding:13px 15px;margin-top:4px;display:flex;align-items:center;justify-content:space-between;font-weight:800}
+  .bb-total .big{font-size:22px;color:var(--brand-d)}
+
+  /* STEPS */
+  .steps{background:var(--bg)}
+  .step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:960px;margin:0 auto}
+  @media(max-width:820px){.step-grid{grid-template-columns:1fr}}
+  .step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 22px;position:relative}
+  .step .num{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-dd));color:#fff;display:grid;place-items:center;font-weight:800;font-size:17px;margin-bottom:12px}
+  .step h4{font-size:18px;margin-bottom:5px}
+  .step p{color:var(--muted);font-size:15px}
+
+  /* DEMO */
+  .demo-controls{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+  .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  @media(max-width:900px){.demo-grid{grid-template-columns:1fr;gap:28px}}
+  .demo-hint{text-align:center;font-size:14px;color:var(--muted);margin-top:12px}
+  .paycard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow-sm)}
+  .paycard .pc-name{font-weight:700;font-size:16px}
+  .paycard .pc-sub{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+  .paycard .pc-status{margin-top:12px;font-size:13.5px;font-weight:700}
+  .paycard .pc-status .deuda{color:var(--red)}
+  .paycard .pc-status .aldia{color:var(--green-d)}
+  .reward{margin-top:12px;background:#dcfce7;border:1px solid #bbf7d0;border-radius:12px;padding:11px 13px;font-size:13.5px;font-weight:700;color:var(--green-d);display:flex;align-items:center;gap:8px}
+
+  /* SCREENS */
+  .scr{background:var(--bg)}
+  .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+  .tab{font-size:15px;font-weight:700;padding:10px 18px;border-radius:30px;background:#fff;border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:all .15s}
+  .tab.on{background:var(--brand);color:#fff;border-color:var(--brand);box-shadow:0 6px 16px rgba(79,70,229,.3)}
+  .showcase{display:grid;grid-template-columns:1.6fr 1fr;gap:34px;align-items:center}
+  @media(max-width:900px){.showcase{grid-template-columns:1fr;gap:30px}.phone{margin:0 auto}}
+  .browser{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+  .browser-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#f1f5f9;border-bottom:1px solid var(--line)}
+  .browser-bar .bdot{width:11px;height:11px;border-radius:50%}
+  .browser-bar .r{background:#fb7185}.browser-bar .y{background:#fbbf24}.browser-bar .gr{background:#34d399}
+  .browser-bar .url{flex:1;margin-left:10px;background:#fff;border:1px solid var(--line);border-radius:7px;font-size:12px;color:var(--muted);padding:5px 11px}
+  .device-browser .screen{height:452px;overflow:hidden;background:var(--bg)}
+  .phone-sm{width:270px}
+  .phone-sm .phone-screen{height:520px}
+  .web-caption{text-align:center;font-size:15px;color:var(--muted);margin-top:12px;font-weight:600}
+
+  .app-top{background:#fff;border-bottom:1px solid var(--line);padding:13px 16px;display:flex;align-items:center;justify-content:space-between}
+  .app-top .t-title{font-weight:700;font-size:15px}.app-top .t-sub{font-size:11.5px;color:var(--muted)}
+  .app-av{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--gremio),var(--gremio-dd));color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+  .app-body{padding:14px;overflow-y:auto;flex:1;height:100%}
+  .app-body::-webkit-scrollbar{width:6px}.app-body::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+  .kpi .lab{font-size:11px;color:var(--muted)}.kpi .val{font-size:19px;font-weight:700;margin-top:3px}
+  .kpi .val.g{color:var(--gremio-d)}.kpi .val.c{color:var(--curso-d)}.kpi .val.green{color:var(--green-d)}.kpi .val.amber{color:#d97706}.kpi .val.red{color:var(--red)}
+  .sec-lbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin:6px 0 9px}
+  .res-row{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .res-row .nm{font-weight:600;font-size:14px}.res-row .meta{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .badge{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .b-ok{background:#dcfce7;color:var(--green-d)}.b-deb{background:#fee2e2;color:var(--red)}.b-in{background:#fef3c7;color:#b45309}.b-eg{background:#e0e7ff;color:var(--brand-d)}
+  .amt2{font-size:13px;font-weight:700;text-align:right}.amt2 small{display:block;font-weight:500;color:var(--muted);font-size:10.5px}
+  .amt2.pos{color:var(--green-d)}.amt2.neg{color:var(--red)}
+  .wabtn{display:inline-flex;align-items:center;gap:5px;background:var(--wa);color:#fff;font-size:11px;font-weight:700;padding:6px 11px;border-radius:20px;white-space:nowrap}
+  .bars{display:flex;align-items:flex-end;gap:9px;height:120px;margin:6px 0 4px;padding:0 2px}
+  .bars .bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end}
+  .bars .bk{width:100%;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--brand),var(--brand-dd))}
+  .bars .bl{font-size:10px;color:var(--muted)}
+  /* matriz cuotas (admin) */
+  .mtx{display:flex;flex-direction:column;gap:7px}
+  .mtx-row{display:flex;align-items:center;gap:8px}
+  .mtx-row .mn{width:80px;flex:none;font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mtx-row .mstrip{display:flex;gap:3px}
+  .mcell{width:15px;height:15px;border-radius:4px;background:#eef2f7;border:1px solid #e2e8f0}
+  .mcell.p{background:#22c55e;border-color:#16a34a}
+  .mcell.x{background:#f59e0b;border-color:#d97706}
+  .mcell.e{background:#818cf8;border-color:#6366f1}
+  .aichip{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--brand),var(--gremio));color:#fff;font-size:12.5px;font-weight:700;padding:9px 14px;border-radius:12px;margin-top:6px}
+
+  /* FUNCIONES */
+  .funcs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:900px;margin:0 auto}
+  @media(max-width:700px){.funcs{grid-template-columns:1fr}}
+  .func{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .func .e{font-size:26px;flex:none}
+  .func h4{font-size:17px;margin-bottom:2px}
+  .func p{color:var(--muted);font-size:15px}
+  .func .soon{font-size:10.5px;font-weight:700;background:#fef3c7;color:#b45309;padding:3px 9px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  .func .tag-g{font-size:10.5px;font-weight:700;background:#ede9fe;color:var(--gremio-d);padding:3px 9px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  .func .tag-c{font-size:10.5px;font-weight:700;background:#dbeafe;color:var(--curso-d);padding:3px 9px;border-radius:20px;margin-left:6px;vertical-align:middle}
+
+  /* CTA */
+  .cta{background:linear-gradient(180deg,#eef0fb,#fff)}
+  .price-box{max-width:640px;margin:0 auto;background:#fff;border:2px solid var(--brand);border-radius:24px;padding:42px;text-align:center;box-shadow:var(--shadow)}
+  .price-box h3{font-size:28px;margin:6px 0 8px}.price-box .p{font-size:18px;color:var(--muted);margin-bottom:24px}
+  .price-box .big-btn{font-size:20px;padding:18px 34px}
+  .prod-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+  .prod-links a{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:12px 20px;border-radius:12px;border:2px solid}
+  .prod-links a.g{color:var(--gremio-d);border-color:#ddd6fe}
+  .prod-links a.c{color:var(--curso-d);border-color:#bfdbfe}
+
+  footer{background:var(--brand-ddd);color:#cfcdf0;padding:40px 0 64px;text-align:center;font-size:15px}
+  footer .brand{justify-content:center;color:#fff;margin-bottom:12px}
+  footer a{color:#fff;font-weight:600}
+
+  .ver{position:fixed;bottom:8px;right:12px;font-size:11px;color:#999;font-family:monospace;opacity:.7;user-select:none;z-index:99}
+</style>
+</head>
+<body>
+
+<div class="ribbon">🧪 Producto en prueba — versión de muestra publicada en 360 Los Ríos</div>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand"><div class="logo">💰</div> Mi Gremio · Mi Curso</div>
+    <div class="nav-links">
+      <a class="txt g" href="https://gremios.360losrios.cl" target="_blank" rel="noopener">🏛️ Mi Gremio</a>
+      <a class="txt c" href="https://curso.360losrios.cl" target="_blank" rel="noopener">🎓 Mi Curso</a>
+      <a href="#probar" class="nav-cta">Quiero probarlo</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill">💰 Tesorería digital para tu organización</span>
+      <h1>La tesorería de tu <span class="g">gremio</span> o del <span class="c">curso</span>, ordenada y a la vista de todos</h1>
+      <p class="lead">Cobra las cuotas <b>mes a mes</b>, registra los pagos con su comprobante y muestra un <b>balance claro</b>. Sin planillas sueltas ni cuadernos: todo en un solo lugar, en el celular o el computador.</p>
+      <div class="hero-cta">
+        <a href="#modos" class="btn">🔎 ¿Gremio o curso?</a>
+        <a href="#demo" class="btn ghost">Probar registrar un pago</a>
+      </div>
+      <p class="hero-note">Cuotas, balance, deudores por WhatsApp y directorio con actas. Todo rinde cuentas solo. ✨</p>
+    </div>
+    <div>
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="phone-screen">
+          <div class="ph-top"><div><div class="t-title">Tesorería</div><div class="t-sub">A.G. Comerciantes de Futrono</div></div><div class="ph-av">AF</div></div>
+          <div class="ph-body">
+            <div class="bcard g">
+              <div class="bc-head">
+                <div class="bc-logo">🏛️</div>
+                <div class="bc-name">A.G. Comerciantes<small>Futrono · Julio 2026</small></div>
+              </div>
+              <div class="bc-lab">Saldo en caja</div>
+              <div class="bc-big">$1.690.000</div>
+              <div class="bc-break">
+                <div class="bc-row"><span class="l">💳 Fondo de cuotas</span><span class="v">$2.140.000</span></div>
+                <div class="bc-row"><span class="l">🎉 Actividades</span><span class="v">$430.000</span></div>
+                <div class="bc-row"><span class="l">💸 Egresos y sueldos</span><span class="v">−$1.180.000</span></div>
+              </div>
+              <div class="bc-foot">✅ Socios al día <b>&nbsp;38 de 52</b> · cuota $5.000/mes</div>
+            </div>
+            <div class="ph-note">📲 El balance se arma solo: cada pago que registras <b>suma</b> y cada sueldo o gasto <b>resta</b>. La directiva lo ve al instante.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODE SELECTOR -->
+<section id="modos" class="modes">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill">🧭 Dos versiones, un mismo motor</span>
+      <h2>¿Es para un gremio o para un curso?</h2>
+      <p>El mismo programa se adapta a los dos. Toca cada modo y mira cómo cambia.</p>
+    </div>
+
+    <div class="mode-tabs">
+      <div class="mode-tab on" data-mode="gremio"><span class="mt-emo">🏛️</span>Mi Gremio<small>Socios y sindicatos</small></div>
+      <div class="mode-tab" data-mode="curso"><span class="mt-emo">🎓</span>Mi Curso<small>Apoderados y colegios</small></div>
+      <div class="mode-tab" data-mode="comun"><span class="mt-emo">⚙️</span>Lo que comparten<small>El motor común</small></div>
+    </div>
+
+    <div class="mode-grid">
+      <div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="phone-screen">
+            <div class="ph-top"><div><div class="t-title" id="mPhTitle">Mi Gremio</div><div class="t-sub" id="mPhSub">A.G. Comerciantes</div></div><div class="ph-av" id="mPhAv">AF</div></div>
+            <div class="ph-body" id="mMount"></div>
+          </div>
+        </div>
+      </div>
+      <div class="mode-info">
+        <h3 id="mTitle">Para tu gremio o sindicato</h3>
+        <div class="sub" id="mSub">Socios al día, sueldos de empleados y un balance que rinde cuentas.</div>
+        <ul class="blist" id="mBullets"></ul>
+        <div class="diagram" id="mDiagram"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUE PUEDES HACER -->
+<section class="ask">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Lo que más vas a usar</h2>
+      <p>Tres acciones simples, desde el celular o el computador:</p>
+    </div>
+    <div class="ask-grid">
+      <div class="ask-card">
+        <div class="ico">📅</div>
+        <h3>Cobrar las cuotas</h3>
+        <div class="say">Mes a mes, socio por socio</div>
+        <p>Defines la cuota del año y quién la debe. Cada persona tiene su fila con los 12 meses, con pagos parciales y exenciones.</p>
+      </div>
+      <div class="ask-card">
+        <div class="ico">🧾</div>
+        <h3>Registrar los pagos</h3>
+        <div class="say">Efectivo o transferencia + comprobante</div>
+        <p>El tesorero anota el pago y adjunta la foto del comprobante. El saldo y el balance se actualizan solos.</p>
+      </div>
+      <div class="ask-card">
+        <div class="ico">💬</div>
+        <h3>Recordar por WhatsApp</h3>
+        <div class="say">"Te faltan 2 meses de cuota 🙂"</div>
+        <p>El reporte de deudores arma el mensaje y abre tu WhatsApp con el socio o apoderado listo para enviar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BALANCE BAND -->
+<section class="balband">
+  <div class="wrap bb-grid">
+    <div>
+      <span class="bb-tag">⚖️ El corazón del programa</span>
+      <h2>Un balance que cuadra solo</h2>
+      <p>Se acabaron las dudas sobre la plata. Todo lo que entra y sale queda registrado, y el saldo se calcula en tiempo real.</p>
+      <p>El <b>fondo de cuotas</b> junta lo que pagan los socios. El <b>fondo colectivo</b> suma eventos, rifas y otros ingresos, y le resta los egresos. Más el <b>saldo inicial</b> que traías. Nada se pierde.</p>
+    </div>
+    <div class="bb-demo">
+      <div class="lblrow">📊 Balance del curso 4°B · 2026</div>
+      <div class="bb-tile"><span class="e">💳</span><div><b>Fondo de cuotas</b><small>28 apoderados · $8.000/mes</small></div><span class="amt pos">+$1.344.000</span></div>
+      <div class="bb-tile"><span class="e">🎟️</span><div><b>Rifa aniversario</b><small>Fondo colectivo</small></div><span class="amt pos">+$260.000</span></div>
+      <div class="bb-tile"><span class="e">🛍️</span><div><b>Stand de la kermés</b><small>Fondo colectivo</small></div><span class="amt pos">+$185.000</span></div>
+      <div class="bb-tile"><span class="e">🚌</span><div><b>Gira de estudio (anticipo)</b><small>Egreso</small></div><span class="amt neg">−$540.000</span></div>
+      <div class="bb-total"><span>Saldo del curso</span><span class="big">$1.249.000</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill">🧭 De cero a ordenado</span>
+      <h2>Cómo se pone en marcha</h2>
+      <p>Seis pasos y tu tesorería queda al día.</p>
+    </div>
+    <div class="step-grid">
+      <div class="step"><div class="num">1</div><h4>Crea tu organización</h4><p>Un gremio o un curso. El tesorero recibe una invitación por link o WhatsApp y entra sin instalar nada.</p></div>
+      <div class="step"><div class="num">2</div><h4>Suma a la gente</h4><p>Socios o apoderados, uno a uno o subiendo un Excel con la lista completa (hay plantilla lista para descargar).</p></div>
+      <div class="step"><div class="num">3</div><h4>Define las cuotas del año</h4><p>El monto y los meses. Cada persona queda con su matriz de 12 meses; puedes eximir a quien corresponda.</p></div>
+      <div class="step"><div class="num">4</div><h4>Registra los pagos</h4><p>Efectivo o transferencia, con su comprobante. Pagos parciales incluidos. El saldo baja solo.</p></div>
+      <div class="step"><div class="num">5</div><h4>Cobra a los que deben</h4><p>El reporte de deudores te muestra quién debe y cuánto, con un botón para recordarle por WhatsApp.</p></div>
+      <div class="step"><div class="num">6</div><h4>Rinde cuentas</h4><p>Balance a la vista de todos, directorio con actas y acuerdos, y una bitácora que registra quién hizo cada cosa.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill">🎬 Pruébalo tú mismo</span>
+      <h2>Registra un pago en segundos</h2>
+      <p>Aprieta "Registrar pago" y mira cómo el mes queda pagado y la deuda baja.</p>
+    </div>
+    <div class="demo-grid">
+      <div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="phone-screen">
+            <div class="ph-top"><div><div class="t-title">Curso 4°B</div><div class="t-sub" id="demoStatus">Registrar pago de cuota</div></div><div class="ph-av c">MG</div></div>
+            <div class="ph-body">
+              <div class="paycard">
+                <div class="pc-name">María González</div>
+                <div class="pc-sub">Apoderada de Benjamín · cuota $8.000/mes</div>
+                <div class="strip" id="demoStrip"></div>
+                <div class="legend">
+                  <span><i class="lg" style="background:#dcfce7;border:1px solid #bbf7d0"></i>Pagado</span>
+                  <span><i class="lg" style="background:#fef3c7;border:1px solid #fde68a"></i>Parcial</span>
+                  <span><i class="lg" style="background:#fff;border:1px solid #e2e8f0"></i>Pendiente</span>
+                </div>
+                <div class="pc-status" id="demoStatusLine"></div>
+                <div id="demoReward"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-controls">
+          <button class="btn" id="payBtn">🧾 Registrar pago</button>
+          <button class="btn ghost" id="resetBtn">↺ Reiniciar</button>
+        </div>
+        <div class="demo-hint" id="demoHint">Consejo: aprieta 🧾 para registrar el pago del próximo mes pendiente.</div>
+      </div>
+      <div>
+        <h3 style="font-size:28px;letter-spacing:-.5px;margin-bottom:10px">Simple para el tesorero, claro para todos</h3>
+        <ul class="blist">
+          <li><span class="ck">✓</span><div><p><b>Sin planillas ni cuadernos.</b> La cuota de cada persona vive en el sistema, mes a mes.</p></div></li>
+          <li><span class="ck">✓</span><div><p><b>Pagos parciales y exenciones.</b> Si alguien abona a medias o está exento, queda reflejado.</p></div></li>
+          <li><span class="ck">✓</span><div><p><b>Comprobante adjunto.</b> Cada pago guarda su respaldo (foto o PDF).</p></div></li>
+          <li><span class="ck">✓</span><div><p><b>El balance se actualiza solo.</b> Nadie tiene que "cuadrar" nada a mano.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PANEL -->
+<section id="pantallas" class="scr">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill" style="background:#ede9fe;color:var(--gremio-d)">🖥️ El panel de la tesorería</span>
+      <h2>Tú lo controlas todo desde un panel</h2>
+      <p>Lo mismo se ve en el computador y en el teléfono. Toca cada pestaña:</p>
+    </div>
+    <div class="tabs">
+      <div class="tab on" data-scr="dash">Resumen</div>
+      <div class="tab" data-scr="cuotas">Cuotas</div>
+      <div class="tab" data-scr="deud">Deudores</div>
+      <div class="tab" data-scr="dir">Directorio</div>
+    </div>
+    <div class="showcase">
+      <div>
+        <div class="browser device-browser">
+          <div class="browser-bar"><span class="bdot r"></span><span class="bdot y"></span><span class="bdot gr"></span><span class="url" id="urlBar">gremios.360losrios.cl</span></div>
+          <div class="screen" id="webScreen"></div>
+        </div>
+        <div class="web-caption">🌐 En el computador</div>
+      </div>
+      <div>
+        <div class="phone phone-sm"><div class="notch"></div><div class="phone-screen" id="phoneScreen"></div></div>
+        <div class="web-caption">📱 En tu teléfono</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCIONES -->
+<section class="ask">
+  <div class="wrap">
+    <div class="sec-head"><h2>Todo lo que incluye</h2></div>
+    <div class="funcs">
+      <div class="func"><div class="e">📅</div><div><h4>Cuotas mes a mes</h4><p>Matriz de cada persona por los 12 meses, con pagos parciales y exenciones.</p></div></div>
+      <div class="func"><div class="e">🧾</div><div><h4>Pagos con comprobante</h4><p>Efectivo o transferencia; adjuntas la foto o el PDF del respaldo.</p></div></div>
+      <div class="func"><div class="e">⚖️</div><div><h4>Balance en vivo</h4><p>Fondo de cuotas + fondo colectivo (eventos y otros) − egresos + saldo inicial.</p></div></div>
+      <div class="func"><div class="e">💬</div><div><h4>Deudores por WhatsApp</h4><p>Ves quién debe y le recuerdas con un mensaje ya escrito, en un toque.</p></div></div>
+      <div class="func"><div class="e">📥</div><div><h4>Importar desde Excel</h4><p>Sube toda la lista de socios o apoderados con una plantilla descargable.</p></div></div>
+      <div class="func"><div class="e">✉️</div><div><h4>Comunicados por correo</h4><p>Mensajes masivos por segmento: todos, la directiva o los que tienen deuda.</p></div></div>
+      <div class="func"><div class="e">🔗</div><div><h4>Invitaciones con cargo</h4><p>Invitas por link o WhatsApp "como Tesorero" y la persona entra con su rol.</p></div></div>
+      <div class="func"><div class="e">👥</div><div><h4>Cargos e historial de directiva</h4><p>Presidente, Tesorero, Secretario… y el registro de quién ocupó cada cargo.</p></div></div>
+      <div class="func"><div class="e">💼</div><div><h4>Sueldos de empleados <span class="tag-g">Gremio</span></h4><p>Registras remuneraciones y cada pago genera su egreso en el balance, solo.</p></div></div>
+      <div class="func"><div class="e">🎟️</div><div><h4>Rifas y stands <span class="tag-c">Curso</span></h4><p>Grilla de números de la rifa y ventas del stand; su plata va al fondo del curso.</p></div></div>
+      <div class="func"><div class="e">📋</div><div><h4>Directorio: actas y acuerdos</h4><p>Acuerdos con responsable, fecha límite y semáforo de cumplimiento.</p></div></div>
+      <div class="func"><div class="e">✨</div><div><h4>IA que lee el acta</h4><p>Subes el acta en PDF o foto y la IA propone los acuerdos con responsable y fecha.</p></div></div>
+      <div class="func"><div class="e">🛡️</div><div><h4>Bitácora de auditoría</h4><p>Cada cambio queda registrado: quién, qué y cuándo. Transparencia total.</p></div></div>
+      <div class="func"><div class="e">🎨</div><div><h4>Con tu marca</h4><p>El logo y el nombre de tu organización en todo el sistema.</p></div></div>
+      <div class="func"><div class="e">💳</div><div><h4>Pago online <span class="soon">PRONTO</span></h4><p>Que el socio o apoderado pague su cuota con Webpay, Flow o Khipu.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="probar" class="cta">
+  <div class="wrap">
+    <div class="price-box">
+      <span class="pill">🚀 Pruébalo gratis</span>
+      <h3>Ordena la tesorería de tu organización hoy</h3>
+      <p class="p">Te ayudamos a dejarla lista con tus socios o apoderados y las cuotas del año. Sea un gremio o el curso de tu hijo.</p>
+      <a class="btn wa big-btn" href="https://wa.me/56998871415?text=Hola,%20quiero%20probar%20Mi%20Gremio%20/%20Mi%20Curso%20para%20mi%20organizaci%C3%B3n" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
+      <p style="margin-top:18px;font-size:15px;color:var(--muted)">o al correo <a href="mailto:eduardo@termasllifen.cl" style="color:var(--brand-d);font-weight:600">eduardo@termasllifen.cl</a></p>
+      <div class="prod-links">
+        <a class="g" href="https://gremios.360losrios.cl" target="_blank" rel="noopener">🏛️ Ir a Mi Gremio →</a>
+        <a class="c" href="https://curso.360losrios.cl" target="_blank" rel="noopener">🎓 Ir a Mi Curso →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><div class="logo">💰</div> Mi Gremio · Mi Curso</div>
+    <p>La tesorería de tu gremio o curso, ordenada y a la vista de todos · Producto en prueba</p>
+    <p style="margin-top:8px">Contacto: <a href="mailto:eduardo@termasllifen.cl">eduardo@termasllifen.cl</a> · Publicado en <a href="https://www.360losrios.cl" target="_blank" rel="noopener">360 Los Ríos</a></p>
+    <p style="margin-top:14px;opacity:.7;font-size:13px">© 2026 Mi Gremio · Mi Curso. Muestra con datos de ejemplo. Las organizaciones y personas son ficticias.</p>
+  </div>
+</footer>
+
+<div class="ver">v1.0</div>
+
+<script>
+(function(){
+  /* ===== helper meses ===== */
+  var MESES=['E','F','M','A','M','J','J','A','S','O','N','D'];
+
+  /* ===== MODE SELECTOR ===== */
+  var modes={
+    gremio:{
+      title:'Para tu gremio o sindicato',
+      sub:'Socios al día, sueldos de empleados y un balance que rinde cuentas.',
+      phTitle:'Mi Gremio', phSub:'A.G. Comerciantes', phAv:'AF', phCls:'',
+      bullets:[
+        '<b>Cobra la cuota social</b> mes a mes a cada socio, con pagos parciales.',
+        '<b>Paga los sueldos</b> de tus empleados: cada pago descuenta del balance solo.',
+        '<b>Directorio con actas y acuerdos</b>, con semáforo de cumplimiento.',
+        '<b>Invita a la directiva</b> por WhatsApp con su cargo (Presidente, Tesorero…).'
+      ],
+      card:'<div class="bcard g">'+
+        '<div class="bc-head"><div class="bc-logo">🏛️</div><div class="bc-name">A.G. Comerciantes<small>Futrono · 52 socios</small></div></div>'+
+        '<div class="bc-lab">Saldo en caja</div><div class="bc-big">$1.690.000</div>'+
+        '<div class="bc-break">'+
+        '<div class="bc-row"><span class="l">💳 Cuotas del mes</span><span class="v">$190.000</span></div>'+
+        '<div class="bc-row"><span class="l">💼 Sueldo secretaria</span><span class="v">−$250.000</span></div>'+
+        '</div>'+
+        '<div class="bc-foot">✅ Al día <b>&nbsp;38 de 52</b> socios</div></div>'+
+        '<div class="ph-note">El gremio suma <b>cuotas de socios</b> y resta <b>sueldos y gastos</b>. Todo queda en la bitácora.</div>',
+      diagram:'<div class="dnode"><div class="db g">🏛️</div>Gremio</div>'+
+              '<div class="darrow">→</div>'+
+              '<div class="dstack"><div class="dnode"><div class="db n" style="width:40px;height:40px;font-size:18px">👥</div>Socios</div><div class="dnode"><div class="db k" style="width:40px;height:40px;font-size:18px">💼</div>Empleados</div></div>'+
+              '<div class="darrow">→</div>'+
+              '<div class="dnode"><div class="db b">⚖️</div>Balance</div>'
+    },
+    curso:{
+      title:'Para el curso de tu hijo',
+      sub:'Apoderados, cuotas del año y la plata de las actividades, clara para todos.',
+      phTitle:'Mi Curso', phSub:'Curso 4°B', phAv:'4B', phCls:'c',
+      bullets:[
+        '<b>Sube la lista de apoderados</b> desde un Excel en segundos.',
+        '<b>Cobra la cuota del curso</b> mes a mes; registra pagos parciales.',
+        '<b>Suma rifas y el stand</b> de la kermés al fondo del curso.',
+        '<b>Muestra el balance a todos</b> los apoderados: nadie duda de la plata.'
+      ],
+      card:'<div class="bcard c">'+
+        '<div class="bc-head"><div class="bc-logo">🎓</div><div class="bc-name">Curso 4°B<small>Colegio Los Ríos · 28 apoderados</small></div></div>'+
+        '<div class="bc-lab">Saldo del curso</div><div class="bc-big">$1.249.000</div>'+
+        '<div class="bc-break">'+
+        '<div class="bc-row"><span class="l">💳 Fondo de cuotas</span><span class="v">$1.344.000</span></div>'+
+        '<div class="bc-row"><span class="l">🎟️ Rifa + stand</span><span class="v">$445.000</span></div>'+
+        '</div>'+
+        '<div class="bc-foot">✅ Al día <b>&nbsp;22 de 28</b> apoderados</div></div>'+
+        '<div class="ph-note">El curso suma <b>cuotas</b>, <b>rifas</b> y el <b>stand</b>, y resta lo que se gasta (gira, materiales).</div>',
+      diagram:'<div class="dnode"><div class="db c">🎓</div>Curso</div>'+
+              '<div class="darrow">→</div>'+
+              '<div class="dstack"><div class="dnode"><div class="db n" style="width:40px;height:40px;font-size:18px">👪</div>Apoderados</div><div class="dnode"><div class="db k" style="width:40px;height:40px;font-size:18px">🎟️</div>Rifa/Stand</div></div>'+
+              '<div class="darrow">→</div>'+
+              '<div class="dnode"><div class="db b">⚖️</div>Fondo</div>'
+    },
+    comun:{
+      title:'El motor que comparten',
+      sub:'Cambian los nombres; el corazón es el mismo para los dos.',
+      phTitle:'Mismo motor', phSub:'Gremio y curso', phAv:'⚙️', phCls:'',
+      bullets:[
+        '<b>Cuotas mes a mes</b> con pagos parciales, exenciones y comprobante.',
+        '<b>Balance en vivo</b>: lo que entra suma, lo que sale resta, sin cuadrar a mano.',
+        '<b>Deudores y avisos por WhatsApp</b>, invitaciones y comunicados por correo.',
+        '<b>Bitácora de auditoría</b>: cada movimiento registra quién lo hizo.'
+      ],
+      card:'<div class="bcard" style="background:linear-gradient(135deg,var(--brand),var(--brand-ddd))">'+
+        '<div class="bc-head"><div class="bc-logo">⚙️</div><div class="bc-name">Motor común<small>Cuotas · Balance · Personas</small></div></div>'+
+        '<div class="bc-break" style="margin-top:2px">'+
+        '<div class="bc-row"><span class="l">📅 Cuotas mes a mes</span><span class="v">✓</span></div>'+
+        '<div class="bc-row"><span class="l">⚖️ Balance automático</span><span class="v">✓</span></div>'+
+        '<div class="bc-row"><span class="l">💬 Deudores por WhatsApp</span><span class="v">✓</span></div>'+
+        '<div class="bc-row"><span class="l">🛡️ Bitácora de auditoría</span><span class="v">✓</span></div>'+
+        '</div></div>'+
+        '<div class="ph-note">Un <b>gremio</b> ve "socios" y "sueldos"; un <b>curso</b> ve "apoderados" y "rifas". Debajo, es el mismo programa.</div>',
+      diagram:'<div class="dnode"><div class="db g">🏛️</div>Gremio</div>'+
+              '<div class="darrow">＋</div>'+
+              '<div class="dnode"><div class="db c">🎓</div>Curso</div>'+
+              '<div class="darrow">→</div>'+
+              '<div class="dnode"><div class="db b">⚙️</div>Un solo motor</div>'
+    }
+  };
+  var mTitle=document.getElementById('mTitle'),mSub=document.getElementById('mSub'),mBullets=document.getElementById('mBullets'),
+      mDiagram=document.getElementById('mDiagram'),mMount=document.getElementById('mMount'),
+      mPhTitle=document.getElementById('mPhTitle'),mPhSub=document.getElementById('mPhSub'),mPhAv=document.getElementById('mPhAv');
+  function renderMode(key){
+    var m=modes[key];
+    mTitle.textContent=m.title; mSub.textContent=m.sub;
+    mPhTitle.textContent=m.phTitle; mPhSub.textContent=m.phSub;
+    mPhAv.textContent=m.phAv; mPhAv.className='ph-av'+(m.phCls?' '+m.phCls:'');
+    mBullets.innerHTML=m.bullets.map(function(b){return '<li><span class="ck">✓</span><div><p>'+b+'</p></div></li>';}).join('');
+    mDiagram.innerHTML=m.diagram;
+    mMount.innerHTML=m.card;
+    document.querySelectorAll('.mode-tab').forEach(function(t){t.classList.toggle('on',t.dataset.mode===key);});
+  }
+  document.querySelectorAll('.mode-tab').forEach(function(t){t.addEventListener('click',function(){renderMode(t.dataset.mode);});});
+  renderMode('gremio');
+
+  /* ===== DEMO registrar pago ===== */
+  var demoStrip=document.getElementById('demoStrip'),demoStatus=document.getElementById('demoStatus'),
+      demoStatusLine=document.getElementById('demoStatusLine'),demoReward=document.getElementById('demoReward'),
+      demoHint=document.getElementById('demoHint'),payBtn=document.getElementById('payBtn'),resetBtn=document.getElementById('resetBtn');
+  var CUOTA=8000, START=6; // pagados hasta junio (índice 0..5)
+  var paid=START;
+  function renderDemo(){
+    demoStrip.innerHTML='';
+    for(var j=0;j<12;j++){
+      var d=document.createElement('div');
+      d.className='dot'+(j<paid?' p':'');
+      d.textContent=j<paid?'✓':MESES[j];
+      demoStrip.appendChild(d);
+    }
+    var debeMeses=12-paid;
+    var debe=debeMeses*CUOTA;
+    var mesAlDia=paid>0?['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'][paid-1]:'—';
+    if(debeMeses>0){
+      demoStatusLine.innerHTML='Al día hasta <b>'+mesAlDia+'</b> · <span class="deuda">debe '+debeMeses+' '+(debeMeses===1?'mes':'meses')+' ($'+debe.toLocaleString('es-CL')+')</span>';
+    }else{
+      demoStatusLine.innerHTML='<span class="aldia">✅ Cuota del año al día — ¡sin deuda!</span>';
+    }
+  }
+  function pagar(){
+    if(paid>=12){
+      demoReward.innerHTML='<div class="reward">🎉 Cuota anual completa · nada pendiente</div>';
+      demoHint.textContent='Este apoderado ya pagó los 12 meses. Aprieta ↺ para reiniciar.';
+      return;
+    }
+    var mes=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'][paid];
+    paid++;
+    renderDemo();
+    demoStatus.textContent='Pago registrado ✓';
+    demoReward.innerHTML='<div class="reward">✅ Pago de <b>'+mes+'</b> registrado · comprobante adjunto</div>';
+    demoHint.textContent='El mes quedó verde y la deuda bajó $'+CUOTA.toLocaleString('es-CL')+'. El balance se actualizó solo.';
+  }
+  function resetDemo(){
+    paid=START; renderDemo();
+    demoStatus.textContent='Registrar pago de cuota';
+    demoReward.innerHTML='';
+    demoHint.textContent='Consejo: aprieta 🧾 para registrar el pago del próximo mes pendiente.';
+  }
+  payBtn.addEventListener('click',pagar);
+  resetBtn.addEventListener('click',resetDemo);
+  renderDemo();
+
+  /* ===== PANEL ===== */
+  function bars(vals,labels){
+    var max=Math.max.apply(null,vals);
+    var s='<div class="bars">';
+    for(var i=0;i<vals.length;i++){ s+='<div class="bcol"><div class="bk" style="height:'+Math.round(vals[i]/max*100)+'%"></div><div class="bl">'+labels[i]+'</div></div>'; }
+    return s+'</div>';
+  }
+  function mtxRow(name,states){
+    var s='<div class="mtx-row"><div class="mn">'+name+'</div><div class="mstrip">';
+    for(var i=0;i<12;i++){ var st=states[i]; s+='<div class="mcell'+(st==='p'?' p':st==='x'?' x':st==='e'?' e':'')+'"></div>'; }
+    return s+'</div></div>';
+  }
+  var mtxData=[
+    ['Juan Soto',      'pppppppo oooo'.replace(/ /g,'').split('')],
+    ['Ana Vera',       'ppppppppppoo'.split('')],
+    ['Pedro Ramírez',  'ppppoooooooo'.split('')],
+    ['Luisa Díaz',     'ppppppxooooo'.split('')],
+    ['Marta Fuentes',  'pppppppppppp'.split('')],
+    ['Carlos Muñoz',   'eeeeeeeeeeee'.split('')],
+    ['Rosa Álvarez',   'pppppppppooo'.split('')]
+  ];
+  var mtxHTML='<div class="mtx">'+mtxData.map(function(r){return mtxRow(r[0],r[1]);}).join('')+'</div>'+
+    '<div class="legend" style="margin-top:12px">'+
+    '<span><i class="lg" style="background:#22c55e"></i>Pagado</span>'+
+    '<span><i class="lg" style="background:#f59e0b"></i>Parcial</span>'+
+    '<span><i class="lg" style="background:#eef2f7;border:1px solid #e2e8f0"></i>Pendiente</span>'+
+    '<span><i class="lg" style="background:#818cf8"></i>Exento</span></div>';
+
+  var screens={
+    dash:{ url:'gremios.360losrios.cl',
+      html:'<div class="app-top"><div><div class="t-title">A.G. Comerciantes</div><div class="t-sub">Resumen · Julio 2026</div></div><div class="app-av">AF</div></div>'+
+        '<div class="app-body">'+
+        '<div class="kpis">'+
+        '<div class="kpi"><div class="lab">💳 Recaudado del mes</div><div class="val g">$190.000</div></div>'+
+        '<div class="kpi"><div class="lab">✅ Socios al día</div><div class="val green">38 / 52</div></div>'+
+        '<div class="kpi"><div class="lab">⚠️ Deudores</div><div class="val red">14</div></div>'+
+        '<div class="kpi"><div class="lab">⚖️ Saldo en caja</div><div class="val g">$1.690.000</div></div>'+
+        '</div>'+
+        '<div class="sec-lbl">Recaudación por mes</div>'+
+        bars([150,175,160,190,205,190],['Feb','Mar','Abr','May','Jun','Jul'])+
+        '<div class="sec-lbl" style="margin-top:12px">Últimos movimientos</div>'+
+        '<div class="res-row"><div><div class="nm">Cuota · Juan Soto</div><div class="meta">Transferencia · hace 1 h</div></div><span class="amt2 pos">+$5.000</span></div>'+
+        '<div class="res-row"><div><div class="nm">Sueldo secretaria</div><div class="meta">Egreso automático · 05 Jul</div></div><span class="amt2 neg">−$250.000</span></div>'+
+        '<div class="res-row"><div><div class="nm">Rifa aniversario</div><div class="meta">Fondo colectivo · 28 Jun</div></div><span class="amt2 pos">+$180.000</span></div>'+
+        '</div>' },
+    cuotas:{ url:'gremios.360losrios.cl/cuotas',
+      html:'<div class="app-top"><div><div class="t-title">Cuotas 2026</div><div class="t-sub">Cada socio × 12 meses</div></div><div class="app-av">AF</div></div>'+
+        '<div class="app-body">'+
+        '<div class="searchbar" style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;color:var(--muted);font-size:13px;margin-bottom:12px">🔍 Buscar socio…</div>'+
+        mtxHTML+
+        '<div style="text-align:center;margin-top:14px"><span class="badge b-eg" style="font-size:12px;padding:7px 14px">📥 Importar socios desde Excel</span></div>'+
+        '</div>' },
+    deud:{ url:'gremios.360losrios.cl/deudores',
+      html:'<div class="app-top"><div><div class="t-title">Deudores</div><div class="t-sub">14 socios con deuda</div></div><div class="app-av">AF</div></div>'+
+        '<div class="app-body">'+
+        '<div class="res-row"><div><div class="nm">Luis Díaz</div><div class="meta">Debe 6 meses</div></div><div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px"><span class="amt2 neg">$30.000</span><span class="wabtn">💬 Recordar</span></div></div>'+
+        '<div class="res-row"><div><div class="nm">Pedro Ramírez</div><div class="meta">Debe 4 meses</div></div><div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px"><span class="amt2 neg">$20.000</span><span class="wabtn">💬 Recordar</span></div></div>'+
+        '<div class="res-row"><div><div class="nm">Ana Vera</div><div class="meta">Debe 2 meses</div></div><div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px"><span class="amt2 neg">$10.000</span><span class="wabtn">💬 Recordar</span></div></div>'+
+        '<div class="ph-note" style="margin-top:4px">📲 <b>Recordar</b> abre tu WhatsApp con el socio y el mensaje ya escrito: <i>"Hola Ana, te faltan 2 meses de cuota ($10.000). ¡Gracias!"</i></div>'+
+        '<div style="text-align:center;margin-top:12px"><span class="badge b-in" style="font-size:12px;padding:7px 14px">✉️ Enviar recordatorio a todos por correo</span></div>'+
+        '</div>' },
+    dir:{ url:'gremios.360losrios.cl/directorio',
+      html:'<div class="app-top"><div><div class="t-title">Directorio</div><div class="t-sub">Actas y acuerdos</div></div><div class="app-av">AF</div></div>'+
+        '<div class="app-body">'+
+        '<div class="sec-lbl">Última acta</div>'+
+        '<div class="res-row"><div><div class="nm">📋 Acta N°6 · Julio 2026</div><div class="meta">PDF adjunto · 3 acuerdos</div></div><span class="aichip">✨ Acuerdos con IA</span></div>'+
+        '<div class="sec-lbl" style="margin-top:12px">Acuerdos y su cumplimiento</div>'+
+        '<div class="res-row"><div><div class="nm">12/2026 · Comprar toldo feria</div><div class="meta">Resp: Tesorero · vence 30 Jul</div></div><span class="badge b-in">🟡 En proceso</span></div>'+
+        '<div class="res-row"><div><div class="nm">11/2026 · Renovar patente</div><div class="meta">Resp: Secretaria · 10 Jul</div></div><span class="badge b-ok">✅ Cumplido</span></div>'+
+        '<div class="res-row"><div><div class="nm">10/2026 · Arreglar sede</div><div class="meta">Resp: Presidente · venció 05 Jul</div></div><span class="badge b-deb">🔴 Atrasado</span></div>'+
+        '<div class="ph-note" style="margin-top:4px">✨ Subes el acta en PDF o foto y la <b>IA propone los acuerdos</b> con responsable y fecha. Tú revisas antes de guardar.</div>'+
+        '</div>' }
+  };
+  var webScreen=document.getElementById('webScreen'),phoneScreen=document.getElementById('phoneScreen'),urlBar=document.getElementById('urlBar'),tabs=document.querySelectorAll('.tab');
+  function render(key){var s=screens[key];webScreen.innerHTML='<div class="app-body" style="padding:0">'+s.html+'</div>';phoneScreen.innerHTML=s.html;urlBar.textContent=s.url;tabs.forEach(function(t){t.classList.toggle('on',t.dataset.scr===key);});}
+  tabs.forEach(function(t){t.addEventListener('click',function(){render(t.dataset.scr);});});
+  render('dash');
+
+  /* ===== Auto-registrar un pago al entrar a la demo ===== */
+  var auto=false;
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting && !auto){ auto=true; setTimeout(pagar,600); }
+    });},{threshold:.4}).observe(document.getElementById('demo'));
+  }
+})();
+</script>
+</body>
+</html>

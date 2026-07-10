@@ -38,6 +38,13 @@ const projects: Project[] = [
     manual: "/tarjetas/manual",
   },
   {
+    title: "Mi Gremio · Mi Curso 💰",
+    description:
+      "Tesorería para tu gremio o el curso de tu hijo: cobra las cuotas mes a mes, registra pagos y muestra un balance claro. Mira la demo interactiva.",
+    status: "desarrollo",
+    href: "/gremios-cursos",
+  },
+  {
     title: "Sistema Gym 🏋️",
     description:
       "Gestión de membresías, asistencia y pagos para gimnasios.",
@@ -218,6 +225,31 @@ export default function Home() {
               </p>
             </div>
             <span className="hidden shrink-0 items-center gap-1 rounded-lg bg-violet-500 px-4 py-2 text-sm font-semibold text-white transition-transform group-hover:scale-105 sm:inline-flex">
+              Ver demo →
+            </span>
+          </div>
+        </a>
+
+        {/* Banner destacado: Demo Mi Gremio · Mi Curso */}
+        <a
+          href="/gremios-cursos"
+          className="group mb-20 block overflow-hidden rounded-xl border border-indigo-500/30 bg-gradient-to-r from-indigo-500/10 to-blue-500/5 p-6 transition-colors hover:border-indigo-400/60 hover:from-indigo-500/15"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <span className="inline-block rounded-full bg-indigo-500/20 px-3 py-0.5 text-xs font-semibold text-indigo-300">
+                🧪 Nuevo · En prueba
+              </span>
+              <h3 className="mt-3 text-lg font-semibold text-white">
+                Mi Gremio · Mi Curso — la tesorería de tu organización 💰
+              </h3>
+              <p className="mt-1 text-sm text-neutral-400">
+                Cobra las cuotas mes a mes, registra los pagos y muestra un
+                balance claro. Deudores por WhatsApp, actas y acuerdos. Sea un
+                gremio o el curso de tu hijo. Mira la demo interactiva.
+              </p>
+            </div>
+            <span className="hidden shrink-0 items-center gap-1 rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white transition-transform group-hover:scale-105 sm:inline-flex">
               Ver demo →
             </span>
           </div>
